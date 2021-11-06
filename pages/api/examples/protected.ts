@@ -1,7 +1,9 @@
 // This is an example of to protect an API route
+import { NextApiResponse } from "next";
 import { getSession } from "next-auth/client";
+import { NextApiRequest } from "next-auth/internals/utils";
 
-export default async (req, res) => {
+const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   const session = await getSession({ req });
 
   if (session) {
@@ -15,3 +17,4 @@ export default async (req, res) => {
     });
   }
 };
+export default handler;
