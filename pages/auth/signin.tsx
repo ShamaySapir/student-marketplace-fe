@@ -1,17 +1,17 @@
 import React from "react";
 import Box from "@mui/material/Box";
 import { ClientSafeProvider, providers, signIn } from "next-auth/client";
-import providersComponent from "../../components/providers";
+import { google } from "../../components/providers";
 
 interface IProps {
   providers: Promise<Record<string, ClientSafeProvider> | null>;
 }
-type ProviderComponent = { [key]: React.FC };
+type ProviderComponent = { [key: string]: React.FC<any> };
 
 const providersComponents: ProviderComponent = {
-  google: providersComponent.google,
+  google,
 };
-const SignInPage: React.FC = ({ providers }: IProps) => {
+const SignInPage: React.FC<IProps> = ({ providers }: IProps) => {
   return (
     <Box
       sx={{
