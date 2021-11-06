@@ -1,10 +1,18 @@
 import React from "react";
-import GoogleLoginIcon from "./gLoginIcon.svg";
 import Box from "@mui/material/Box";
+import { ClientSafeProvider, providers, signIn } from "next-auth/client";
+import providersComponent from "../../components/providers";
 
-const SignInPage: React.FC = () => {
+interface IProps {
+  providers: Promise<Record<string, ClientSafeProvider> | null>;
+}
+type ProviderComponent = { [key]: React.FC };
+
+const providersComponents: ProviderComponent = {
+  google: providersComponent.google,
+};
+const SignInPage: React.FC = ({ providers }: IProps) => {
   return (
-    // <div style={{ height: "100vh", width: "100vw", margin: 0, padding: 0 }}>
     <Box
       sx={{
         display: "grid",
@@ -17,12 +25,26 @@ const SignInPage: React.FC = () => {
       }}
     >
       <Box sx={{ gridArea: "loginIcon" }}>
-        {" "}
-        <GoogleLoginIcon />
+        {Object.values(providers).map((provider) => {
+          const ProviderComponent = providersComponents[provider.name];
+          return (
+            <ProviderComponent
+              key={provider.name}
+              onClick={() => signIn(provider.id)}
+            />
+          );
+        })}
       </Box>
     </Box>
-    // </div>
   );
 };
 
 export default SignInPage;
+
+export async function getServerSideProps(context: any) {
+  return {
+    props: {
+      providers: await providers(context),
+    },
+  };
+}
