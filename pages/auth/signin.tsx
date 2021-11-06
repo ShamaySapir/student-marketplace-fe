@@ -9,7 +9,7 @@ interface IProps {
 type ProviderComponent = { [key: string]: React.FC<any> };
 
 const providersComponents: ProviderComponent = {
-  google,
+  Google: google,
 };
 const SignInPage: React.FC<IProps> = ({ providers }: IProps) => {
   return (
@@ -28,10 +28,12 @@ const SignInPage: React.FC<IProps> = ({ providers }: IProps) => {
         {Object.values(providers).map((provider) => {
           const ProviderComponent = providersComponents[provider.name];
           return (
-            <ProviderComponent
-              key={provider.name}
-              onClick={() => signIn(provider.id)}
-            />
+            ProviderComponent && (
+              <ProviderComponent
+                key={provider.name}
+                onClick={() => signIn(provider.id)}
+              />
+            )
           );
         })}
       </Box>
@@ -44,6 +46,7 @@ export default SignInPage;
 export async function getServerSideProps(context: any) {
   return {
     props: {
+      // @ts-ignore: Unreachable code error
       providers: await providers(context),
     },
   };

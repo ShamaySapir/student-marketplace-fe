@@ -7,7 +7,7 @@ interface IProps {}
 
 export default function GoogleProviderSignin(props: IProps) {
   return (
-    <Box sx={{ gridArea: "loginIcon" }} className={styles.logo} {...props}>
+    <Box sx={{ gridArea: "loginIcon" }} className={styles.link} {...props}>
       <GoogleLoginIcon />
     </Box>
   );
