@@ -38,7 +38,7 @@ export default function Header() {
           )}
           {session && (
             <>
-              {session.user.image && (
+              {session?.user?.image && (
                 <span
                   style={{ backgroundImage: `url(${session.user.image})` }}
                   className={styles.avatar}
