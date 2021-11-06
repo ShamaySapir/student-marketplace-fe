@@ -1,9 +1,17 @@
 import { Provider } from "next-auth/client";
 import "./styles.css";
-
+import React from "react";
+import { Session } from "next-auth";
+interface IPageProps {
+  session: Session;
+}
+interface IProps {
+  Component: React.FC<any>;
+  pageProps: IPageProps;
+}
 // Use the <Provider> to improve performance and allow components that call
 // `useSession()` anywhere in your application to access the `session` object.
-export default function App({ Component, pageProps }) {
+export default function App({ Component, pageProps }: IProps) {
   return (
     <Provider
       // Provider options are not required but can be useful in situations where
