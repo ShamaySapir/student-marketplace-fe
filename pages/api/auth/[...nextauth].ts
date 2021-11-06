@@ -76,7 +76,9 @@ export default NextAuth({
       if (user.email?.endsWith("@post.bgu.ac.il")) return true;
       return false;
     },
-    // async redirect(url, baseUrl) { return baseUrl },
+    async redirect(url, baseUrl) {
+      return `${baseUrl}/home`;
+    },
     // async session(session, user) { return session },
     // async jwt(token, user, account, profile, isNewUser) { return token }
   },

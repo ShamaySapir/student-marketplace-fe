@@ -34,7 +34,7 @@ export default function Page() {
   // If session exists, display content
   return (
     <Layout>
-      <h1>Protected Page</h1>
+      <h1>Home</h1>
       <p>
         <strong>{content || "\u00a0"}</strong>
       </p>
