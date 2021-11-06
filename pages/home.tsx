@@ -37,7 +37,6 @@ export default function Page() {
       <h1>Home</h1>
       <p>
         <strong>{content || "\u00a0"}</strong>
-        bla123
       </p>
     </Layout>
   );
