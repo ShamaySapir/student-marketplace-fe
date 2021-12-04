@@ -1,7 +1,7 @@
 import React from "react";
 import Box from "@mui/material/Box";
 import { ClientSafeProvider, providers, signIn } from "next-auth/client";
-import { google } from "../../components/providers";
+import { google } from "../providers";
 
 interface IProps {
   providers: Promise<Record<string, ClientSafeProvider> | null>;

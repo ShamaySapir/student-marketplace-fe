@@ -1,30 +1,17 @@
 import { signIn, signOut, useSession } from "next-auth/client";
-import { Box, Typography, Avatar } from "@mui/material";
-import PropTypes from "prop-types";
+import { Box, Typography, Avatar, Button } from "@mui/material";
+import GoogleProviderSignin from "./providers/google/GoogleProviderSignin";
 
+import { styled } from "@mui/material/styles";
+
+const Div = styled("div")(({ theme }) => ({
+  ...theme.typography.button,
+  backgroundColor: theme.palette.background.paper,
+  padding: theme.spacing(1),
+}));
 // The approach used in this component shows how to build a sign in and sign out
 // component that works on pages which support both client and server side
 // rendering, and avoids any flash incorrect content on initial page load.
-
-function Item(props) {
-  const { sx, ...other } = props;
-  return (
-    <Box
-      sx={{
-        ...sx,
-      }}
-      {...other}
-    />
-  );
-}
-
-Item.propTypes = {
-  sx: PropTypes.oneOfType([
-    PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.func, PropTypes.object])),
-    PropTypes.func,
-    PropTypes.object,
-  ]),
-};
 
 export default function Header() {
   const [session, loading] = useSession();
@@ -40,14 +27,16 @@ export default function Header() {
         }}
       >
         <Box>
-          <Item sx={{ gridArea: "title" }}>
-            <Typography>Student marketplace</Typography>
-          </Item>
+          <Box sx={{ gridArea: "title" }}>
+            <Div>Student social marketplace</Div>
+          </Box>
         </Box>
         <Box sx={{ gridArea: "avatar" }}>
-          <Item>
-            <Avatar alt={session?.user?.name} src={session?.user?.image} />
-          </Item>
+          <Box>
+            {(session && (
+              <Avatar alt={session?.user?.name} src={session?.user?.image} />
+            )) || <GoogleProviderSignin onClick={() => signIn("google")} />}
+          </Box>
         </Box>
       </Box>
     </Box>

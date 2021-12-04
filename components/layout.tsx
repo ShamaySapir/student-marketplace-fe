@@ -3,7 +3,7 @@ import Footer from "../components/footer";
 import { useState, useEffect } from "react";
 import { useSession } from "next-auth/client";
 import React from "react";
-import { Box, Grid } from "@mui/material";
+import { Box } from "@mui/material";
 
 interface IProps {
   children?: JSX.Element | JSX.Element[];
