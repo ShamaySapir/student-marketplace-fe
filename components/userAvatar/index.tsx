@@ -11,7 +11,8 @@ import Menu from "./Menu";
 import Link from "next/link";
 import ExitToAppIcon from "@mui/icons-material/ExitToApp";
 import PersonIcon from "@mui/icons-material/Person";
-
+import StorefrontIcon from "@mui/icons-material/Storefront";
+import ShopTwoIcon from "@mui/icons-material/ShopTwo";
 import { styled } from "@mui/material/styles";
 
 const SignOutComponent = () => (
@@ -43,6 +44,52 @@ const MyProfileComponent = () => (
     </Grid>
   </Link>
 );
+
+const BecomeASellerComponent = () => (
+  <Link href="/registration" passHref>
+    <Grid container>
+      <Grid item>
+        <ListItemIcon>
+          <StorefrontIcon fontSize="small" />
+        </ListItemIcon>
+      </Grid>
+      <Grid item>
+        <ListItemText>Become A Seller</ListItemText>
+      </Grid>
+    </Grid>
+  </Link>
+);
+
+const OrderHistoryComponent = () => (
+  <Link href="/orderHistory" passHref>
+    <Grid container>
+      <Grid item>
+        <ListItemIcon>
+          <ShopTwoIcon fontSize="small" />
+        </ListItemIcon>
+      </Grid>
+      <Grid item>
+        <ListItemText>Orders History</ListItemText>
+      </Grid>
+    </Grid>
+  </Link>
+);
+
+const AddServiceComponent = () => (
+  <Link href="/service" passHref>
+    <Grid container>
+      <Grid item>
+        <ListItemIcon>
+          <ShopTwoIcon fontSize="small" />
+        </ListItemIcon>
+      </Grid>
+      <Grid item>
+        <ListItemText>Add Service</ListItemText>
+      </Grid>
+    </Grid>
+  </Link>
+);
+
 const Div = styled("div")(({ theme }) => ({
   ...theme.typography.button,
   backgroundColor: theme.palette.background.paper,
@@ -52,9 +99,32 @@ const Div = styled("div")(({ theme }) => ({
 // component that works on pages which support both client and server side
 // rendering, and avoids any flash incorrect content on initial page load.
 
-const MenuItems = [
+const buyerMenuItems = [
   {
     Component: () => <MyProfileComponent />,
+  },
+  {
+    Component: () => <OrderHistoryComponent />,
+  },
+  {
+    Component: () => <BecomeASellerComponent />,
+  },
+  {
+    divider: true,
+    onClick: signOut,
+    Component: () => <SignOutComponent />,
+  },
+];
+
+const sellerMenuItems = [
+  {
+    Component: () => <MyProfileComponent />,
+  },
+  {
+    Component: () => <OrderHistoryComponent />,
+  },
+  {
+    Component: () => <AddServiceComponent />,
   },
   {
     divider: true,
@@ -88,7 +158,9 @@ export default function Header() {
         handleClose={handleClose}
         anchorEl={anchorEl}
         open={open}
-        menuItems={MenuItems}
+        menuItems={
+          (session?.user.isSeller && sellerMenuItems) || buyerMenuItems
+        }
       />
     </Button>
   );

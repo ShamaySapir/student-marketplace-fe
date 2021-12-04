@@ -1,6 +1,6 @@
 import NextAuth from "next-auth";
 import Providers from "next-auth/providers";
-
+import routes from "../../../tools/api/routes";
 // For more information on each option (and a full list of options) go to
 // https://next-auth.js.org/configuration/options
 export default NextAuth({
@@ -79,8 +79,35 @@ export default NextAuth({
     async redirect(url, baseUrl) {
       return `${baseUrl}/home`;
     },
-    // async session(session, user) { return session },
-    // async jwt(token, user, account, profile, isNewUser) { return token }
+    async session(session, user) {
+      const routeInfo = routes.getUserDetails({
+        userId: user.id,
+      });
+
+      // const routeInfo = getUserDetails({ userEmail: session.user.email });
+      // const userDetails = await fetch(routeInfo.route, {
+      //   method: routeInfo.method,
+      //   params: {},
+      // });
+      Object.assign(session.user, {
+        displayName: session.user.name,
+        isSeller: false,
+      });
+
+      return session;
+    },
+    jwt: async (
+      token: Token,
+      user?: User,
+      account?: Account,
+      profile?: Profile
+    ) => {
+      if (profile) {
+        token.id = profile.id;
+      }
+
+      return Promise.resolve(token);
+    },
   },
 
   // Events are useful for logging
