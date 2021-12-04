@@ -3,6 +3,8 @@ import Footer from "../components/footer";
 import { useState, useEffect } from "react";
 import { useSession } from "next-auth/client";
 import React from "react";
+import { Box, Grid } from "@mui/material";
+
 interface IProps {
   children?: JSX.Element | JSX.Element[];
 }
@@ -23,7 +25,18 @@ export default function Layout({ children }: IProps) {
   return (
     <>
       <Header />
-      <main>{children}</main>
+      <Box
+        sx={{
+          display: "grid",
+          gridTemplateColumns: "repeat(7, 1fr)",
+          gridTemplateAreas: `". content content content content content."`,
+          alignItems: "center",
+        }}
+      >
+        <Box sx={{ gridArea: "content" }}>
+          <main>{children}</main>
+        </Box>
+      </Box>
       <Footer />
     </>
   );
