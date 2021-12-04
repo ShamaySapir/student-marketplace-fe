@@ -20,9 +20,6 @@ export default function Layout({ children }: IProps) {
     };
     fetchData();
   }, [session]);
-  // const ChildrenWithProps = React.cloneElement(children, {
-  //   isAuthenticated: session,
-  // });
   return (
     <>
       <Header />
