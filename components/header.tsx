@@ -1,7 +1,7 @@
 import { signIn, signOut, useSession } from "next-auth/client";
-import { Box, Typography, Avatar, Button } from "@mui/material";
+import { Box, Avatar } from "@mui/material";
 import GoogleProviderSignin from "./providers/google/GoogleProviderSignin";
-
+import UserAvatar from "./userAvatar";
 import { styled } from "@mui/material/styles";
 
 const Div = styled("div")(({ theme }) => ({
@@ -33,9 +33,9 @@ export default function Header() {
         </Box>
         <Box sx={{ gridArea: "avatar" }}>
           <Box>
-            {(session && (
-              <Avatar alt={session?.user?.name} src={session?.user?.image} />
-            )) || <GoogleProviderSignin onClick={() => signIn("google")} />}
+            {(session && <UserAvatar />) || (
+              <GoogleProviderSignin onClick={() => signIn("google")} />
+            )}
           </Box>
         </Box>
       </Box>
