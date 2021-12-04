@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import { signOut, useSession } from "next-auth/client";
 import {
   Avatar,
@@ -14,7 +14,7 @@ import PersonIcon from "@mui/icons-material/Person";
 import StorefrontIcon from "@mui/icons-material/Storefront";
 import ShopTwoIcon from "@mui/icons-material/ShopTwo";
 import { styled } from "@mui/material/styles";
-
+import { UserType } from "../../constants";
 const SignOutComponent = () => (
   <div>
     <Grid container>
@@ -31,7 +31,7 @@ const SignOutComponent = () => (
 );
 
 const MyProfileComponent = () => (
-  <Link href="/registration" passHref>
+  <Link href="/profile" passHref>
     <Grid container>
       <Grid item>
         <ListItemIcon>
@@ -46,7 +46,7 @@ const MyProfileComponent = () => (
 );
 
 const BecomeASellerComponent = () => (
-  <Link href="/registration" passHref>
+  <Link href="/becomeSeller" passHref>
     <Grid container>
       <Grid item>
         <ListItemIcon>
@@ -95,9 +95,6 @@ const Div = styled("div")(({ theme }) => ({
   backgroundColor: theme.palette.background.paper,
   padding: theme.spacing(1),
 }));
-// The approach used in this component shows how to build a sign in and sign out
-// component that works on pages which support both client and server side
-// rendering, and avoids any flash incorrect content on initial page load.
 
 const buyerMenuItems = [
   {
@@ -135,16 +132,15 @@ const sellerMenuItems = [
 
 export default function Header() {
   const [session, loading] = useSession();
-  const [anchorEl, setAnchorEl] = useState(null);
+  const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
 
   const open = Boolean(anchorEl);
-  const handleClick = (event) => {
+  const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
     setAnchorEl(event.currentTarget);
   };
   const handleClose = () => {
     setAnchorEl(null);
   };
-
   return (
     <Button
       id="basic-button"
@@ -153,13 +149,17 @@ export default function Header() {
       aria-expanded={open ? "true" : undefined}
       onClick={handleClick}
     >
-      <Avatar alt={session?.user?.name} src={session?.user?.image} />
+      <Avatar
+        alt={session!.user!.name as string}
+        src={session!.user!.image as string}
+      />
       <Menu
         handleClose={handleClose}
         anchorEl={anchorEl}
         open={open}
         menuItems={
-          (session?.user.isSeller && sellerMenuItems) || buyerMenuItems
+          (session?.user.type === UserType.seller && sellerMenuItems) ||
+          buyerMenuItems
         }
       />
     </Button>

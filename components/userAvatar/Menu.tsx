@@ -4,7 +4,7 @@ import { map, noop } from "lodash";
 import Link from "next/link";
 interface IProps {
   open: boolean;
-  handleClose: MenuProps["onClose"];
+  handleClose: () => void;
   anchorEl?: MenuProps["anchorEl"];
   menuItems: Array<any>;
 }
@@ -30,9 +30,9 @@ export default function BasicMenu({
           <div key={idx}>
             {divider && <Divider />}
             <MenuItem
-              onClick={(e: any, rest: any) => {
+              onClick={(e: any) => {
                 onClick(e);
-                handleClose(e, rest);
+                handleClose();
               }}
             >
               <Link href="registration" passHref>
