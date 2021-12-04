@@ -4,6 +4,7 @@ import React from "react";
 import { Session } from "next-auth";
 import { ThemeProvider } from "@mui/material/styles";
 import theme from "../tools/theme";
+import Layout from "../components/layout";
 
 interface IPageProps {
   session: Session;
@@ -37,7 +38,9 @@ export default function App({ Component, pageProps }: IProps) {
         }}
         session={pageProps.session}
       >
-        <Component {...pageProps} />
+        <Layout>
+          <Component {...pageProps} />
+        </Layout>
       </Provider>
     </ThemeProvider>
   );

@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import Layout from "../components/layout";
 import { TextField, Button } from "@mui/material";
 import { useFormik } from "formik";
 import { useSession } from "next-auth/client";
@@ -65,58 +64,54 @@ export default function RegistrationForm() {
   });
 
   return (
-    <Layout>
-      <form onSubmit={formik.handleSubmit}>
-        <TextField
-          fullWidth
-          id="email"
-          name="email"
-          label="Email"
-          disabled
-          value={formik.values.email}
-          error={formik.touched.email && Boolean(formik.errors.email)}
-          helperText={formik.touched.email && formik.errors.email}
-        />
-        <TextField
-          fullWidth
-          id="firstName"
-          name="firstName"
-          label="firstName"
-          disabled
-          value={formik.values.firstName}
-          onChange={formik.handleChange}
-          error={formik.touched.firstName && Boolean(formik.errors.firstName)}
-          helperText={formik.touched.firstName && formik.errors.firstName}
-        />
-        <TextField
-          fullWidth
-          id="lastName"
-          name="lastName"
-          label="lastName"
-          disabled
-          value={formik.values.lastName}
-          onChange={formik.handleChange}
-          error={formik.touched.lastName && Boolean(formik.errors.lastName)}
-          helperText={formik.touched.lastName && formik.errors.lastName}
-        />
-        <TextField
-          fullWidth
-          id="presentedName"
-          name="presentedName"
-          label="presentedName"
-          value={formik.values.presentedName}
-          onChange={formik.handleChange}
-          error={
-            formik.touched.presentedName && Boolean(formik.errors.presentedName)
-          }
-          helperText={
-            formik.touched.presentedName && formik.errors.presentedName
-          }
-        />
-        <Button color="primary" variant="contained" fullWidth type="submit">
-          Submit
-        </Button>
-      </form>
-    </Layout>
+    <form onSubmit={formik.handleSubmit}>
+      <TextField
+        fullWidth
+        id="email"
+        name="email"
+        label="Email"
+        disabled
+        value={formik.values.email}
+        error={formik.touched.email && Boolean(formik.errors.email)}
+        helperText={formik.touched.email && formik.errors.email}
+      />
+      <TextField
+        fullWidth
+        id="firstName"
+        name="firstName"
+        label="firstName"
+        disabled
+        value={formik.values.firstName}
+        onChange={formik.handleChange}
+        error={formik.touched.firstName && Boolean(formik.errors.firstName)}
+        helperText={formik.touched.firstName && formik.errors.firstName}
+      />
+      <TextField
+        fullWidth
+        id="lastName"
+        name="lastName"
+        label="lastName"
+        disabled
+        value={formik.values.lastName}
+        onChange={formik.handleChange}
+        error={formik.touched.lastName && Boolean(formik.errors.lastName)}
+        helperText={formik.touched.lastName && formik.errors.lastName}
+      />
+      <TextField
+        fullWidth
+        id="presentedName"
+        name="presentedName"
+        label="presentedName"
+        value={formik.values.presentedName}
+        onChange={formik.handleChange}
+        error={
+          formik.touched.presentedName && Boolean(formik.errors.presentedName)
+        }
+        helperText={formik.touched.presentedName && formik.errors.presentedName}
+      />
+      <Button color="primary" variant="contained" fullWidth type="submit">
+        Submit
+      </Button>
+    </form>
   );
 }
