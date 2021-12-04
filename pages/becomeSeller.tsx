@@ -1,61 +1,44 @@
 import React, { useEffect, useState } from "react";
 import Layout from "../components/layout";
-import { TextField, Button } from "@mui/material";
+import { TextField, Button, TextareaAutosize } from "@mui/material";
 import { useFormik } from "formik";
 import { useSession } from "next-auth/client";
-
+import { Session } from "next-auth";
 import * as yup from "yup";
 
 const validationSchema = yup.object({
-  firstName: yup
+  displayName: yup
     .string()
     .min(2, "Too Short!")
     .max(50, "Too Long!")
     .required("Required"),
-  lastName: yup
-    .string()
-    .min(2, "Too Short!")
-    .max(50, "Too Long!")
-    .required("Required"),
-  email: yup.string().email("Invalid email").required("Required"),
-  presentedName: yup
-    .string()
-    .min(2, "Too Short!")
-    .max(20, "Too Long!")
-    .required("Required"),
+  // description: yup
+  //   .string()
+  //   .min(2, "Too Short!")
+  //   .max(500, "Too Long!")
+  //   .required("Required"),
 });
-type stringOrUndefinendOrNull = string | undefined | null;
 interface IUserDetails {
-  email: stringOrUndefinendOrNull;
-  firstName: stringOrUndefinendOrNull;
-  lastName: stringOrUndefinendOrNull;
+  displayName: Session["displayName"];
 }
 
-export default function RegistrationForm() {
+export default function BecomeASellerForm() {
   const [session, loading] = useSession();
   const [user, setUser] = useState<IUserDetails>({
-    email: "",
-    firstName: "",
-    lastName: "",
+    displayName: session?.user.displayName as string,
+    // description:
   });
 
   useEffect(() => {
     if (!loading && session!.user) {
-      const loggedInUser = session!.user;
-      const userFullName = session?.user.name?.split(" ");
       setUser({
-        email: loggedInUser.email,
-        firstName: userFullName?.[0],
-        lastName: userFullName?.[1],
+        displayName: user.displayName,
       });
     }
   }, [session, loading]);
   const formik = useFormik({
     initialValues: {
-      email: user.email,
-      firstName: user.firstName,
-      lastName: user.lastName,
-      presentedName: "",
+      displayName: user.displayName,
     },
     enableReinitialize: true,
     validationSchema: validationSchema,
@@ -69,50 +52,25 @@ export default function RegistrationForm() {
       <form onSubmit={formik.handleSubmit}>
         <TextField
           fullWidth
-          id="email"
-          name="email"
-          label="Email"
-          disabled
-          value={formik.values.email}
-          error={formik.touched.email && Boolean(formik.errors.email)}
-          helperText={formik.touched.email && formik.errors.email}
-        />
-        <TextField
-          fullWidth
-          id="firstName"
-          name="firstName"
-          label="firstName"
-          disabled
-          value={formik.values.firstName}
-          onChange={formik.handleChange}
-          error={formik.touched.firstName && Boolean(formik.errors.firstName)}
-          helperText={formik.touched.firstName && formik.errors.firstName}
-        />
-        <TextField
-          fullWidth
-          id="lastName"
-          name="lastName"
-          label="lastName"
-          disabled
-          value={formik.values.lastName}
-          onChange={formik.handleChange}
-          error={formik.touched.lastName && Boolean(formik.errors.lastName)}
-          helperText={formik.touched.lastName && formik.errors.lastName}
-        />
-        <TextField
-          fullWidth
-          id="presentedName"
-          name="presentedName"
-          label="presentedName"
-          value={formik.values.presentedName}
-          onChange={formik.handleChange}
+          id="displayName"
+          name="displayName"
+          label="Display Name"
+          value={formik.values.displayName}
           error={
-            formik.touched.presentedName && Boolean(formik.errors.presentedName)
+            formik.touched.displayName && Boolean(formik.errors.displayName)
           }
-          helperText={
-            formik.touched.presentedName && formik.errors.presentedName
-          }
+          helperText={formik.touched.displayName && formik.errors.displayName}
         />
+        {/* <TextareaAutosize
+          id="description"
+          name="description"
+          placeholder="Description"
+          defaultValue={formik.values.description}
+          error={
+            formik.touched.displayName && Boolean(formik.errors.displayName)
+          }
+          helperText={formik.touched.displayName && formik.errors.displayName}
+        /> */}
         <Button color="primary" variant="contained" fullWidth type="submit">
           Submit
         </Button>
