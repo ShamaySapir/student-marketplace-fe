@@ -23,16 +23,16 @@ export default function Page() {
 
   // If no session exists, display access denied message
   if (!session) {
-    return (
-        <AccessDenied />
-    );
+    return <AccessDenied />;
   }
 
   // If session exists, display content
   return (
+    <div>
       <h1>Home</h1>
       <p>
         <strong>{content || "\u00a0"}</strong>
       </p>
+    </div>
   );
 }

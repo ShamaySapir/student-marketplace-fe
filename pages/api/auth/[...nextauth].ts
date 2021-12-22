@@ -1,6 +1,6 @@
 import NextAuth from "next-auth";
 import Providers from "next-auth/providers";
-import routes from "../../../tools/api/routes";
+import * as routes from "../../../tools/api/routes";
 import { Session, User, Account, Profile } from "next-auth";
 import { JWT } from "next-auth/jwt";
 import { UserType } from "../../../constants";
@@ -83,16 +83,19 @@ export default NextAuth({
       return `${baseUrl}/home`;
     },
     async session(session, user): Promise<Session> {
-      // const routeInfo = await routes.getUserDetails({
-      //   userId: user.id,
-      // });
+      const userInfo = await routes.getUserType({
+        userId: user.id,
+      });
+      const isSeller = userInfo?.data?.[0]?.isSeller
+        ? UserType.seller
+        : UserType.buyer;
 
       return {
         ...session,
         user: {
           ...session.user,
           displayName: session.user.name as string,
-          type: UserType.buyer,
+          type: isSeller,
         },
       };
     },

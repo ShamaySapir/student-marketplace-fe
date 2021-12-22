@@ -1,7 +1,6 @@
 import * as React from "react";
 import { Menu, MenuItem, MenuProps, Divider } from "@mui/material";
 import { map, noop } from "lodash";
-import Link from "next/link";
 interface IProps {
   open: boolean;
   handleClose: () => void;
@@ -35,9 +34,7 @@ export default function BasicMenu({
                 handleClose();
               }}
             >
-              <Link href="registration" passHref>
-                <Component />
-              </Link>
+              <Component />
             </MenuItem>
           </div>
         );
