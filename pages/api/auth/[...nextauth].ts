@@ -83,9 +83,14 @@ export default NextAuth({
       return `${baseUrl}/home`;
     },
     async session(session, user): Promise<Session> {
-      const userInfo = await routes.getUserType({
-        userId: user.id as string,
-      });
+      let userInfo;
+      try {
+        const userInfo = await routes.getUserType({
+          userId: user.id as string,
+        });
+      } catch (e) {
+        console.log(e);
+      }
       const isSeller = userInfo?.data?.[0]?.isSeller
         ? UserType.seller
         : UserType.buyer;
