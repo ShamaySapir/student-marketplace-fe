@@ -1,6 +1,8 @@
 import { Button } from "@mui/material";
 
-interface IProps {}
+interface IProps {
+  onClick: () => Promise<undefined>;
+}
 
 export default function GoogleProviderSignin(props: IProps) {
   return (
