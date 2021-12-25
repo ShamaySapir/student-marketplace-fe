@@ -1,6 +1,6 @@
 import requestor from "./requestor";
 
-export const getUserDetails = (params) => {
+export const getUserDetails = (params: any) => {
   const payload = {
     method: "GET",
     route: "/user",
@@ -12,10 +12,21 @@ export const getUserDetails = (params) => {
   });
 };
 
-export const getUserType = ({ userId }) => {
+export const getUserType = ({ userId }: { userId: string }) => {
   const payload = {
     method: "GET",
     route: `/sellers?gid=${userId}`,
+  };
+  return requestor({
+    method: payload.method,
+    url: payload.route,
+  });
+};
+
+export const getItemTypes = () => {
+  const payload = {
+    method: "GET",
+    route: `/item-types`,
   };
   return requestor({
     method: payload.method,
