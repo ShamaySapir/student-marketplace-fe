@@ -39,7 +39,7 @@ export default function BecomeASellerForm() {
 
   const formik = useFormik({
     initialValues: {
-      itemType: itemTypes?.[0].id,
+      itemType: itemTypes?.[0]?.id,
       itemName: "",
       itemDesc: "",
       itemPrice: 0.0,
