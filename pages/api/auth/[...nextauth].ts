@@ -4,6 +4,7 @@ import * as routes from "../../../tools/api/routes";
 import { Session, User, Account, Profile } from "next-auth";
 import { JWT } from "next-auth/jwt";
 import { UserType } from "../../../constants";
+import { MarketplaceUser } from "../../../types/types";
 // For more information on each option (and a full list of options) go to
 // https://next-auth.js.org/configuration/options
 export default NextAuth({
@@ -83,9 +84,14 @@ export default NextAuth({
       return `${baseUrl}/home`;
     },
     async session(session, user): Promise<Session> {
-      const userInfo = await routes.getUserType({
-        userId: user.id,
-      });
+      let userInfo;
+      try {
+        userInfo = await routes.getUserType({
+          userId: user.id as string,
+        });
+      } catch (e) {
+        console.log(e);
+      }
       const isSeller = userInfo?.data?.[0]?.isSeller
         ? UserType.seller
         : UserType.buyer;

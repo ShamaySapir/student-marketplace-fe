@@ -4,6 +4,7 @@ import { useFormik } from "formik";
 import * as routes from "../tools/api/routes";
 import * as yup from "yup";
 import { map, pick } from "lodash";
+import { ItemType } from "../types/types";
 const validationSchema = yup.object({
   itemType: yup.number().required("Required"),
   itemName: yup
@@ -24,7 +25,7 @@ const validationSchema = yup.object({
 });
 
 export default function BecomeASellerForm() {
-  const [itemTypes, setItemTypes] = useState(null);
+  const [itemTypes, setItemTypes] = useState<ItemType[]>([]);
 
   useEffect(() => {
     async function getItemTypes() {
@@ -38,7 +39,7 @@ export default function BecomeASellerForm() {
 
   const formik = useFormik({
     initialValues: {
-      itemType: itemTypes?.[0].id,
+      itemType: itemTypes?.[0]?.id,
       itemName: "",
       itemDesc: "",
       itemPrice: 0.0,
