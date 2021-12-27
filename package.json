@@ -3,8 +3,8 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
     "start": "next start -p $PORT",
+    "build": "next build",
     "lint": "next lint"
   },
   "dependencies": {
