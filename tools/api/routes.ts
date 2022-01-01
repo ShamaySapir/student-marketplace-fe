@@ -38,3 +38,20 @@ export const getItemTypes = (): AxiosPromise<ItemType[]> => {
     url: payload.route,
   } as AxiosRequestConfig);
 };
+
+export const postUploadImage = (imageFiles: FileList): AxiosPromise => {
+  const bodyFormData = new FormData();
+  bodyFormData.append("files", imageFiles[0]);
+
+  const payload = {
+    method: "POST",
+    route: `/upload`,
+    data: bodyFormData,
+    headers: { "Content-Type": "multipart/form-data" },
+  };
+  return requestor({
+    method: payload.method,
+    url: payload.route,
+    ...payload,
+  } as AxiosRequestConfig);
+};

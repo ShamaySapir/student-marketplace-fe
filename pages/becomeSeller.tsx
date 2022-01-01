@@ -1,11 +1,18 @@
 import React, { useEffect, useState } from "react";
-import { TextField, Button, IconButton, Stack } from "@mui/material";
+import {
+  TextField,
+  Button,
+  IconButton,
+  Stack,
+  CircularProgress,
+} from "@mui/material";
 import { styled } from "@mui/material/styles";
 import { useFormik } from "formik";
 import { useSession } from "next-auth/client";
 import { Session } from "next-auth";
 import * as yup from "yup";
 import { PhotoCamera } from "@mui/icons-material";
+import * as routes from "../tools/api/routes";
 
 const validationSchema = yup.object({
   displayName: yup
@@ -25,11 +32,21 @@ interface IUserDetails {
   description: string;
 }
 const Input = styled("input")({
-  display: "none",
+  // display: "none",
 });
+
+const uploadImage = async (
+  e: React.ChangeEvent<HTMLInputElement>,
+  setLoading: React.Dispatch<React.SetStateAction<boolean>>
+) => {
+  setLoading(true);
+  await routes.postUploadImage(e.currentTarget.files!);
+  setLoading(false);
+};
 
 export default function BecomeASellerForm() {
   const [session, loading] = useSession();
+  const [getLoading, setLoading] = useState<boolean>(false);
   const [user, setUser] = useState<Partial<IUserDetails>>({
     displayName: session?.user.displayName as string,
   });
@@ -78,13 +95,18 @@ export default function BecomeASellerForm() {
       />
       <Stack direction="row" alignItems="center" spacing={2}>
         <label htmlFor="icon-button-file">
-          <Input accept="image/*" id="icon-button-file" type="file" />
+          <Input
+            accept="image/*"
+            id="icon-button-file"
+            type="file"
+            onChange={(e) => uploadImage(e, setLoading)}
+          />
           <IconButton
             color="primary"
             aria-label="upload picture"
             component="span"
           >
-            <PhotoCamera />
+            {getLoading ? <CircularProgress /> : <PhotoCamera />}
           </IconButton>
         </label>
       </Stack>

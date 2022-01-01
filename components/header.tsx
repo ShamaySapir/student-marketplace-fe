@@ -1,7 +1,7 @@
 import { signIn, signOut, useSession } from "next-auth/client";
 import { Box, Avatar } from "@mui/material";
 import GoogleProviderSignin from "./providers/google/GoogleProviderSignin";
-import UserAvatar from "./userAvatar";
+import UserAvatar from "./userAvatar/index1";
 import { styled } from "@mui/material/styles";
 
 const Div = styled("div")(({ theme }) => ({
