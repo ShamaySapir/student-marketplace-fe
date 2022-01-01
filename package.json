@@ -3,8 +3,9 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
+    "start": "next start -p $PORT",
+    "heroku-postbuild": "npm run build",
     "build": "next build",
-    "start": "next start",
     "lint": "next lint"
   },
   "dependencies": {
