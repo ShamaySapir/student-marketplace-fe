@@ -91,7 +91,7 @@ export default NextAuth({
       } catch (e) {
         console.log(e);
       }
-      const isSeller = userInfo?.data?.data?.[0]?.attributes.isSeller
+      const isSeller = userInfo?.data?.[0]?.attributes.isSeller
         ? UserType.seller
         : UserType.buyer;
 
@@ -100,8 +100,8 @@ export default NextAuth({
         user: {
           ...session.user,
           displayName: session.user.name as string,
-          firstName: session.user.name.split(" ")?.[0] || "",
-          lastName: session.user.name.split(" ")?.[1] || "",
+          firstName: session!.user.name.split(" ")?.[0] || "",
+          lastName: session!.user.name.split(" ")?.[1] || "",
           googleId: user.id,
           type: isSeller,
         },

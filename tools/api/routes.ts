@@ -13,11 +13,7 @@ export const getUserDetails = (params: any) => {
   } as AxiosRequestConfig);
 };
 
-export const getUserType = ({
-  userId,
-}: {
-  userId: string;
-}): AxiosPromise<MPUser[]> => {
+export const getUserType = ({ userId }: { userId: string }): AxiosPromise => {
   const payload = {
     method: "GET",
     route: `/the-users?gid=${userId}`,
