@@ -50,7 +50,18 @@ export const postUploadImage = (imageFiles: FileList): AxiosPromise => {
     headers: { "Content-Type": "multipart/form-data" },
   };
   return requestor({
-    method: payload.method,
+    url: payload.route,
+    ...payload,
+  } as AxiosRequestConfig);
+};
+
+export const becomeASeller = (sellerData: any): AxiosPromise => {
+  const payload = {
+    method: "POST",
+    route: `/the-users`,
+    data: { data: sellerData },
+  };
+  return requestor({
     url: payload.route,
     ...payload,
   } as AxiosRequestConfig);
