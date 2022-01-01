@@ -24,7 +24,7 @@ export const getUserType = ({ userId }: { userId: string }): AxiosPromise => {
   } as AxiosRequestConfig);
 };
 
-export const getItemTypes = (): AxiosPromise<ItemType[]> => {
+export const getItemTypes = (): AxiosPromise => {
   const payload = {
     method: "GET",
     route: `/item-types`,
