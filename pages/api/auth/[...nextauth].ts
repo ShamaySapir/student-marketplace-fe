@@ -91,7 +91,7 @@ export default NextAuth({
       } catch (e) {
         console.log(e);
       }
-      const isSeller = userInfo?.data?.[0]?.attributes.isSeller
+      const isSeller = userInfo?.data?.data?.[0]?.attributes.isSeller
         ? UserType.seller
         : UserType.buyer;
 
