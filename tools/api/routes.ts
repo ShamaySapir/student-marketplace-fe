@@ -1,5 +1,5 @@
 import requestor from "./requestor";
-import { ItemType, MarketplaceUser } from "../../types/types";
+import { ItemType, MPUser } from "../../types/types";
 import { AxiosPromise, AxiosRequestConfig } from "axios";
 export const getUserDetails = (params: any) => {
   const payload = {
@@ -17,10 +17,10 @@ export const getUserType = ({
   userId,
 }: {
   userId: string;
-}): AxiosPromise<MarketplaceUser[]> => {
+}): AxiosPromise<MPUser[]> => {
   const payload = {
     method: "GET",
-    route: `/sellers?gid=${userId}`,
+    route: `/the-users?gid=${userId}`,
   };
   return requestor({
     method: payload.method,

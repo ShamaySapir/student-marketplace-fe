@@ -30,8 +30,11 @@ export default function BecomeASellerForm() {
   useEffect(() => {
     async function getItemTypes() {
       const routeTypes = await routes.getItemTypes();
-      const resJson = routeTypes.data;
-      const items = map(resJson, (type) => pick(type, ["id", "name"]));
+      const resJson = routeTypes.data?.data;
+      const items = map(resJson, (type) => ({
+        name: type.attributes.name,
+        id: type.id,
+      }));
       setItemTypes(items);
     }
     getItemTypes();
