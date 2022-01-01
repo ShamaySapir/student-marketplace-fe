@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const instance = axios.create({
-  baseURL: process.env.MARKETPLACE_API,
+  baseURL: process.env.NEXT_PUBLIC_MARKETPLACE_API,
 });
 
 instance.interceptors.request.use(
