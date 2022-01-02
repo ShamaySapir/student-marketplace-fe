@@ -82,7 +82,7 @@ export default function AddServiceForm() {
     onSubmit: async (values) => {
       const payload = {
         title: values.itemName,
-        itemType: values.itemType,
+        serviceGroup: values.itemType,
         description: values.itemDesc,
         images: values.imageId,
         price: values.itemPrice,
