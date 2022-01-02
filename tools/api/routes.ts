@@ -62,3 +62,15 @@ export const becomeASeller = (sellerData: any): AxiosPromise => {
     ...payload,
   } as AxiosRequestConfig);
 };
+
+export const addService = (itemData: any): AxiosPromise => {
+  const payload = {
+    method: "POST",
+    route: `/items`,
+    data: { data: itemData },
+  };
+  return requestor({
+    url: payload.route,
+    ...payload,
+  } as AxiosRequestConfig);
+};

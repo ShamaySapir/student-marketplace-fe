@@ -35,7 +35,7 @@ const validationSchema = yup.object({
     .max(25, "Too Long!")
     .matches(/^[A-Za-z ]+$/, "Should contain only letters!")
     .required("Required"),
-  description: yup
+  sellerDesc: yup
     .string()
     .min(10, "Too Short!")
     .max(500, "Too Long!")
@@ -48,7 +48,7 @@ const validationSchema = yup.object({
 });
 interface IUserDetails {
   displayName: Session["displayName"];
-  description: string;
+  sellerDesc: string;
 }
 const Input = styled("input")({
   // display: "none",
@@ -83,7 +83,7 @@ export default function BecomeASellerForm() {
   const formik = useFormik({
     initialValues: {
       displayName: user.displayName,
-      description: "", //user.description,
+      sellerDesc: "", //user.description,
       imageId: "",
       phone: "",
     },
@@ -97,7 +97,7 @@ export default function BecomeASellerForm() {
         phone: values.phone,
         email: session!.user.email,
         isSeller: true,
-        sellerDescription: values.description,
+        sellerDescription: values.sellerDesc,
         images: values.imageId,
         googleId: session!.user.googleId,
       };
@@ -124,16 +124,14 @@ export default function BecomeASellerForm() {
         />
         <TextField
           fullWidth
-          id="description"
-          name="description"
+          id="sellerDesc"
+          name="sellerDesc"
           label="Description"
           placeholder="Enter your seller description"
-          defaultValue={formik.values.description}
+          defaultValue={formik.values.sellerDesc}
           onChange={formik.handleChange}
-          error={
-            formik.touched.description && Boolean(formik.errors.description)
-          }
-          helperText={formik.touched.description && formik.errors.description}
+          error={formik.touched.sellerDesc && Boolean(formik.errors.sellerDesc)}
+          helperText={formik.touched.sellerDesc && formik.errors.sellerDesc}
         />
         <TextField
           fullWidth
@@ -187,7 +185,7 @@ export default function BecomeASellerForm() {
           </Typography>
         </DialogTitle>
         <DialogContent>
-          <Typography sx={{ mt: 2 }}>You Are Now A Seller</Typography>
+          <Typography sx={{ mt: 2 }}>You are now a seller</Typography>
         </DialogContent>
         <DialogActions>
           <Link href="/service">
