@@ -59,11 +59,10 @@ export default function AddServiceForm() {
 
   useEffect(() => {
     async function getItemTypes() {
-      const routeTypes = await routes.getItemTypes();
-      const resJson = routeTypes.data?.data;
-      const items = map(resJson, (type) => ({
-        name: type.attributes.name,
-        id: type.id,
+      const resJson = await routes.getItemTypes();
+      const items = map(resJson, ({ name, id }) => ({
+        name,
+        id,
       }));
       setItemTypes(items);
     }

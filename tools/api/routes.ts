@@ -1,38 +1,38 @@
 import requestor from "./requestor";
 import { ItemType, MPUser } from "../../types/types";
 import { AxiosPromise, AxiosRequestConfig } from "axios";
-export const getUserDetails = (params: any) => {
-  const payload = {
-    method: "GET",
-    route: "/user",
-  };
-  return requestor({
-    method: payload.method,
-    url: payload.route,
-    params,
-  } as AxiosRequestConfig);
-};
 
-export const getUserType = ({ userId }: { userId: string }): AxiosPromise => {
+export const getUserType = async ({
+  userId,
+}: {
+  userId: string;
+}): Promise<MPUser | null> => {
   const payload = {
     method: "GET",
-    route: `/the-users?gid=${userId}`,
+    route: `/the-users?filters[googleId]=${userId}`,
   };
-  return requestor({
+  const res = await requestor({
     method: payload.method,
     url: payload.route,
   } as AxiosRequestConfig);
+
+  const userData = res.data.data?.[0];
+  return userData ? { id: userData.id, ...userData.attributes } : null;
 };
 
-export const getItemTypes = (): AxiosPromise => {
+export const getItemTypes = async (): Promise<ItemType[]> => {
   const payload = {
     method: "GET",
     route: `/item-types`,
   };
-  return requestor({
+  const res = await requestor({
     method: payload.method,
     url: payload.route,
   } as AxiosRequestConfig);
+  return res.data.data.map((item: any) => ({
+    id: item.id,
+    ...item.attributes,
+  })) as ItemType[];
 };
 
 export const postUploadImage = (imageFiles: FileList): AxiosPromise => {
