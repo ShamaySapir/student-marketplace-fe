@@ -1,9 +1,17 @@
-import { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useSession } from "next-auth/client";
-import Layout from "../components/layout";
 import AccessDenied from "../components/accessDenied";
+import SwiperCore, { Virtual } from "swiper";
+import { Swiper, SwiperSlide } from "swiper/react";
+import "swiper/css";
+import "swiper/css/pagination";
+import "swiper/css/navigation";
+import ServiceTile from "../components/serviceTile";
+import Link from "next/link";
 
 export default function Page() {
+  SwiperCore.use([Virtual]);
+
   const [session, loading] = useSession();
   const [content, setContent] = useState();
 
@@ -26,14 +34,28 @@ export default function Page() {
   if (!session) {
     return <AccessDenied />;
   }
+  const slides = Array.from({ length: 1000 }).map((_, index) => (
+    <Link href="/service">
+      <ServiceTile />
+    </Link>
+  ));
 
-  // If session exists, display content
   return (
-    <>
-      <h1>Protected Page</h1>
-      <p>
-        <strong>{content || "\u00a0"}</strong>
-      </p>
-    </>
+    <Swiper
+      slidesPerView={5}
+      // centeredSlides={true}
+      spaceBetween={30}
+      pagination={{
+        type: "fraction",
+      }}
+      navigation={true}
+      virtual
+    >
+      {slides.map((slideContent, index) => (
+        <SwiperSlide key={slideContent} virtualIndex={index}>
+          {slideContent}
+        </SwiperSlide>
+      ))}
+    </Swiper>
   );
 }
