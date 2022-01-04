@@ -4,6 +4,7 @@ import * as routes from "../../../tools/api/routes";
 import { Session, User, Account, Profile } from "next-auth";
 import { JWT } from "next-auth/jwt";
 import { UserType } from "../../../constants";
+import { MPUser } from "../../../types/types";
 // For more information on each option (and a full list of options) go to
 // https://next-auth.js.org/configuration/options
 export default NextAuth({
@@ -91,9 +92,7 @@ export default NextAuth({
       } catch (e) {
         console.log(e);
       }
-      const isSeller = userInfo?.data?.data?.[0]?.attributes.isSeller
-        ? UserType.seller
-        : UserType.buyer;
+      const isSeller = userInfo?.isSeller ? UserType.seller : UserType.buyer;
 
       return {
         ...session,

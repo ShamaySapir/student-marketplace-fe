@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import { useSession } from "next-auth/client";
 import React from "react";
 import { Box } from "@mui/material";
-
+// import layout.css
 interface IProps {
   children?: JSX.Element | JSX.Element[];
 }
