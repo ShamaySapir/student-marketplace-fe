@@ -17,7 +17,7 @@ const validationSchema = yup.object({
     .max(50, "Too Long!")
     .required("Required"),
   email: yup.string().email("Invalid email").required("Required"),
-  presentedName: yup
+  displayName: yup
     .string()
     .min(2, "Too Short!")
     .max(20, "Too Long!")
@@ -41,11 +41,11 @@ export default function RegistrationForm() {
   useEffect(() => {
     if (!loading && session!.user) {
       const loggedInUser = session!.user;
-      const userFullName = session?.user.name?.split(" ");
       setUser({
         email: loggedInUser.email,
-        firstName: userFullName?.[0],
-        lastName: userFullName?.[1],
+        firstName: session!.user.firstName,
+        lastName: session!.user.lastName,
+        displayName: session!.user.name,
       });
     }
   }, [session, loading]);
@@ -54,7 +54,7 @@ export default function RegistrationForm() {
       email: user.email,
       firstName: user.firstName,
       lastName: user.lastName,
-      presentedName: "",
+      displayName: user.displayName,
     },
     enableReinitialize: true,
     validationSchema: validationSchema,
@@ -99,15 +99,13 @@ export default function RegistrationForm() {
       />
       <TextField
         fullWidth
-        id="presentedName"
-        name="presentedName"
-        label="presentedName"
-        value={formik.values.presentedName}
+        id="displayName"
+        name="displayName"
+        label="displayName"
+        value={formik.values.displayName}
         onChange={formik.handleChange}
-        error={
-          formik.touched.presentedName && Boolean(formik.errors.presentedName)
-        }
-        helperText={formik.touched.presentedName && formik.errors.presentedName}
+        error={formik.touched.displayName && Boolean(formik.errors.displayName)}
+        helperText={formik.touched.displayName && formik.errors.displayName}
       />
       <Button color="primary" variant="contained" fullWidth type="submit">
         Submit
