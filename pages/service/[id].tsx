@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import { useSession } from "next-auth/client";
-import { Grid, Box, Paper, Typography } from "@mui/material";
+import { Grid, Box, Paper, Card, CardMedia } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import * as routes from "../../tools/api/routes";
 import { Service } from "../../types/types";
@@ -61,7 +61,16 @@ export default function ItemPage() {
             <Item>{getItemDesc.price}</Item>
           </Grid>
           <Grid item xs={8}>
-            <Item>{getItemDesc.image}</Item>
+            <Item>
+              <Card sx={{ maxWidth: 345 }}>
+                <CardMedia
+                  component="img"
+                  height="140"
+                  image={getItemDesc.image}
+                  alt={getItemDesc.title}
+                />
+              </Card>
+            </Item>
           </Grid>
           <Grid item xs={4}>
             <Item>{getItemDesc.sellerPhone}</Item>

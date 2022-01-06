@@ -114,7 +114,7 @@ export default function BecomeASellerForm() {
           fullWidth
           id="displayName"
           name="displayName"
-          label="Display Name"
+          // label="Display Name"
           value={formik.values.displayName}
           onChange={formik.handleChange}
           error={
