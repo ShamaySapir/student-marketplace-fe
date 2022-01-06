@@ -28,6 +28,7 @@ interface IUserDetails {
   email: stringOrUndefinendOrNull;
   firstName: stringOrUndefinendOrNull;
   lastName: stringOrUndefinendOrNull;
+  displayName: stringOrUndefinendOrNull;
 }
 
 export default function RegistrationForm() {
@@ -36,6 +37,7 @@ export default function RegistrationForm() {
     email: "",
     firstName: "",
     lastName: "",
+    displayName: "",
   });
 
   useEffect(() => {
@@ -43,9 +45,9 @@ export default function RegistrationForm() {
       const loggedInUser = session!.user;
       setUser({
         email: loggedInUser.email,
-        firstName: session!.user.firstName,
-        lastName: session!.user.lastName,
-        displayName: session!.user.name,
+        firstName: session!.user.firstName as string,
+        lastName: session!.user.lastName as string,
+        displayName: session!.user.name as string,
       });
     }
   }, [session, loading]);

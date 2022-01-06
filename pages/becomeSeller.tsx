@@ -188,7 +188,7 @@ export default function BecomeASellerForm() {
           <Typography sx={{ mt: 2 }}>You are now a seller</Typography>
         </DialogContent>
         <DialogActions>
-          <Link href="/service">
+          <Link href="/service" passHref>
             <Button>Add your first service/product </Button>
           </Link>
         </DialogActions>
