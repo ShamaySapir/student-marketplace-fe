@@ -11,6 +11,7 @@ module.exports = {
     MAGIC_API_KEY: "pk_test_398B82F5F0E88874",
     PORTIS_DAPP_ID: "e9be171c-2b7f-4ff0-8db9-327707511ee2",
     NEXT_PUBLIC_MARKETPLACE_API: process.env.MARKETPLACE_API,
+    NEXT_PUBLIC_MARKETPLACE_API_STRAPI: process.env.MARKETPLACE_API_STRAPI,
   },
   webpack(config) {
     config.module.rules.push({

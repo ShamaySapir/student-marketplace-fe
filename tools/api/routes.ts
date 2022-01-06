@@ -2,22 +2,18 @@ import requestor from "./requestor";
 import { ItemType, MPUser } from "../../types/types";
 import { AxiosPromise, AxiosRequestConfig } from "axios";
 
-export const getUserType = async ({
-  userId,
-}: {
-  userId: string;
-}): Promise<MPUser | null> => {
-  const payload = {
-    method: "GET",
-    route: `/the-users?filters[googleId]=${userId}`,
-  };
-  const res = await requestor({
-    method: payload.method,
-    url: payload.route,
+const getBaseRequestor = (args: any) => {
+  return requestor({
+    ...args,
+    baseURL: process.env.NEXT_PUBLIC_MARKETPLACE_API,
   } as AxiosRequestConfig);
+};
 
-  const userData = res.data.data?.[0];
-  return userData ? { id: userData.id, ...userData.attributes } : null;
+const getStrapiRequestor = (args: any) => {
+  return requestor({
+    ...args,
+    baseURL: process.env.NEXT_PUBLIC_MARKETPLACE_API_STRAPI,
+  } as AxiosRequestConfig);
 };
 
 export const getItemTypes = async (): Promise<ItemType[]> => {
@@ -25,14 +21,89 @@ export const getItemTypes = async (): Promise<ItemType[]> => {
     method: "GET",
     route: `/item-types`,
   };
-  const res = await requestor({
-    method: payload.method,
+  try {
+    const res = await getBaseRequestor({
+      method: payload.method,
+      url: payload.route,
+    });
+    if (res.status !== 200) throw new Error("Not implemented");
+    return res.data.map((item: any) => ({
+      id: item.id,
+      ...item.attributes,
+    })) as ItemType[];
+  } catch (e: any) {
+    const res = await getStrapiRequestor({
+      method: payload.method,
+      url: payload.route,
+    });
+    return res.data.data.map((item: any) => ({
+      id: item.id,
+      ...item.attributes,
+    })) as ItemType[];
+  }
+};
+
+export const getUserType = async ({
+  userId,
+}: {
+  userId: string;
+}): Promise<MPUser | null> => {
+  try {
+    const payload = {
+      method: "GET",
+      route: `/user/isseller/${userId}`,
+    };
+
+    const res = await getBaseRequestor({
+      method: payload.method,
+      url: payload.route,
+    } as AxiosRequestConfig);
+
+    if (res.status !== 200) throw new Error("Not implemented");
+    const userData = res.data[0];
+    return userData ? { id: userData.id, ...userData.attributes } : null;
+  } catch (e: any) {
+    const payload = {
+      method: "GET",
+      route: `/the-users?filters[googleId]=${userId}`,
+    };
+    const res = await getStrapiRequestor({
+      method: payload.method,
+      url: payload.route,
+    } as AxiosRequestConfig);
+
+    const userData = res.data.data?.[0];
+    return userData ? { id: userData.id, ...userData.attributes } : null;
+  }
+};
+
+export const updateUser = (userData: any): any => {
+  const payload = {
+    method: "POST",
+    route: `/the-users`,
+    data: { data: userData },
+    // /user/register
+  };
+  try {
+    return getStrapiRequestor({
+      url: payload.route,
+      ...payload,
+    } as AxiosRequestConfig);
+  } catch (e: any) {
+    console.log(e);
+  }
+};
+
+export const addService = (itemData: any): AxiosPromise => {
+  const payload = {
+    method: "POST",
+    route: `/items`,
+    data: { data: itemData },
+  };
+  return requestor({
     url: payload.route,
+    ...payload,
   } as AxiosRequestConfig);
-  return res.data.data.map((item: any) => ({
-    id: item.id,
-    ...item.attributes,
-  })) as ItemType[];
 };
 
 export const postUploadImage = (imageFiles: FileList): AxiosPromise => {
@@ -44,30 +115,6 @@ export const postUploadImage = (imageFiles: FileList): AxiosPromise => {
     route: `/upload`,
     data: bodyFormData,
     headers: { "Content-Type": "multipart/form-data" },
-  };
-  return requestor({
-    url: payload.route,
-    ...payload,
-  } as AxiosRequestConfig);
-};
-
-export const becomeASeller = (sellerData: any): AxiosPromise => {
-  const payload = {
-    method: "POST",
-    route: `/the-users`,
-    data: { data: sellerData },
-  };
-  return requestor({
-    url: payload.route,
-    ...payload,
-  } as AxiosRequestConfig);
-};
-
-export const addService = (itemData: any): AxiosPromise => {
-  const payload = {
-    method: "POST",
-    route: `/items`,
-    data: { data: itemData },
   };
   return requestor({
     url: payload.route,

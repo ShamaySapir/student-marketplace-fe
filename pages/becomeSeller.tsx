@@ -101,7 +101,7 @@ export default function BecomeASellerForm() {
         images: values.imageId,
         googleId: session!.user.googleId,
       };
-      const response = await routes.becomeASeller(payload);
+      const response = await routes.updateUser(payload);
       setSuccessfulMessage(response.status === 200);
       session!.user.type = UserType.seller;
     },
