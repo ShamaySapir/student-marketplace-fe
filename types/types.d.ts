@@ -23,7 +23,7 @@ export interface DescriptionItem {
   id: string;
   image: string;
   price: number;
-  rating: string;
+  rating: number;
   serviceGroup: string;
   title: string;
 }

@@ -1,3 +1,4 @@
+// @ts-ignore
 import * as React from "react";
 import {
   Card,
@@ -6,16 +7,34 @@ import {
   CardMedia,
   IconButton,
   Typography,
+  Grid,
+  Rating,
+  Stack,
 } from "@mui/material";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import ShareIcon from "@mui/icons-material/Share";
-import Link from "next/link";
+import { Link } from "@mui/material";
 import { DescriptionItem } from "../types/types";
+import { makeStyles } from "@mui/styles";
 
-export default function ServiceTile({ image, title, id }: DescriptionItem) {
+const useStyles = makeStyles({
+  link: {
+    cursor: "pointer",
+  },
+});
+
+export default function ServiceTile({
+  image,
+  title,
+  id,
+  price,
+  rating,
+}: DescriptionItem) {
+  const classes = useStyles();
+
   return (
     <Link href={`/service/${id}`} key={id} passHref>
-      <Card sx={{ maxWidth: 345 }}>
+      <Card>
         <CardMedia component="img" height="140" image={image} alt={title} />
         <CardContent>
           <Typography gutterBottom variant="h5" component="div">
@@ -23,12 +42,22 @@ export default function ServiceTile({ image, title, id }: DescriptionItem) {
           </Typography>
         </CardContent>
         <CardActions>
-          <IconButton aria-label="add to favorites">
-            <FavoriteIcon />
-          </IconButton>
-          <IconButton aria-label="share">
-            <ShareIcon />
-          </IconButton>
+          <Grid container item>
+            <Grid item>
+              <IconButton aria-label="add to favorites">
+                <FavoriteIcon />
+              </IconButton>
+              <IconButton aria-label="share">
+                <ShareIcon />
+              </IconButton>
+            </Grid>
+            <Grid item>
+              <Stack>
+                <Rating defaultValue={rating} />
+              </Stack>
+            </Grid>
+            <Grid item>{price}</Grid>
+          </Grid>
         </CardActions>
       </Card>
     </Link>
