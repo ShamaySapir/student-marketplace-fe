@@ -201,5 +201,5 @@ export const getDisplayTileData = async (): Promise<GroupedItems> => {
     }),
     {}
   );
-  return itemsDuplicated;
+  return items;
 };

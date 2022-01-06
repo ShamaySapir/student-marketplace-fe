@@ -15,7 +15,7 @@ const SwimLane = ({
   serviceTiles: JSX.Element[];
 }) => {
   const [swiperRef, setSwiperRef] = useState(null);
-  const NUMBER_OF_LIZARDS = 5;
+  const NUMBER_OF_LIZARDS = Math.min(serviceTiles.length, 5);
   return (
     <Grid container>
       <Grid item>
