@@ -1,8 +1,10 @@
 import requestor from "./requestor";
+
 import {
   ItemType,
   MPUser,
   GroupedItems,
+  Service,
   DescriptionItem,
 } from "../../types/types";
 import { AxiosPromise, AxiosRequestConfig } from "axios";
@@ -24,7 +26,7 @@ const getStrapiRequestor = (args: any) => {
 export const getItemTypes = async (): Promise<ItemType[]> => {
   const payload = {
     method: "GET",
-    route: `/item-types`,
+    route: `/serviceGroup`,
   };
   try {
     const res = await getBaseRequestor({
@@ -32,10 +34,7 @@ export const getItemTypes = async (): Promise<ItemType[]> => {
       url: payload.route,
     });
     if (res.status !== 200) throw new Error("Not implemented");
-    return res.data.map((item: any) => ({
-      id: item.id,
-      ...item.attributes,
-    })) as ItemType[];
+    return res.data as ItemType[];
   } catch (e: any) {
     const res = await getStrapiRequestor({
       method: payload.method,
@@ -95,8 +94,8 @@ export const getUserType = async ({
 export const updateUser = (userData: any): any => {
   try {
     const payload = {
-      method: "POST",
-      route: `/user/register`,
+      method: "PATCH",
+      route: `/user/update/${userData.googleId}`,
       data: userData,
     };
     return getBaseRequestor({
@@ -119,14 +118,45 @@ export const updateUser = (userData: any): any => {
 export const addService = (itemData: any): AxiosPromise => {
   const payload = {
     method: "POST",
-    route: `/items`,
+    route: `/items/add`,
     data: itemData,
     // data: { data: itemData },
   };
-  return getStrapiRequestor({
+  return getBaseRequestor({
     url: payload.route,
     ...payload,
   } as AxiosRequestConfig);
+};
+
+export const getService = async ({
+  itemId,
+}: {
+  itemId: string;
+}): Promise<Service> => {
+  const payload = {
+    method: "GET",
+    route: `/items/fullDetails/${itemId}`,
+  };
+  const res = await getBaseRequestor({
+    url: payload.route,
+    ...payload,
+  } as AxiosRequestConfig);
+  const { id, image, price, rating, serviceGroup, title, description, seller } =
+    res.data;
+  const sellerDesc = seller.description;
+  const sellerPhone = seller.phoneNumber;
+  const servicenItem = {
+    id,
+    image,
+    price,
+    rating,
+    serviceGroup,
+    title,
+    description,
+    sellerDesc,
+    sellerPhone,
+  };
+  return servicenItem;
 };
 
 export const postUploadImage = (imageFiles: FileList): AxiosPromise => {

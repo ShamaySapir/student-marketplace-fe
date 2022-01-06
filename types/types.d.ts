@@ -1,5 +1,5 @@
 export interface ItemType {
-  id: number;
+  id: string;
   name: string;
 }
 
@@ -26,6 +26,12 @@ export interface DescriptionItem {
   rating: number;
   serviceGroup: string;
   title: string;
+}
+
+export interface Service extends DescriptionItem {
+  description: string;
+  sellerDesc: string;
+  sellerPhone: string;
 }
 
 export interface GroupedItems {

@@ -94,11 +94,11 @@ export default function BecomeASellerForm() {
         firstName: session!.user.firstName,
         lastName: session!.user.lastName,
         displayName: values.displayName,
-        phone: values.phone,
+        phoneNumber: values.phone,
         email: session!.user.email,
         isSeller: true,
-        sellerDescription: values.sellerDesc,
-        images: values.imageId,
+        description: values.sellerDesc,
+        profilePic: values.imageId,
         googleId: session!.user.googleId,
       };
       const response = await routes.updateUser(payload);
@@ -188,7 +188,7 @@ export default function BecomeASellerForm() {
           <Typography sx={{ mt: 2 }}>You are now a seller</Typography>
         </DialogContent>
         <DialogActions>
-          <Link href="/service" passHref>
+          <Link href="/service/new" passHref>
             <Button>Add your first service/product </Button>
           </Link>
         </DialogActions>
