@@ -6,12 +6,12 @@ import {
   CircularProgress,
   IconButton,
   Stack,
-  Input,
   Dialog,
   DialogTitle,
   Typography,
   DialogContent,
 } from "@mui/material";
+import { styled } from "@mui/material/styles";
 import { useFormik } from "formik";
 import * as routes from "../tools/api/routes";
 import * as yup from "yup";
@@ -38,6 +38,10 @@ const validationSchema = yup.object({
     // .min(0, "Too cheap")
     // .max(100, "Too expensive")
     .required("Required"),
+});
+
+const Input = styled("input")({
+  // display: "none",
 });
 
 const uploadImage = async (

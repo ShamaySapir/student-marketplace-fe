@@ -1,3 +1,4 @@
+// @ts-nocheck
 import React, { useEffect, useState } from "react";
 import { useSession } from "next-auth/client";
 import AccessDenied from "../components/accessDenied";
@@ -35,27 +36,33 @@ export default function Page() {
     return <AccessDenied />;
   }
   const slides = Array.from({ length: 1000 }).map((_, index) => (
-    <Link href="/service">
+    <Link href="/service" key={index} passHref>
       <ServiceTile />
     </Link>
   ));
 
   return (
-    <Swiper
-      slidesPerView={5}
-      // centeredSlides={true}
-      spaceBetween={30}
-      pagination={{
-        type: "fraction",
-      }}
-      navigation={true}
-      virtual
-    >
-      {slides.map((slideContent, index) => (
-        <SwiperSlide key={slideContent} virtualIndex={index}>
-          {slideContent}
-        </SwiperSlide>
-      ))}
-    </Swiper>
+    <>
+      {slides.length > 0 ? (
+        <Swiper
+          slidesPerView={5}
+          // centeredSlides={true}
+          spaceBetween={30}
+          pagination={{
+            type: "fraction",
+          }}
+          navigation={true}
+          virtual
+        >
+          {slides.map((slideContent, index) => (
+            <SwiperSlide key={slideContent} virtualIndex={index}>
+              {slideContent}
+            </SwiperSlide>
+          ))}
+        </Swiper>
+      ) : (
+        <h2>No products in this category</h2>
+      )}
+    </>
   );
 }
