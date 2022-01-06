@@ -22,8 +22,8 @@ export interface MPUser {
 export interface DescriptionItem {
   id: string;
   image: string;
-  price: string;
-  rating: string;
+  price: number;
+  rating: number;
   serviceGroup: string;
   title: string;
 }

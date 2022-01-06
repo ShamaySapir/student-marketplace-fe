@@ -2,10 +2,10 @@ import React, { useEffect, useState } from "react";
 import { useSession } from "next-auth/client";
 import AccessDenied from "../components/accessDenied";
 import ServiceTile from "../components/serviceTile";
-import Link from "next/link";
 import { Button } from "@mui/material";
 import * as routes from "../tools/api/routes";
 import { DescriptionItem } from "../types/types";
+import { Grid } from "@mui/material";
 import SwimLane from "../components/swimLane";
 import { map } from "lodash";
 
@@ -54,12 +54,13 @@ export default function Page() {
   return (
     <>
       <Button onClick={deleteUserFunc}>delete user</Button>
-      {map(displayItems, (tileData, category) => (
-        <>
-          {category}
-          <SwimLane serviceTiles={prepareSlides(tileData)} />
-        </>
-      ))}
+      <Grid container>
+        {map(displayItems, (tileData, category) => (
+          <Grid container item>
+            <SwimLane serviceTiles={prepareSlides(tileData)} name={category} />
+          </Grid>
+        ))}
+      </Grid>
     </>
   );
 }

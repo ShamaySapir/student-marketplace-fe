@@ -18,8 +18,8 @@ export default function ItemPage() {
   const [getItemDesc, setItemDesc] = useState<Service>({
     id: "",
     image: "",
-    price: "",
-    rating: "",
+    price: 0,
+    rating: 0,
     serviceGroup: "",
     title: "",
     description: "",

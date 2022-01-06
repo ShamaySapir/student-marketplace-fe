@@ -1,7 +1,14 @@
 import requestor from "./requestor";
-import { ItemType, MPUser, GroupedItems, Service } from "../../types/types";
+
+import {
+  ItemType,
+  MPUser,
+  GroupedItems,
+  Service,
+  DescriptionItem,
+} from "../../types/types";
 import { AxiosPromise, AxiosRequestConfig } from "axios";
-import { groupBy } from "lodash";
+import { groupBy, reduce } from "lodash";
 const getBaseRequestor = (args: any) => {
   return requestor({
     ...args,
@@ -142,8 +149,8 @@ export const getService = async ({
   const servicenItem = {
     id,
     image,
-    price,
-    rating,
+    price: +price,
+    rating: +rating,
     serviceGroup,
     title,
     description,
@@ -169,6 +176,9 @@ export const postUploadImage = (imageFiles: FileList): AxiosPromise => {
   } as AxiosRequestConfig);
 };
 
+const makeRepeated = (arr: any, repeats: number) =>
+  [].concat(...Array.from({ length: repeats }, () => arr));
+
 export const getDisplayTileData = async (): Promise<GroupedItems> => {
   const payload = {
     method: "GET",
@@ -178,6 +188,19 @@ export const getDisplayTileData = async (): Promise<GroupedItems> => {
     url: payload.route,
     ...payload,
   } as AxiosRequestConfig);
-  const items = groupBy(res.data, "serviceGroup");
+  const parsedRes = res.data.map((item: DescriptionItem) => ({
+    ...item,
+    rating: +item.rating,
+    price: +item.price,
+  }));
+  const items = groupBy(parsedRes, "serviceGroup");
+  const itemsDuplicated = reduce(
+    items,
+    (acc, itemsList, category) => ({
+      ...acc,
+      [category]: makeRepeated(itemsList, 100),
+    }),
+    {}
+  );
   return items;
 };
