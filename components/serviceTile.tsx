@@ -58,7 +58,7 @@ export default function ServiceTile({
                 <Rating defaultValue={rating} />
               </Stack>
             </Grid>
-            <Grid item>{price}</Grid>
+            <Grid item>Price: {price}</Grid>
           </Grid>
         </CardActions>
       </Card>
