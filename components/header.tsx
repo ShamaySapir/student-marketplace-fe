@@ -3,6 +3,7 @@ import { Box, Avatar } from "@mui/material";
 import GoogleProviderSignin from "./providers/google/GoogleProviderSignin";
 import UserAvatar from "./userAvatar/index1";
 import { styled } from "@mui/material/styles";
+import Link from "next/link";
 
 const Div = styled("div")(({ theme }) => ({
   ...theme.typography.button,
@@ -28,7 +29,9 @@ export default function Header() {
       >
         <Box>
           <Box sx={{ gridArea: "title" }}>
-            <Div>Student social marketplace</Div>
+            <Div>
+              <Link href="/">Student social marketplace</Link>
+            </Div>
           </Box>
         </Box>
         <Box sx={{ gridArea: "avatar" }}>
