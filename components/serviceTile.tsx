@@ -42,13 +42,15 @@ export default function ServiceTile({
           </Typography>
         </CardContent>
         <CardActions>
-          <Grid container item>
+          <Grid
+            container
+            item
+            alignItems={"center"}
+            justifyContent={"space-between"}
+          >
             <Grid item>
               <IconButton aria-label="add to favorites">
                 <FavoriteIcon />
-              </IconButton>
-              <IconButton aria-label="share">
-                <ShareIcon />
               </IconButton>
             </Grid>
             <Grid item>

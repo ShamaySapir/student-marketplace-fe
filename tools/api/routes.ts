@@ -148,8 +148,8 @@ export const getService = async ({
   const servicenItem = {
     id,
     image,
-    price,
-    rating,
+    price: +price,
+    rating: +rating,
     serviceGroup,
     title,
     description,
