@@ -74,8 +74,7 @@ export const getUserType = async ({
     } as AxiosRequestConfig);
 
     if (res.status !== 200) throw new Error("Not implemented");
-    const userData = res.data[0];
-    return userData ? { id: userData.id, ...userData.attributes } : null;
+    return res.data;
   } catch (e: any) {
     const payload = {
       method: "GET",
