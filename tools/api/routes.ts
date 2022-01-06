@@ -46,6 +46,7 @@ export const deleteUser = async ({ userId }: { userId: string }) => {
     route: `/user/delete/${userId}`,
   };
   return getBaseRequestor({
+    url: payload.route,
     ...payload,
   } as AxiosRequestConfig);
 };
