@@ -18,3 +18,16 @@ export interface MPUser {
   images: [string];
   googleId: string;
 }
+
+export interface DescriptionItem {
+  id: string;
+  image: string;
+  price: number;
+  rating: string;
+  serviceGroup: string;
+  title: string;
+}
+
+export interface GroupedItems {
+  [string]: [DescriptionItem];
+}

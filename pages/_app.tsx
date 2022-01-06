@@ -5,6 +5,7 @@ import { Session } from "next-auth";
 import { ThemeProvider } from "@mui/material/styles";
 import theme from "../tools/theme";
 import Layout from "../components/layout";
+import SwiperCore, { Virtual } from "swiper";
 
 interface IPageProps {
   session: Session;
@@ -16,6 +17,8 @@ interface IProps {
 // Use the <Provider> to improve performance and allow components that call
 // `useSession()` anywhere in your application to access the `session` object.
 export default function App({ Component, pageProps }: IProps) {
+  SwiperCore.use([Virtual]);
+
   return (
     <ThemeProvider theme={theme}>
       <Provider
