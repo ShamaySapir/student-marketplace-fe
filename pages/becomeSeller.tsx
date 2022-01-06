@@ -94,11 +94,11 @@ export default function BecomeASellerForm() {
         firstName: session!.user.firstName,
         lastName: session!.user.lastName,
         displayName: values.displayName,
-        phone: values.phone,
+        phoneNumber: values.phone,
         email: session!.user.email,
         isSeller: true,
-        sellerDescription: values.sellerDesc,
-        images: values.imageId,
+        description: values.sellerDesc,
+        profilePic: values.imageId,
         googleId: session!.user.googleId,
       };
       const response = await routes.updateUser(payload);

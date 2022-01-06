@@ -19,7 +19,7 @@ const getStrapiRequestor = (args: any) => {
 export const getItemTypes = async (): Promise<ItemType[]> => {
   const payload = {
     method: "GET",
-    route: `/item-types`,
+    route: `/serviceGroup`,
   };
   try {
     const res = await getBaseRequestor({
@@ -27,10 +27,7 @@ export const getItemTypes = async (): Promise<ItemType[]> => {
       url: payload.route,
     });
     if (res.status !== 200) throw new Error("Not implemented");
-    return res.data.map((item: any) => ({
-      id: item.id,
-      ...item.attributes,
-    })) as ItemType[];
+    return res.data as ItemType[];
   } catch (e: any) {
     const res = await getStrapiRequestor({
       method: payload.method,
@@ -91,7 +88,7 @@ export const updateUser = (userData: any): any => {
   try {
     const payload = {
       method: "PATCH",
-      route: `/update/${userData.googleId}`,
+      route: `/user/update/${userData.googleId}`,
       data: userData,
     };
     return getBaseRequestor({
@@ -114,7 +111,7 @@ export const updateUser = (userData: any): any => {
 export const addService = (itemData: any): AxiosPromise => {
   const payload = {
     method: "POST",
-    route: `/items`,
+    route: `/items/add`,
     data: itemData,
     // data: { data: itemData },
   };

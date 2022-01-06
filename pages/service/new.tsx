@@ -22,7 +22,7 @@ import { useSession } from "next-auth/client";
 import { Session } from "next-auth";
 
 const validationSchema = yup.object({
-  itemType: yup.number().required("Required"),
+  itemTypeId: yup.string().required("Required"),
   itemName: yup
     .string()
     .min(2, "Too Short!")
@@ -75,7 +75,7 @@ export default function AddServiceForm() {
 
   const formik = useFormik({
     initialValues: {
-      itemType: itemTypes?.[0]?.id,
+      itemTypeId: itemTypes?.[0]?.id,
       itemName: "",
       itemDesc: "",
       itemPrice: 0.0,
@@ -86,7 +86,7 @@ export default function AddServiceForm() {
     onSubmit: async (values) => {
       const payload = {
         title: values.itemName,
-        serviceGroup: values.itemType,
+        serviceGroup: values.itemTypeId,
         description: values.itemDesc,
         images: values.imageId,
         price: values.itemPrice,
@@ -101,12 +101,12 @@ export default function AddServiceForm() {
     <>
       <form onSubmit={formik.handleSubmit}>
         <TextField
-          id="itemType"
+          id="itemTypeId"
           select
           label="Type"
-          value={formik.values.itemType}
-          onChange={formik.handleChange("itemType")}
-          error={formik.touched.itemType && Boolean(formik.errors.itemType)}
+          value={formik.values.itemTypeId}
+          onChange={formik.handleChange("itemTypeId")}
+          error={formik.touched.itemTypeId && Boolean(formik.errors.itemTypeId)}
           margin="normal"
           fullWidth
         >
