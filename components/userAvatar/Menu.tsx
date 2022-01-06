@@ -14,7 +14,8 @@ export default function BasicMenu({
   handleClose = noop,
   anchorEl,
   menuItems,
-}: IProps) {
+  ...props
+}: IProps & MenuProps) {
   return (
     <Menu
       id="basic-menu"
@@ -24,22 +25,28 @@ export default function BasicMenu({
       MenuListProps={{
         "aria-labelledby": "basic-button",
       }}
+      {...props}
     >
-      {map(menuItems, ({ divider, onClick = noop, Component }, idx) => {
-        return (
-          <div key={idx}>
-            {divider && <Divider />}
-            <MenuItem
-              onClick={(e: any) => {
-                onClick(e);
-                handleClose();
-              }}
-            >
-              <Component />
-            </MenuItem>
-          </div>
-        );
-      })}
+      {/* <MenuItem onClick={handleClose}>Profile</MenuItem>
+      <MenuItem onClick={handleClose}>Profile2</MenuItem>
+      <MenuItem onClick={handleClose}>Profile3</MenuItem> */}
+      <>
+        {map(menuItems, ({ divider, onClick = noop, Component }, idx) => {
+          return (
+            <div key={idx}>
+              {divider && <Divider />}
+              <MenuItem
+                onClick={(e: any) => {
+                  onClick(e);
+                  handleClose();
+                }}
+              >
+                <Component />
+              </MenuItem>
+            </div>
+          );
+        })}
+      </>
     </Menu>
   );
 }
