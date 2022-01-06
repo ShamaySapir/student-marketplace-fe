@@ -22,10 +22,16 @@ export interface MPUser {
 export interface DescriptionItem {
   id: string;
   image: string;
-  price: number;
+  price: string;
   rating: string;
   serviceGroup: string;
   title: string;
+}
+
+export interface Service extends DescriptionItem {
+  description: string;
+  sellerDesc: string;
+  sellerPhone: string;
 }
 
 export interface GroupedItems {

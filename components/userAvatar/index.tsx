@@ -77,7 +77,7 @@ const OrderHistoryComponent = () => (
 );
 
 const AddServiceComponent = () => (
-  <Link href="/service" passHref>
+  <Link href="/service/new" passHref>
     <Grid container>
       <Grid item>
         <ListItemIcon>

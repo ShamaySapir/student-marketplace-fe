@@ -1,5 +1,5 @@
 import requestor from "./requestor";
-import { ItemType, MPUser, GroupedItems } from "../../types/types";
+import { ItemType, MPUser, GroupedItems, Service } from "../../types/types";
 import { AxiosPromise, AxiosRequestConfig } from "axios";
 import { groupBy } from "lodash";
 const getBaseRequestor = (args: any) => {
@@ -118,10 +118,41 @@ export const addService = (itemData: any): AxiosPromise => {
     data: itemData,
     // data: { data: itemData },
   };
-  return getStrapiRequestor({
+  return getBaseRequestor({
     url: payload.route,
     ...payload,
   } as AxiosRequestConfig);
+};
+
+export const getService = async ({
+  itemId,
+}: {
+  itemId: string;
+}): Promise<Service> => {
+  const payload = {
+    method: "GET",
+    route: `/items/fullDetails/${itemId}`,
+  };
+  const res = await getBaseRequestor({
+    url: payload.route,
+    ...payload,
+  } as AxiosRequestConfig);
+  const { id, image, price, rating, serviceGroup, title, description, seller } =
+    res.data;
+  const sellerDesc = seller.description;
+  const sellerPhone = seller.phoneNumber;
+  const servicenItem = {
+    id,
+    image,
+    price,
+    rating,
+    serviceGroup,
+    title,
+    description,
+    sellerDesc,
+    sellerPhone,
+  };
+  return servicenItem;
 };
 
 export const postUploadImage = (imageFiles: FileList): AxiosPromise => {

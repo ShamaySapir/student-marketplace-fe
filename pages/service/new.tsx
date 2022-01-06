@@ -13,10 +13,10 @@ import {
 } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import { useFormik } from "formik";
-import * as routes from "../tools/api/routes";
+import * as routes from "../../tools/api/routes";
 import * as yup from "yup";
 import { map, pick } from "lodash";
-import { ItemType } from "../types/types";
+import { ItemType } from "../../types/types";
 import { PhotoCamera } from "@mui/icons-material";
 import { useSession } from "next-auth/client";
 import { Session } from "next-auth";
