@@ -90,8 +90,8 @@ export const getUserType = async ({
 export const updateUser = (userData: any): any => {
   try {
     const payload = {
-      method: "POST",
-      route: `/user/register`,
+      method: "PATCH",
+      route: `/update/${userData.googleId}`,
       data: userData,
     };
     return getBaseRequestor({
