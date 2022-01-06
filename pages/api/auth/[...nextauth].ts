@@ -81,7 +81,7 @@ export default NextAuth({
       return false;
     },
     async redirect(url, baseUrl) {
-      return `${baseUrl}/home`;
+      return `${baseUrl}`;
     },
     async session(session, user): Promise<Session> {
       let userInfo;

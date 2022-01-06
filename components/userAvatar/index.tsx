@@ -161,9 +161,9 @@ export default function Header() {
         anchorEl={anchorEl}
         open={open}
         handleClose={handleClose}
-        MenuListProps={{
-          "aria-labelledby": "basic-button",
-        }}
+        // MenuListProps={{
+        //   "aria-labelledby": "basic-button",
+        // }}
         menuItems={
           (session?.user.type === UserType.seller && sellerMenuItems) ||
           buyerMenuItems

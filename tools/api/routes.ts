@@ -78,19 +78,26 @@ export const getUserType = async ({
 };
 
 export const updateUser = (userData: any): any => {
-  const payload = {
-    method: "POST",
-    route: `/the-users`,
-    data: { data: userData },
-    // /user/register
-  };
   try {
-    return getStrapiRequestor({
+    const payload = {
+      method: "POST",
+      route: `/user/register`,
+      data: { data: userData },
+    };
+    return getBaseRequestor({
       url: payload.route,
       ...payload,
     } as AxiosRequestConfig);
   } catch (e: any) {
-    console.log(e);
+    const payload = {
+      method: "POST",
+      route: `/the-users`,
+      data: { data: userData },
+    };
+    return getStrapiRequestor({
+      url: payload.route,
+      ...payload,
+    } as AxiosRequestConfig);
   }
 };
 
