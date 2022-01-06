@@ -28,7 +28,7 @@ const SwimLane = ({
           slidesPerView={NUMBER_OF_LIZARDS}
           navigation
           virtual
-          pagination={{ type: "fraction", clickable: true }}
+          // pagination={{ clickable: true }}
         >
           {serviceTiles.map((slideContent: any, index: number) => (
             <SwiperSlide key={index} virtualIndex={index}>
