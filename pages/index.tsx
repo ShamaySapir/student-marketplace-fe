@@ -53,7 +53,7 @@ export default function Page() {
 
   return (
     <>
-      <Button onClick={deleteUserFunc}>delete user</Button>
+      {/* <Button onClick={deleteUserFunc}>delete user</Button> */}
       <Grid container>
         {map(displayItems, (tileData, category) => (
           <Grid container item>
