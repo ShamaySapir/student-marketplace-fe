@@ -1,23 +1,18 @@
-// @ts-nocheck
 import React, { useEffect, useState } from "react";
 import { useSession } from "next-auth/client";
 import AccessDenied from "../components/accessDenied";
-import SwiperCore, { Virtual } from "swiper";
-import { Swiper, SwiperSlide } from "swiper/react";
-import "swiper/css";
-import "swiper/css/pagination";
-import "swiper/css/navigation";
 import ServiceTile from "../components/serviceTile";
 import Link from "next/link";
 import { Button } from "@mui/material";
 import * as routes from "../tools/api/routes";
+import { DescriptionItem } from "../types/types";
+import SwimLane from "../components/swimLane";
+import { map } from "lodash";
 
 export default function Page() {
-  SwiperCore.use([Virtual]);
-
   const [session, loading] = useSession();
   const [content, setContent] = useState();
-
+  const [displayItems, setDisplayTileItems] = useState({});
   // Fetch content from protected route
   useEffect(() => {
     const fetchData = async () => {
@@ -30,6 +25,14 @@ export default function Page() {
     fetchData();
   }, [session]);
 
+  useEffect(() => {
+    async function fetchDisplayTileData() {
+      const itemsToShow = await routes.getDisplayTileData();
+      setDisplayTileItems(itemsToShow);
+    }
+    fetchDisplayTileData();
+  }, []);
+
   // When rendering client side don't display anything until loading is complete
   if (typeof window !== "undefined" && loading) return null;
 
@@ -37,41 +40,26 @@ export default function Page() {
   if (!session) {
     return <AccessDenied />;
   }
-  const slides = Array.from({ length: 1000 }).map((_, index) => (
-    <Link href="/service" key={index} passHref>
-      <ServiceTile />
-    </Link>
-  ));
+  const prepareSlides = (services: DescriptionItem[]) =>
+    services?.map((content: DescriptionItem, index) => (
+      <ServiceTile {...content} key={index} />
+    ));
 
   const deleteUserFunc = async () => {
     const response = await routes.deleteUser({
-      userId: session!.user.googleId,
+      userId: session!.user.googleId as string,
     });
   };
 
   return (
     <>
       <Button onClick={deleteUserFunc}>delete user</Button>
-      {slides.length > 0 ? (
-        <Swiper
-          slidesPerView={5}
-          // centeredSlides={true}
-          spaceBetween={30}
-          pagination={{
-            type: "fraction",
-          }}
-          navigation={true}
-          virtual
-        >
-          {slides.map((slideContent, index) => (
-            <SwiperSlide key={slideContent} virtualIndex={index}>
-              {slideContent}
-            </SwiperSlide>
-          ))}
-        </Swiper>
-      ) : (
-        <h2>No products in this category</h2>
-      )}
+      {map(displayItems, (tileData, category) => (
+        <>
+          {category}
+          <SwimLane serviceTiles={prepareSlides(tileData)} />
+        </>
+      ))}
     </>
   );
 }
