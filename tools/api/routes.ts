@@ -43,6 +43,16 @@ export const getItemTypes = async (): Promise<ItemType[]> => {
   }
 };
 
+export const deleteUser = async ({ userId }: { userId: string }) => {
+  const payload = {
+    method: "DELETE",
+    route: `/user/delete/${userId}`,
+  };
+  return getBaseRequestor({
+    ...payload,
+  } as AxiosRequestConfig);
+};
+
 export const getUserType = async ({
   userId,
 }: {
@@ -82,7 +92,7 @@ export const updateUser = (userData: any): any => {
     const payload = {
       method: "POST",
       route: `/user/register`,
-      data: { data: userData },
+      data: userData,
     };
     return getBaseRequestor({
       url: payload.route,
@@ -105,7 +115,8 @@ export const addService = (itemData: any): AxiosPromise => {
   const payload = {
     method: "POST",
     route: `/items`,
-    data: { data: itemData },
+    data: itemData,
+    // data: { data: itemData },
   };
   return requestor({
     url: payload.route,

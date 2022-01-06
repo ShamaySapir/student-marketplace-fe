@@ -29,6 +29,10 @@ instance.interceptors.response.use(
       error.config.baseURL === process.env.NEXT_PUBLIC_MARKETPLACE_API_STRAPI
     ) {
       return Promise.reject(error.response.data.error);
+    } else if (
+      error.config.baseURL === process.env.NEXT_PUBLIC_MARKETPLACE_API
+    ) {
+      return Promise.reject(error.response);
     }
     return Promise.reject(error);
   }

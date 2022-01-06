@@ -9,6 +9,8 @@ import "swiper/css/pagination";
 import "swiper/css/navigation";
 import ServiceTile from "../components/serviceTile";
 import Link from "next/link";
+import { Button } from "@mui/material";
+import * as routes from "../tools/api/routes";
 
 export default function Page() {
   SwiperCore.use([Virtual]);
@@ -41,8 +43,15 @@ export default function Page() {
     </Link>
   ));
 
+  const deleteUserFunc = async () => {
+    const response = await routes.deleteUser({
+      userId: session!.user.googleId,
+    });
+  };
+
   return (
     <>
+      <Button onClick={deleteUserFunc}>delete user</Button>
       {slides.length > 0 ? (
         <Swiper
           slidesPerView={5}
