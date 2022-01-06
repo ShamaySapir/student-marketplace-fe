@@ -15,6 +15,7 @@ const Item = styled(Paper)(({ theme }) => ({
 
 export default function ItemPage() {
   const [session, loading] = useSession();
+
   const [getItemDesc, setItemDesc] = useState<Service>({
     id: "",
     image: "",
@@ -27,19 +28,20 @@ export default function ItemPage() {
     sellerPhone: "",
   });
   const router = useRouter();
+  const { id } = router.query;
 
   useEffect(() => {
     async function getItemDescription() {
-      const { id } = router.query;
-      if (id) {
-        const itemDescription = await routes.getService({
-          itemId: id as string,
-        });
-        setItemDesc(itemDescription);
-      }
+      // const { id } = router.query;
+      // if (id) {
+      const itemDescription = await routes.getService({
+        itemId: id as string,
+      });
+      setItemDesc(itemDescription);
+      // }
     }
     getItemDescription();
-  });
+  }, [id]);
 
   return (
     <>
