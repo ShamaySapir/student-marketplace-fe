@@ -48,11 +48,11 @@ export default function ServiceTile({
             alignItems={"center"}
             justifyContent={"space-between"}
           >
-            <Grid item>
+            {/* <Grid item>
               <IconButton aria-label="add to favorites">
                 <FavoriteIcon />
               </IconButton>
-            </Grid>
+            </Grid> */}
             <Grid item>
               <Stack>
                 <Rating defaultValue={rating} />
