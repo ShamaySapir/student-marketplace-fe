@@ -37,7 +37,6 @@ export default function App({ Component, pageProps }: IProps) {
   }, [session]);
   // When rendering client side don't display anything until loading is complete
   if (typeof window !== "undefined" && loading) return null;
-  console.log(router.pathname);
   // If no session exists, display access denied message
   if (!session) {
     return <AccessDenied />;
