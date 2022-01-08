@@ -1,6 +1,9 @@
 import { Provider } from "next-auth/client";
 import "./styles.css";
-import React from "react";
+import { useRouter } from "next/router";
+import React, { useState, useEffect } from "react";
+import { useSession } from "next-auth/client";
+import AccessDenied from "../components/accessDenied";
 import { Session } from "next-auth";
 import { ThemeProvider } from "@mui/material/styles";
 import theme from "../tools/theme";
@@ -17,8 +20,28 @@ interface IProps {
 // Use the <Provider> to improve performance and allow components that call
 // `useSession()` anywhere in your application to access the `session` object.
 export default function App({ Component, pageProps }: IProps) {
-  SwiperCore.use([Virtual]);
+  const [session, loading] = useSession();
+  const [content, setContent] = useState();
+  const router = useRouter();
 
+  SwiperCore.use([Virtual]);
+  useEffect(() => {
+    const fetchData = async () => {
+      const res = await fetch("/api/examples/protected");
+      const json = await res.json();
+      if (json.content) {
+        setContent(json.content);
+      }
+    };
+    fetchData();
+  }, [session]);
+  // When rendering client side don't display anything until loading is complete
+  if (typeof window !== "undefined" && loading) return null;
+  console.log(router.pathname);
+  // If no session exists, display access denied message
+  if (!session) {
+    return <AccessDenied />;
+  }
   return (
     <ThemeProvider theme={theme}>
       <Provider
@@ -39,7 +62,7 @@ export default function App({ Component, pageProps }: IProps) {
           // windows / tabs will be updated to reflect the user is signed out.
           keepAlive: 0,
         }}
-        session={pageProps.session}
+        session={session}
       >
         <Layout>
           <Component {...pageProps} />

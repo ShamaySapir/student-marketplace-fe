@@ -21,13 +21,6 @@ import * as routes from "../tools/api/routes";
 import Link from "next/link";
 import { UserType } from "../constants";
 
-const modalStyle = {
-  position: "absolute" as "absolute",
-  top: "50%",
-  left: "50%",
-  transform: "translate(-50%, -50%)",
-  width: 400,
-};
 const validationSchema = yup.object({
   displayName: yup
     .string()
@@ -114,7 +107,6 @@ export default function BecomeASellerForm() {
           fullWidth
           id="displayName"
           name="displayName"
-          // label="Display Name"
           value={formik.values.displayName}
           onChange={formik.handleChange}
           error={

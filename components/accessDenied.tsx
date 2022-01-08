@@ -9,8 +9,7 @@ export default function AccessDenied() {
         <a
           href="/api/auth/signin"
           onClick={(e) => {
-            e.preventDefault();
-            signIn();
+            signIn("google");
           }}
         >
           You must be signed in to view this page

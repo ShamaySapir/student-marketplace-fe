@@ -5,7 +5,6 @@ import {
   CardActions,
   CardContent,
   CardMedia,
-  IconButton,
   Typography,
   Grid,
   Rating,
@@ -48,11 +47,6 @@ export default function ServiceTile({
             alignItems={"center"}
             justifyContent={"space-between"}
           >
-            {/* <Grid item>
-              <IconButton aria-label="add to favorites">
-                <FavoriteIcon />
-              </IconButton>
-            </Grid> */}
             <Grid item>
               <Stack>
                 <Rating defaultValue={rating} />
