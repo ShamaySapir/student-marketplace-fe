@@ -20,6 +20,7 @@ export default function Layout({
   children,
   renderOptions = { renderHeader: true, renderFooter: true, renderSides: true },
 }: IProps) {
+  const { renderHeader, renderFooter, renderSides } = renderOptions;
   const [session, loading] = useSession();
   const [content, setContent] = useState();
   useEffect(() => {
