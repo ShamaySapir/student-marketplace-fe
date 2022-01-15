@@ -9,7 +9,7 @@ import {
 } from "@mui/material";
 import { ExpandLess, ExpandMore } from "@mui/icons-material";
 import { map } from "lodash";
-interface IFilterItemProps {
+export interface IFilterItemProps {
   title: string;
   subFilters?: IFilterItemProps[];
   indent?: number;

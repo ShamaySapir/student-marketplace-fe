@@ -32,7 +32,7 @@ export default function Page() {
     <Grid container>
       {/* <Button onClick={deleteUserFunc}>delete user</Button> */}
       <Grid item xs={2}>
-        <Filters />
+        <Filters services={displayItems} />
       </Grid>
       <Grid item xs={10}>
         <Grid container direction="column">
