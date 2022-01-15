@@ -1,30 +1,23 @@
 import * as React from "react";
-import {
-  List,
-  ListSubheader,
-  ListItemIcon,
-  ListItemText,
-  ListItemButton,
-  Collapse,
-  Checkbox,
-} from "@mui/material";
-import {
-  MoveToInbox as InboxIcon,
-  Drafts as DraftsIcon,
-  Send as SendIcon,
-  ExpandLess,
-  ExpandMore,
-  StarBorder,
-} from "@mui/icons-material";
+import { List, ListSubheader } from "@mui/material";
+import { map } from "lodash";
 import FilterItem from "./FilterItem";
 
 export default function FiltersList() {
-  const [open, setOpen] = React.useState(true);
-
-  const handleClick = () => {
-    setOpen(!open);
-  };
-
+  const generateFilterItems = () => [
+    {
+      title: "a",
+      subFilters: [{ title: "b", subFilters: [{ title: "c" }] }],
+    },
+    {
+      title: "test",
+      subFilters: [
+        { title: "test2", subFilters: [{ title: "test3" }] },
+        { title: "test4" },
+      ],
+    },
+    { title: "m" },
+  ];
   return (
     <List
       sx={{ width: "100%", maxWidth: 360, bgcolor: "background.paper" }}
@@ -36,25 +29,13 @@ export default function FiltersList() {
         </ListSubheader>
       }
     >
-      <ListItemButton>
-        <ListItemIcon>
-          <SendIcon />
-        </ListItemIcon>
-        <ListItemText primary="Sent mail" />
-      </ListItemButton>
-      <ListItemButton>
-        <ListItemIcon>
-          <DraftsIcon />
-        </ListItemIcon>
-        <ListItemText primary="Drafts" />
-      </ListItemButton>
-      <FilterItem
-        title="test"
-        subFilters={[
-          { title: "test2", subFilters: [{ title: "test3" }] },
-          { title: "test4" },
-        ]}
-      />
+      {map(generateFilterItems(), (filterDetails, idx) => (
+        <FilterItem
+          key={idx}
+          title={filterDetails.title}
+          subFilters={filterDetails.subFilters}
+        />
+      ))}
     </List>
   );
 }

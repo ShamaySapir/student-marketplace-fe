@@ -13,15 +13,17 @@ interface IFilterItemProps {
   title: string;
   subFilters?: IFilterItemProps[];
   indent?: number;
+  inheritChecked?: boolean;
 }
 const INDENT = 2;
 export default function FilterItem({
   title,
   subFilters,
   indent = 0,
+  inheritChecked = false,
 }: IFilterItemProps) {
   const [open, setOpen] = React.useState(true);
-  const [checked, setChecked] = React.useState(false);
+  const [checked, setChecked] = React.useState(inheritChecked);
 
   const handleClick = () => {
     setOpen(!open);
@@ -42,7 +44,12 @@ export default function FilterItem({
         <Collapse in={open} timeout="auto" unmountOnExit>
           <List component="div" disablePadding>
             {map(subFilters, (subFilter, idx) => (
-              <FilterItem {...subFilter} key={idx} indent={indent + INDENT} />
+              <FilterItem
+                {...subFilter}
+                key={idx}
+                indent={indent + INDENT}
+                inheritChecked={checked}
+              />
             ))}
           </List>
         </Collapse>
