@@ -16,12 +16,10 @@ interface IProps {
   renderOptions?: IRenderOptions;
 }
 
-export default function Layout({ children, renderOptions = {} }: IProps) {
-  const {
-    renderHeader = true,
-    renderFooter = true,
-    renderSides = true,
-  } = renderOptions;
+export default function Layout({
+  children,
+  renderOptions = { renderHeader: true, renderFooter: true, renderSides: true },
+}: IProps) {
   const [session, loading] = useSession();
   const [content, setContent] = useState();
   useEffect(() => {
