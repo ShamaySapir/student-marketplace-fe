@@ -37,7 +37,7 @@ export default function Page() {
       <Grid item xs={10}>
         <Grid container direction="column">
           {map(displayItems, (tileData, category) => (
-            <Grid container item>
+            <Grid container item key={category}>
               <SwimLane
                 serviceTiles={prepareSlides(tileData)}
                 name={category}

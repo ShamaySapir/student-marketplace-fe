@@ -32,7 +32,7 @@ export default function ServiceTile({
   const classes = useStyles();
 
   return (
-    <Link href={`/service/${id}`} key={id} passHref>
+    <Link href={`/service/${id}`} key={id}>
       <Card>
         <CardMedia component="img" height="140" image={image} alt={title} />
         <CardContent>

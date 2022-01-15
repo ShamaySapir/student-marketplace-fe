@@ -57,7 +57,7 @@ export default function ItemPage() {
   return (
     <>
       <Grid container>
-        <Grid direction={"column"} xs>
+        <Grid container item direction={"column"} xs>
           <Grid item>
             <Typography variant="h2">{getItemDesc.title}</Typography>
           </Grid>
@@ -68,7 +68,7 @@ export default function ItemPage() {
             <Rating defaultValue={getItemDesc.rating} />
           </Grid>
         </Grid>
-        <Grid xs>
+        <Grid item xs>
           <Card>
             <CardMedia
               component="img"
@@ -80,7 +80,7 @@ export default function ItemPage() {
         </Grid>
       </Grid>
       <Grid container>
-        <Grid direction={"column"} xs>
+        <Grid container direction={"column"}>
           <Grid item>
             <Typography variant="h5">About the seller</Typography>
           </Grid>
