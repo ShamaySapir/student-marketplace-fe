@@ -1,17 +1,17 @@
 import { Provider } from "next-auth/client";
 import "./styles.css";
-import { useRouter } from "next/router";
 import React, { useState, useEffect } from "react";
 import { useSession } from "next-auth/client";
 import AccessDenied from "../components/accessDenied";
 import { Session } from "next-auth";
 import { ThemeProvider } from "@mui/material/styles";
 import theme from "../tools/theme";
-import Layout from "../components/layout";
+import Layout, { IRenderOptions } from "../components/layout";
 import SwiperCore, { Virtual } from "swiper";
 
 interface IPageProps {
   session: Session;
+  renderLayout?: IRenderOptions;
 }
 interface IProps {
   Component: React.FC<any>;
@@ -22,7 +22,6 @@ interface IProps {
 export default function App({ Component, pageProps }: IProps) {
   const [session, loading] = useSession();
   const [content, setContent] = useState();
-  const router = useRouter();
 
   SwiperCore.use([Virtual]);
   useEffect(() => {
@@ -41,6 +40,7 @@ export default function App({ Component, pageProps }: IProps) {
   if (!session) {
     return <AccessDenied />;
   }
+  const { renderLayout } = pageProps;
   return (
     <ThemeProvider theme={theme}>
       <Provider
@@ -63,7 +63,7 @@ export default function App({ Component, pageProps }: IProps) {
         }}
         session={session}
       >
-        <Layout>
+        <Layout renderOptions={renderLayout}>
           <Component {...pageProps} />
         </Layout>
       </Provider>

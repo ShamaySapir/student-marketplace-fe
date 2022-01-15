@@ -17,7 +17,7 @@ const SwimLane = ({
   const [swiperRef, setSwiperRef] = useState(null);
   const NUMBER_OF_LIZARDS = Math.min(serviceTiles.length, 5);
   return (
-    <Grid container>
+    <Grid item container>
       <Grid item>
         <Typography>{name}</Typography>
       </Grid>

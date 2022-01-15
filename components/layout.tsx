@@ -4,12 +4,24 @@ import { useState, useEffect } from "react";
 import { useSession } from "next-auth/client";
 import React from "react";
 import { Box } from "@mui/material";
-// import layout.css
-interface IProps {
-  children?: JSX.Element | JSX.Element[];
+
+export interface IRenderOptions {
+  renderHeader: boolean;
+  renderSides: boolean;
+  renderFooter: boolean;
 }
 
-export default function Layout({ children }: IProps) {
+interface IProps {
+  children?: JSX.Element | JSX.Element[];
+  renderOptions?: IRenderOptions;
+}
+
+export default function Layout({ children, renderOptions = {} }: IProps) {
+  const {
+    renderHeader = true,
+    renderFooter = true,
+    renderSides = true,
+  } = renderOptions;
   const [session, loading] = useSession();
   const [content, setContent] = useState();
   useEffect(() => {
@@ -24,20 +36,26 @@ export default function Layout({ children }: IProps) {
   }, [session]);
   return (
     <>
-      <Header />
-      <Box
-        sx={{
-          display: "grid",
-          gridTemplateColumns: "repeat(7, 1fr)",
-          gridTemplateAreas: `". content content content content content."`,
-          alignItems: "center",
-        }}
-      >
+      {renderHeader && <Header />}
+      {(renderSides && (
+        <Box
+          sx={{
+            display: "grid",
+            gridTemplateColumns: "repeat(7, 1fr)",
+            gridTemplateAreas: `". content content content content content ."`,
+            alignItems: "center",
+          }}
+        >
+          <Box sx={{ gridArea: "content" }}>
+            <main>{children}</main>
+          </Box>
+        </Box>
+      )) || (
         <Box sx={{ gridArea: "content" }}>
           <main>{children}</main>
         </Box>
-      </Box>
-      <Footer />
+      )}
+      {renderFooter && <Footer />}
     </>
   );
 }
