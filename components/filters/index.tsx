@@ -8,7 +8,6 @@ interface IFiltersListProps {
 }
 
 const EXCLUDED_PROPERTIES = ["id", "image"];
-
 export default function FiltersList({ services }: IFiltersListProps) {
   const [filters, setFilters] = useState<IFilterItemProps[]>([]);
   const getServicesFiltersData = (services: GroupedItems) => {
