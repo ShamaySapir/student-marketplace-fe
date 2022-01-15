@@ -43,13 +43,10 @@ export default function ItemPage() {
 
   useEffect(() => {
     async function getItemDescription() {
-      // const { id } = router.query;
-      // if (id) {
       const itemDescription = await routes.getService({
         itemId: id as string,
       });
       setItemDesc(itemDescription);
-      // }
     }
     getItemDescription();
   }, [id]);
