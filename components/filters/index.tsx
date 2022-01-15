@@ -25,7 +25,7 @@ export default function FiltersList() {
       aria-labelledby="nested-list-subheader"
       subheader={
         <ListSubheader component="div" id="nested-list-subheader">
-          Nested List Items
+          Filters
         </ListSubheader>
       }
     >
