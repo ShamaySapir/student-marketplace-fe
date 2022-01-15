@@ -1,4 +1,4 @@
-import * as React from "react";
+import React from "react";
 import {
   List,
   ListItemIcon,
@@ -6,10 +6,9 @@ import {
   ListItemButton,
   Collapse,
   Checkbox,
-  Slider,
 } from "@mui/material";
 import { ExpandLess, ExpandMore } from "@mui/icons-material";
-import { map, noop, min, max } from "lodash";
+import { map, noop } from "lodash";
 export interface IFilterItemProps {
   title: string;
   subFilters?: IFilterItemProps[];
@@ -17,17 +16,13 @@ export interface IFilterItemProps {
   inheritChecked?: boolean;
 }
 const INDENT = 2;
-
+import { Price } from "./renderers";
 const customRenderers = (title: string, subFilters: any) => {
   const renderers = {
     // Rating: () => <div>blabla</div>,
-    Price: (subFilters: any) => {
-      const minVal = min(subFilters?.map((f: any) => f.title)) as number;
-      const maxVal = max(subFilters?.map((f: any) => f.title)) as number;
-      return <Slider min={minVal} max={maxVal} value={[minVal, maxVal]} />;
-    },
+    Price: (props: any) => <Price {...props} />,
   };
-  return ((renderers as any)[title] || noop)(subFilters);
+  return ((renderers as any)[title] || noop)({ title, subFilters });
 };
 
 export default function FilterItem({
