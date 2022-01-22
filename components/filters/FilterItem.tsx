@@ -14,6 +14,7 @@ export interface IFilterItemProps {
   subFilters?: IFilterItemProps[];
   indent?: number;
   inheritChecked?: boolean;
+  onFilter: any;
 }
 const INDENT = 2;
 import { Price, Rating } from "./renderers";
@@ -30,6 +31,7 @@ export default function FilterItem({
   subFilters,
   indent = 0,
   inheritChecked = false,
+  onFilter = noop,
 }: IFilterItemProps) {
   const [open, setOpen] = React.useState(true);
   const [checked, setChecked] = React.useState(inheritChecked);
@@ -44,7 +46,11 @@ export default function FilterItem({
           <ListItemIcon>
             <Checkbox
               checked={checked}
-              onChange={(e) => setChecked(e.target.checked)}
+              name={title}
+              onChange={(e, v) => {
+                setChecked(e.target.checked);
+                onFilter({ name: e.target.name, checked: e.target.checked });
+              }}
             />
           </ListItemIcon>
           <ListItemText primary={title} />
@@ -59,6 +65,7 @@ export default function FilterItem({
                   key={idx}
                   indent={indent + INDENT}
                   inheritChecked={checked}
+                  onFilter={onFilter}
                 />
               ))}
             </List>
