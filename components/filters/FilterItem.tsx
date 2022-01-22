@@ -16,10 +16,10 @@ export interface IFilterItemProps {
   inheritChecked?: boolean;
 }
 const INDENT = 2;
-import { Price } from "./renderers";
+import { Price, Rating } from "./renderers";
 const customRenderers = (title: string, subFilters: any) => {
   const renderers = {
-    // Rating: () => <div>blabla</div>,
+    Rating: (props: any) => <Rating {...props} />,
     Price: (props: any) => <Price {...props} />,
   };
   return ((renderers as any)[title] || noop)({ title, subFilters });
