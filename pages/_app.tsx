@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { Provider } from "next-auth/client";
 import "./styles.css";
 import React, { useState, useEffect } from "react";
