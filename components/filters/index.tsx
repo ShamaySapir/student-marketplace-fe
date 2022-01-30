@@ -1,3 +1,4 @@
+// @ts-nocheck
 import React, { useEffect, useReducer } from "react";
 import { List, ListSubheader } from "@mui/material";
 import { map, reduce, upperFirst, pickBy, omitBy, find } from "lodash";
