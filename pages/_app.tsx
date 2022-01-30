@@ -37,9 +37,9 @@ export default function App({ Component, pageProps }: IProps) {
   // When rendering client side don't display anything until loading is complete
   if (typeof window !== "undefined" && loading) return null;
   // If no session exists, display access denied message
-  if (!session) {
-    return <AccessDenied />;
-  }
+  // if (!session) {
+  //   return <AccessDenied />;
+  // }
   const { renderLayout } = pageProps;
   return (
     <ThemeProvider theme={theme}>
