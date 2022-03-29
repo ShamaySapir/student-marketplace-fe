@@ -17,11 +17,12 @@ export interface IFilterItemProps {
   onFilter: any;
 }
 const INDENT = 2;
-import { Price, Rating } from "./renderers";
-const customRenderers = (title: string, subFilters: any) => {
+import { Price, Rating, TextSearch } from "./renderers";
+const customRenderers = (title: string, subFilters: any, onFilter: any) => {
   const renderers = {
     Rating: (props: any) => <Rating {...props} />,
     Price: (props: any) => <Price {...props} />,
+    Title: (props: any) => <TextSearch {...props} onFilter={onFilter} />,
   };
   return ((renderers as any)[title] || noop)({ title, subFilters });
 };
@@ -40,7 +41,7 @@ export default function FilterItem({
     setOpen(!open);
   };
   return (
-    customRenderers(title, subFilters) || (
+    customRenderers(title, subFilters, onFilter) || (
       <>
         <ListItemButton onClick={handleClick} sx={{ pl: indent }}>
           <ListItemIcon>

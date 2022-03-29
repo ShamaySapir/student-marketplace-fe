@@ -6,7 +6,7 @@ import { DescriptionItem } from "../types/types";
 import { Grid } from "@mui/material";
 import SwimLane from "../components/swimLane";
 import Filters from "../components/filters";
-import { map, filter, groupBy, camelCase } from "lodash";
+import { map, filter, groupBy, camelCase, sortBy } from "lodash";
 
 export default function Page() {
   const [displayItems, setDisplayTileItems] = useState({});
@@ -64,14 +64,18 @@ export default function Page() {
                 ],
               },
             ],
-            currentServices: [
-              ...state.currentServices,
-              ...filter(
-                state.initServices,
-                (service) =>
-                  service[camelCase(action.filterName)] === action.payload.name
-              ),
-            ],
+            currentServices: sortBy(
+              [
+                ...state.currentServices,
+                ...filter(
+                  state.initServices,
+                  (service) =>
+                    service[camelCase(action.filterName)] ===
+                    action.payload.name
+                ),
+              ],
+              ["_id"]
+            ),
           };
           return x;
         }
@@ -94,15 +98,31 @@ export default function Page() {
                 ],
               },
             ],
-            currentServices: [
-              ...filter(
-                state.currentServices,
-                (service) =>
-                  service[camelCase(action.filterName)] !== action.payload.name
-              ),
-            ],
+            currentServices: sortBy(
+              [
+                ...filter(
+                  state.currentServices,
+                  (service) =>
+                    service[camelCase(action.filterName)] !==
+                    action.payload.name
+                ),
+              ],
+              ["_id"]
+            ),
           };
           return y;
+        }
+        if (action.payload.textChanged) {
+          return {
+            ...state,
+            currentServices: action.payload.value
+              ? [
+                  ...filter(state.initServices, (service) => {
+                    return service.title.includes(action.payload.value);
+                  }),
+                ]
+              : state.initServices,
+          };
         }
       default:
         throw new Error();
