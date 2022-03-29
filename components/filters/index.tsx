@@ -1,78 +1,21 @@
-// @ts-nocheck
-import React, { useEffect, useReducer } from "react";
+import React, { useEffect } from "react";
 import { List, ListSubheader } from "@mui/material";
-import { map, reduce, upperFirst, pickBy, omitBy, find } from "lodash";
+import { map, reduce, upperFirst, values, flatten } from "lodash";
 import FilterItem, { IFilterItemProps } from "./FilterItem";
 import { GroupedItems } from "../../types/types";
 interface IFiltersListProps {
   services: GroupedItems;
+  onFilterServices: any;
+  dispatch: any;
+  servicesState: any;
 }
 
 const EXCLUDED_PROPERTIES = ["id", "image"];
-export default function FiltersList({ services }: IFiltersListProps) {
-  function reducer(state: IFilterItemProps[], action: any) {
-    switch (action.type) {
-      case "init":
-        return { initState: action.payload, currentFilters: action.payload };
-      case "filter":
-        if (action.payload.checked) {
-          const initEntry = state.initState.filter(
-            ({ title }) => title == action.filterName
-          )?.[0];
-          const filteredEntry = state.currentFilters.filter(
-            ({ title }) => title == action.filterName
-          )?.[0];
-          return {
-            ...state,
-            currentFilters: [
-              ...state.currentFilters.filter(
-                ({ title }) => title !== action.filterName
-              ),
-              {
-                ...filteredEntry,
-                subFilters: [
-                  ...filteredEntry.subFilters.filter(
-                    ({ title }) => title !== action.payload.name
-                  ),
-                  initEntry.subFilters.filter(
-                    ({ title }) => title === action.payload.name
-                  )?.[0],
-                ],
-              },
-            ],
-          };
-        }
-        if (action.payload.checked === false) {
-          const filteredEntry = state.currentFilters.filter(
-            ({ title }) => title == action.filterName
-          )?.[0];
-          return {
-            ...state,
-            currentFilters: [
-              ...state.currentFilters.filter(
-                ({ title }) => title !== action.filterName
-              ),
-              {
-                ...filteredEntry,
-                subFilters: [
-                  ...filteredEntry.subFilters.filter(
-                    ({ title }) => title !== action.payload.name
-                  ),
-                ],
-              },
-            ],
-          };
-        }
-      default:
-        throw new Error();
-    }
-  }
-
-  const [servicesState, dispatch] = useReducer(reducer, {
-    initState: [],
-    currentFilters: [],
-  });
-
+export default function FiltersList({
+  services,
+  dispatch,
+  servicesState,
+}: IFiltersListProps) {
   const getServicesFiltersData = (services: GroupedItems) => {
     const filterPossibilities = reduce(
       services,
@@ -112,7 +55,7 @@ export default function FiltersList({ services }: IFiltersListProps) {
     );
     dispatch({
       type: "init",
-      payload: parsedFilters,
+      payload: { filters: parsedFilters, services: flatten(values(services)) },
     });
   }, [services]);
 
