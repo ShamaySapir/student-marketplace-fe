@@ -30,7 +30,7 @@ export default function FilterItem({
   title,
   subFilters,
   indent = 0,
-  inheritChecked = false,
+  inheritChecked = true,
   onFilter = noop,
 }: IFilterItemProps) {
   const [open, setOpen] = React.useState(true);

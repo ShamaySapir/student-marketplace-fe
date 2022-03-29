@@ -10,7 +10,7 @@ interface IFiltersListProps {
   servicesState: any;
 }
 
-const EXCLUDED_PROPERTIES = ["id", "image"];
+const EXCLUDED_PROPERTIES = ["id", "image", "title"];
 export default function FiltersList({
   services,
   dispatch,

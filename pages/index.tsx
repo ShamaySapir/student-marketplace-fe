@@ -6,7 +6,7 @@ import { DescriptionItem } from "../types/types";
 import { Grid } from "@mui/material";
 import SwimLane from "../components/swimLane";
 import Filters from "../components/filters";
-import { map, filter, groupBy } from "lodash";
+import { map, filter, groupBy, camelCase } from "lodash";
 
 export default function Page() {
   const [displayItems, setDisplayTileItems] = useState({});
@@ -69,8 +69,7 @@ export default function Page() {
               ...filter(
                 state.initServices,
                 (service) =>
-                  service[action.filterName.toLowerCase()] ===
-                  action.payload.name
+                  service[camelCase(action.filterName)] === action.payload.name
               ),
             ],
           };
@@ -99,8 +98,7 @@ export default function Page() {
               ...filter(
                 state.currentServices,
                 (service) =>
-                  service[action.filterName.toLowerCase()] !==
-                  action.payload.name
+                  service[camelCase(action.filterName)] !== action.payload.name
               ),
             ],
           };
