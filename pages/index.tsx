@@ -124,6 +124,21 @@ export default function Page() {
               : state.initServices,
           };
         }
+        if (action.payload.price) {
+          return {
+            ...state,
+            currentServices: action.payload.value
+              ? [
+                  ...filter(state.initServices, (service) => {
+                    return (
+                      service.price >= action.payload.value.currentRanges[0] &&
+                      service.price <= action.payload.value.currentRanges[1]
+                    );
+                  }),
+                ]
+              : state.initServices,
+          };
+        }
       default:
         throw new Error();
     }

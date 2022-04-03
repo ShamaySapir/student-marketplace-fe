@@ -21,7 +21,7 @@ import { Price, Rating, TextSearch } from "./renderers";
 const customRenderers = (title: string, subFilters: any, onFilter: any) => {
   const renderers = {
     Rating: (props: any) => <></>, //<Rating {...props} />,
-    Price: (props: any) => <></>, // <Price {...props} />,
+    Price: (props: any) => <Price {...props} onFilter={onFilter} />,
     Title: (props: any) => <TextSearch {...props} onFilter={onFilter} />,
   };
   return ((renderers as any)[title] || noop)({ title, subFilters });
