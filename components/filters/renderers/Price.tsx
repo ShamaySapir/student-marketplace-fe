@@ -7,13 +7,12 @@ export default function RangeSlider({ subFilters, title, onFilter }: any) {
   const [currentRanges, setCurrentRanges] = useState([0, 0]);
 
   useEffect(() => {
-    // const minV = min(subFilters?.map((f: any) => f.title)) as number;
     const maxV = max(subFilters?.map((f: any) => f.title)) as number;
     setRanges([0, maxV]);
     setCurrentRanges([0, maxV]);
   }, [subFilters]);
   const handleChange = (
-    e: HTMLInputElement | HTMLTextAreaElement,
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
     type: string
   ) => {
     const { value } = e.target;
@@ -32,7 +31,7 @@ export default function RangeSlider({ subFilters, title, onFilter }: any) {
       });
     }
   };
-  const validatePrice = (currentValue: number) => {
+  const validatePrice = (currentValue: string) => {
     const parsedNumber = toNumber(currentValue);
     return isNumber(parsedNumber) && !isNaN(parsedNumber);
   };
