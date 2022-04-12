@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import { useSession } from "next-auth/client";
 import LocalPhoneIcon from "@mui/icons-material/LocalPhone";
+import AttachMoneyIcon from "@mui/icons-material/AttachMoney";
 import InfoIcon from "@mui/icons-material/Info";
 import {
   Grid,
@@ -66,6 +67,14 @@ export default function ItemPage() {
           </Grid>
           <Grid item>
             <Typography variant="h4">{getItemDesc.description}</Typography>
+          </Grid>
+          <Grid container item justifyContent="flex-end" alignItems="center">
+            <Grid item>
+              <Typography variant="h5">{getItemDesc.price}</Typography>
+            </Grid>
+            <Grid item>
+              <AttachMoneyIcon />
+            </Grid>
           </Grid>
           <Grid item>
             <Rating defaultValue={getItemDesc.rating} />
