@@ -6,6 +6,9 @@ import {
   GroupedItems,
   Service,
   DescriptionItem,
+  PurchaseData,
+  GetUserPurchases,
+  UserPurchases,
 } from "../../types/types";
 import { AxiosPromise, AxiosRequestConfig } from "axios";
 import { groupBy, reduce } from "lodash";
@@ -173,6 +176,33 @@ export const postUploadImage = (imageFiles: FileList): AxiosPromise => {
     url: payload.route,
     ...payload,
   } as AxiosRequestConfig);
+};
+
+export const postPurchase = (data: PurchaseData): AxiosPromise => {
+  const payload = {
+    method: "POST",
+    route: `/purchase/submit`,
+    data,
+  };
+  return getBaseRequestor({
+    url: payload.route,
+    ...payload,
+  } as AxiosRequestConfig);
+};
+
+export const getPurchase = async (
+  data: GetUserPurchases
+): Promise<UserPurchases[]> => {
+  const payload = {
+    method: "GET",
+    route: `/history/purchase/${data.userId}`,
+    data,
+  };
+  const resp = await getBaseRequestor({
+    url: payload.route,
+    ...payload,
+  } as AxiosRequestConfig);
+  return resp.data;
 };
 
 const makeRepeated = (arr: any, repeats: number) =>

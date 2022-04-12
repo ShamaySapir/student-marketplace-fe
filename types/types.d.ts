@@ -37,3 +37,27 @@ export interface Service extends DescriptionItem {
 export interface GroupedItems {
   [string]: [DescriptionItem];
 }
+
+export interface PurchaseData {
+  buyerId: string;
+  itemId: string;
+  quantity: number;
+}
+
+export interface GetUserPurchases {
+  userId: string;
+}
+
+export interface UserPurchases {
+  purchaseId: string;
+  buyerId: string;
+  buyerName: string;
+  date: string;
+  sellerId: string;
+  sellerName: string;
+  itemId: string;
+  itemName: string;
+  quantity: number;
+  price: number;
+  totalPrice: number;
+}

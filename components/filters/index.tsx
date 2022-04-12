@@ -62,8 +62,6 @@ export default function FiltersList({ services }: IFiltersListProps) {
             ],
           };
         }
-      default:
-        throw new Error();
     }
   }
 

@@ -50,7 +50,13 @@ export default function ItemPage() {
     }
     getItemDescription();
   }, [id]);
-
+  const purchase = async () => {
+    routes.postPurchase({
+      buyerId: session?.user.googleId as string,
+      itemId: id as string,
+      quantity: 1,
+    });
+  };
   return (
     <>
       <Grid container>
@@ -94,7 +100,9 @@ export default function ItemPage() {
             <Typography>{getItemDesc.sellerPhone}</Typography>
           </Grid>
           <Grid container item alignItems={"center"}>
-            <Button variant="contained">Purchase</Button>
+            <Button variant="contained" onClick={purchase}>
+              Purchase
+            </Button>
           </Grid>
         </Grid>
         <Grid></Grid>
