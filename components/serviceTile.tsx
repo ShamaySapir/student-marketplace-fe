@@ -47,7 +47,7 @@ export default function ServiceTile({
           >
             <Grid item>
               <Stack>
-                <Rating defaultValue={rating} />
+                <Rating defaultValue={rating} readOnly />
               </Stack>
             </Grid>
             <Grid item>Price: {price}</Grid>
