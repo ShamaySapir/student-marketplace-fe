@@ -81,13 +81,17 @@ export default function EnhancedTable() {
     <Grid container>
       <Grid item>
         <Paper sx={{ width: "100%", mb: 2 }}>
-          <Table data={purchasesData} title={"Orders History"} />
+          <Table
+            data={purchasesData}
+            title={"Orders History"}
+            headCells={headCells}
+          />
         </Paper>
       </Grid>
       {session?.user.type === UserType.seller && (
         <Grid item>
           <Paper sx={{ width: "100%", mb: 2 }}>
-            <Table data={sellsData} title={"Sells"} />
+            <Table data={sellsData} title={"Sells"} headCells={headCells} />
           </Paper>
         </Grid>
       )}

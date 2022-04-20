@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { alpha } from "@mui/material/styles";
 import {
   Box,
@@ -60,52 +60,6 @@ function stableSort<T>(
   return stabilizedThis.map((el) => el[0]);
 }
 
-interface HeadCell {
-  disablePadding: boolean;
-  id: keyof UserPurchases;
-  label: string;
-  numeric: boolean;
-}
-
-const headCells: readonly HeadCell[] = [
-  {
-    id: "date",
-    numeric: false,
-    disablePadding: true,
-    label: "Date",
-  },
-  {
-    id: "sellerName",
-    numeric: false,
-    disablePadding: false,
-    label: "Seller Name",
-  },
-  {
-    id: "itemName",
-    numeric: false,
-    disablePadding: false,
-    label: "Item Name",
-  },
-  {
-    id: "quantity",
-    numeric: true,
-    disablePadding: false,
-    label: "Quantity",
-  },
-  {
-    id: "price",
-    numeric: true,
-    disablePadding: false,
-    label: "Price",
-  },
-  {
-    id: "totalPrice",
-    numeric: true,
-    disablePadding: false,
-    label: "Total Price",
-  },
-];
-
 interface EnhancedTableProps {
   numSelected: number;
   onRequestSort: (
@@ -116,10 +70,11 @@ interface EnhancedTableProps {
   order: Order;
   orderBy: string;
   rowCount: number;
+  headCells: T[];
 }
 
 function EnhancedTableHead(props: EnhancedTableProps) {
-  const { order, orderBy, numSelected, onRequestSort } = props;
+  const { order, orderBy, onRequestSort, headCells } = props;
   const createSortHandler =
     (property: keyof UserPurchases) => (event: React.MouseEvent<unknown>) => {
       onRequestSort(event, property);
@@ -202,9 +157,11 @@ const EnhancedTableToolbar = (props: EnhancedTableToolbarProps) => {
 export default function EnhancedTable({
   data,
   title,
+  headCells,
 }: {
   data: any;
   title: string;
+  headCells: T[];
 }) {
   const [order, setOrder] = React.useState<Order>("asc");
   const [orderBy, setOrderBy] = React.useState<keyof UserPurchases>("date");
@@ -253,6 +210,7 @@ export default function EnhancedTable({
               onSelectAllClick={handleSelectAllClick}
               onRequestSort={handleRequestSort}
               rowCount={data.length}
+              headCells={headCells}
             />
             <TableBody>
               {/* if you don't need to support IE11, you can replace the `stableSort` call with:
