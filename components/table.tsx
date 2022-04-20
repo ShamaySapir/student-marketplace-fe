@@ -15,8 +15,6 @@ import {
 } from "@mui/material";
 
 import { visuallyHidden } from "@mui/utils";
-import * as routes from "../tools/api/routes";
-import { useSession } from "next-auth/client";
 import { UserPurchases } from "../types/types";
 
 function descendingComparator<T>(a: T, b: T, orderBy: keyof T) {
@@ -70,7 +68,7 @@ interface EnhancedTableProps {
   order: Order;
   orderBy: string;
   rowCount: number;
-  headCells: T[];
+  headCells: any;
 }
 
 function EnhancedTableHead(props: EnhancedTableProps) {
@@ -161,7 +159,7 @@ export default function EnhancedTable({
 }: {
   data: any;
   title: string;
-  headCells: T[];
+  headCells: any;
 }) {
   const [order, setOrder] = React.useState<Order>("asc");
   const [orderBy, setOrderBy] = React.useState<keyof UserPurchases>("date");
