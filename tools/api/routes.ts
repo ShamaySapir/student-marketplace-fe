@@ -190,12 +190,27 @@ export const postPurchase = (data: PurchaseData): AxiosPromise => {
   } as AxiosRequestConfig);
 };
 
-export const getPurchase = async (
+export const getPurchases = async (
   data: GetUserPurchases
 ): Promise<UserPurchases[]> => {
   const payload = {
     method: "GET",
     route: `/history/purchase/${data.userId}`,
+    data,
+  };
+  const resp = await getBaseRequestor({
+    url: payload.route,
+    ...payload,
+  } as AxiosRequestConfig);
+  return resp.data;
+};
+
+export const getUserSells = async (
+  data: GetUserPurchases
+): Promise<UserPurchases[]> => {
+  const payload = {
+    method: "GET",
+    route: `/history/sell/${data.userId}`,
     data,
   };
   const resp = await getBaseRequestor({
