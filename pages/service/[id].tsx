@@ -13,10 +13,16 @@ import {
   Typography,
   IconButton,
   Rating,
+  Dialog,
+  DialogTitle,
+  DialogContent,
+  DialogActions,
 } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import * as routes from "../../tools/api/routes";
 import { Service } from "../../types/types";
+import BootstrapDialogTitle from "../../components/dialogTitle";
+import Link from "next/link";
 
 const Item = styled(Paper)(({ theme }) => ({
   ...theme.typography.body2,
@@ -39,6 +45,8 @@ export default function ItemPage() {
     sellerDesc: "",
     sellerPhone: "",
   });
+  const [purchaseStatus, setPurchaseStatus] = useState<Boolean>(false);
+  const [open, setOpen] = useState<Boolean>(false);
   const router = useRouter();
   const { id } = router.query;
 
@@ -52,12 +60,25 @@ export default function ItemPage() {
     getItemDescription();
   }, [id]);
   const purchase = async () => {
-    routes.postPurchase({
+    const purchaseResult = await routes.postPurchase({
       buyerId: session?.user.googleId as string,
       itemId: id as string,
       quantity: 1,
     });
+
+    if (purchaseResult.status === 201) {
+      setPurchaseStatus(true);
+    }
+    handleClickOpen();
   };
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+  const handleClose = () => {
+    setOpen(false);
+  };
+
   return (
     <>
       <Grid container>
@@ -116,42 +137,32 @@ export default function ItemPage() {
         </Grid>
         <Grid></Grid>
       </Grid>
+
+      <Dialog open={open === true} disableEscapeKeyDown={false}>
+        <BootstrapDialogTitle
+          id="customized-dialog-title"
+          onClose={() => handleClose()}
+        >
+          Your purchase completed successfully
+        </BootstrapDialogTitle>
+        <DialogContent>
+          <Typography variant="h6" sx={{ mt: 2 }}>
+            Purchase Details:
+          </Typography>
+          <Typography variant="h6" sx={{ mt: 2 }}>
+            Product/Service Name: {getItemDesc.title}
+          </Typography>
+          <Typography variant="h6">
+            Seller Description: {getItemDesc.sellerDesc}
+          </Typography>
+          <Typography variant="h6">Price: {getItemDesc.price}</Typography>
+        </DialogContent>
+        <DialogActions>
+          <Link href="/" passHref>
+            <Button>Back to main page</Button>
+          </Link>
+        </DialogActions>
+      </Dialog>
     </>
-    // <>
-    //   <Box sx={{ flexGrow: 1 }}>
-    //     <Grid container spacing={2}>
-    //       <Grid item xs={12}>
-    //         <Item>{getItemDesc.title}</Item>
-    //       </Grid>
-    //       <Grid item xs={8}>
-    //         <Item>{getItemDesc.description}</Item>
-    //       </Grid>
-    //       <Grid item xs={4}>
-    //         <Item>{getItemDesc.rating}</Item>
-    //       </Grid>
-    //       <Grid item xs={8}>
-    //         <Item>{getItemDesc.sellerDesc}</Item>
-    //       </Grid>
-    //       <Grid item xs={4}>
-    //         <Item>{getItemDesc.price}</Item>
-    //       </Grid>
-    //       <Grid item xs={8}>
-    //         <Item>
-    //           <Card sx={{ maxWidth: 345 }}>
-    //             <CardMedia
-    //               component="img"
-    //               height="140"
-    //               image={getItemDesc.image}
-    //               alt={getItemDesc.title}
-    //             />
-    //           </Card>
-    //         </Item>
-    //       </Grid>
-    //       <Grid item xs={4}>
-    //         <Item>{getItemDesc.sellerPhone}</Item>
-    //       </Grid>
-    //     </Grid>
-    //   </Box>
-    // </>
   );
 }
