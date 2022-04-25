@@ -23,6 +23,7 @@ import * as routes from "../../tools/api/routes";
 import { Service } from "../../types/types";
 import BootstrapDialogTitle from "../../components/dialogTitle";
 import Link from "next/link";
+import { setCookie, getCookie } from "../../tools/cookieUtil";
 
 const Item = styled(Paper)(({ theme }) => ({
   ...theme.typography.body2,
@@ -59,6 +60,15 @@ export default function ItemPage() {
     }
     getItemDescription();
   }, [id]);
+
+  const setOrUpdateCookie = async () => {
+    const cookieName = "rating";
+    const cookie = getCookie(cookieName);
+    let itemSet = new Set(cookie ? Array.from(JSON.parse(cookie)) : []);
+    itemSet.add(id);
+    setCookie(cookieName, JSON.stringify(itemSet), 1000);
+  };
+
   const purchase = async () => {
     const purchaseResult = await routes.postPurchase({
       buyerId: session?.user.googleId as string,
@@ -68,6 +78,7 @@ export default function ItemPage() {
 
     if (purchaseResult.status === 201) {
       setPurchaseStatus(true);
+      setOrUpdateCookie();
     }
     handleClickOpen();
   };
