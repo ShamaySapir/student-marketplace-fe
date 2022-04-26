@@ -4,6 +4,9 @@ import GoogleProviderSignin from "./providers/google/GoogleProviderSignin";
 import UserAvatar from "./userAvatar";
 import { styled } from "@mui/material/styles";
 import Link from "next/link";
+import IconButton from "@mui/material/IconButton";
+import NotificationsIcon from "@mui/icons-material/Notifications";
+import Badge from "@mui/material/Badge";
 
 const Div = styled("div")(({ theme }) => ({
   ...theme.typography.button,
@@ -29,8 +32,17 @@ export default function Header() {
       >
         <Box>
           <Box sx={{ gridArea: "title" }}>
-            <Div>
+            <Div style={{ display: "flex", justifyContent: "space-between" }}>
               <Link href="/">Student social marketplace</Link>
+              <IconButton
+                size="large"
+                aria-label="show x new notifications"
+                color="inherit"
+              >
+                <Badge badgeContent={2} color="error">
+                  <NotificationsIcon />
+                </Badge>
+              </IconButton>
             </Div>
           </Box>
         </Box>
