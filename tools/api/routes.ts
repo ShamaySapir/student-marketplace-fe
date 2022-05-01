@@ -168,16 +168,39 @@ export const postUploadImage = (imageFiles: FileList): AxiosPromise => {
 
   const payload = {
     method: "POST",
-    route: `/upload`,
+    route: `/items/uploadImg`,
     data: bodyFormData,
     headers: { "Content-Type": "multipart/form-data" },
   };
-  return getStrapiRequestor({
+  return getBaseRequestor({
     url: payload.route,
     ...payload,
   } as AxiosRequestConfig);
 };
 
+export const patchUpdateRating = ({
+  itemId,
+  rating,
+  userId,
+}: {
+  itemId: string;
+  rating: string;
+  userId: string;
+}): AxiosPromise => {
+  const payload = {
+    method: "PATCH",
+    route: `/rating/update/${itemId}`,
+    data: {
+      userId,
+      score: rating,
+      itemId,
+    },
+  };
+  return getBaseRequestor({
+    url: payload.route,
+    ...payload,
+  } as AxiosRequestConfig);
+};
 export const postPurchase = (data: PurchaseData): AxiosPromise => {
   const payload = {
     method: "POST",

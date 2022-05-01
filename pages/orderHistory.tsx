@@ -54,6 +54,11 @@ const headCells: readonly HeadCell[] = [
   },
 ];
 
+const buyerHeadCells: readonly HeadCell[] = [
+  ...headCells,
+  { id: "rating", numeric: false, disablePadding: false, label: "Rating" },
+];
+
 export default function EnhancedTable() {
   const [purchasesData, setPurchasesData] = useState<UserPurchases[]>([]);
   const [sellsData, setSellsData] = useState<UserPurchases[]>([]);
@@ -84,7 +89,7 @@ export default function EnhancedTable() {
           <Table
             data={purchasesData}
             title={"Orders History"}
-            headCells={headCells}
+            headCells={buyerHeadCells}
           />
         </Paper>
       </Grid>

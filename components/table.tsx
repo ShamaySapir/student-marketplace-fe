@@ -13,7 +13,7 @@ import {
   Typography,
   Paper,
 } from "@mui/material";
-
+import Rating from "../components/Rating";
 import { visuallyHidden } from "@mui/utils";
 import { UserPurchases } from "../types/types";
 
@@ -238,6 +238,11 @@ export default function EnhancedTable({
                       <TableCell align="right">{row.quantity}</TableCell>
                       <TableCell align="right">{row.price}</TableCell>
                       <TableCell align="right">{row.totalPrice}</TableCell>
+                      {(row.rating !== undefined && (
+                        <TableCell align="right">{row.rating}</TableCell>
+                      )) || (
+                        <Rating value={row.rating} itemId={row.purchaseId} />
+                      )}
                     </TableRow>
                   );
                 })}

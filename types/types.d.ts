@@ -60,4 +60,5 @@ export interface UserPurchases {
   quantity: number;
   price: number;
   totalPrice: number;
+  rating?: number;
 }
