@@ -10,11 +10,11 @@ const ProductRating = ({ value, itemId, disabled = true }: any) => {
   const [innerValue, setValue] = React.useState<number | null>(value);
   const [session, loading] = useSession();
 
-  async function setRating(e: any, newValue: number) {
-    await routes.patchUpdateRating({
+  function setRating(e: React.SyntheticEvent, newValue: number | null): void {
+    routes.patchUpdateRating({
       userId: session?.user.googleId as string,
       itemId,
-      rating: newValue,
+      rating: `${newValue}`,
     });
     setValue(newValue);
   }
