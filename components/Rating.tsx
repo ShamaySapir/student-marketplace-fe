@@ -9,7 +9,7 @@ const DEFAULT_COLOR = "primary";
 const ProductRating = ({ value, itemId, disabled = true }: any) => {
   const [innerValue, setValue] = React.useState<number | null>(value);
   const [session, loading] = useSession();
-
+  const [isRated, setIsRated] = React.useState<boolean>(value !== 0);
   function setRating(e: React.SyntheticEvent, newValue: number | null): void {
     routes.patchUpdateRating({
       userId: session?.user.googleId as string,
@@ -17,8 +17,8 @@ const ProductRating = ({ value, itemId, disabled = true }: any) => {
       rating: `${newValue}`,
     });
     setValue(newValue);
+    setIsRated(true);
   }
-  const isRated = value !== 0;
   return (
     <Rating
       value={innerValue}
