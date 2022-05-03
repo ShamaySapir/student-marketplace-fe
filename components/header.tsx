@@ -1,3 +1,4 @@
+import React, { useEffect, useState } from "react";
 import { signIn, signOut, useSession } from "next-auth/client";
 import { Box, Avatar } from "@mui/material";
 import GoogleProviderSignin from "./providers/google/GoogleProviderSignin";
@@ -7,6 +8,8 @@ import Link from "next/link";
 import IconButton from "@mui/material/IconButton";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import Badge from "@mui/material/Badge";
+import * as routes from "../tools/api/routes";
+import { keyBy } from "lodash";
 
 const Div = styled("div")(({ theme }) => ({
   ...theme.typography.button,
@@ -19,6 +22,25 @@ const Div = styled("div")(({ theme }) => ({
 
 export default function Header() {
   const [session, loading] = useSession();
+  const [rankedItems, setRankedItems] = useState<number>(0);
+
+  useEffect(() => {
+    async function getUserBuyHistory() {
+      const userHistory = await routes.getPurchases({
+        userId: session?.user.googleId as string,
+      });
+      const userPurchases = keyBy(userHistory, "itemId");
+      const numPurchases = Object.keys(userPurchases).length;
+
+      const userRankedItemsArr = await routes.getUserRankedItems({
+        userId: session?.user.googleId as string,
+      });
+
+      const numRanked = Object.keys(userRankedItemsArr).length;
+      setRankedItems(Math.max(numPurchases - numRanked, 0));
+    }
+    getUserBuyHistory();
+  }, []);
 
   return (
     <Box sx={{ color: "primary.main" }} marginBottom="10px">
@@ -39,9 +61,11 @@ export default function Header() {
                 aria-label="show x new notifications"
                 color="inherit"
               >
-                <Badge badgeContent={2} color="error">
-                  <NotificationsIcon />
-                </Badge>
+                <Link href="/orderHistory">
+                  <Badge badgeContent={rankedItems} color="error">
+                    <NotificationsIcon />
+                  </Badge>
+                </Link>
               </IconButton>
             </Div>
           </Box>

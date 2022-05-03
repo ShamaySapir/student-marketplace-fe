@@ -208,10 +208,9 @@ export default function EnhancedTable({
               headCells={headCells}
             />
             <TableBody>
-              {/* if you don't need to support IE11, you can replace the `stableSort` call with:
-              rows.slice().sort(getComparator(order, orderBy)) */}
+              {/* @ts-ignore */}
               {stableSort(data, getComparator(order, orderBy))
-                .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                // .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                 .map((row, index) => {
                   const isItemSelected = isSelected(row.purchaseId);
                   const labelId = `enhanced-table-checkbox-${index}`;
