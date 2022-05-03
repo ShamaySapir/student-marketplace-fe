@@ -3,17 +3,10 @@ import { Paper, Grid } from "@mui/material";
 import Table from "../components/table";
 import * as routes from "../tools/api/routes";
 import { useSession } from "next-auth/client";
-import { UserPurchases } from "../types/types";
+import { UserPurchases, HeadCell } from "../types/types";
 import { UserType } from "../constants";
 
 type Order = "asc" | "desc";
-
-interface HeadCell {
-  disablePadding: boolean;
-  id: keyof UserPurchases;
-  label: string;
-  numeric: boolean;
-}
 
 const headCells: readonly HeadCell[] = [
   {

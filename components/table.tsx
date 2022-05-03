@@ -15,7 +15,7 @@ import {
 } from "@mui/material";
 import Rating from "../components/Rating";
 import { visuallyHidden } from "@mui/utils";
-import { UserPurchases } from "../types/types";
+import { HeadCell, UserPurchases } from "../types/types";
 
 function descendingComparator<T>(a: T, b: T, orderBy: keyof T) {
   if (b[orderBy] < a[orderBy]) {
@@ -32,10 +32,7 @@ type Order = "asc" | "desc";
 function getComparator<Key extends keyof any>(
   order: Order,
   orderBy: Key
-): (
-  a: { [key in Key]: number | string },
-  b: { [key in Key]: number | string }
-) => number {
+): (a: { [key in Key]: string }, b: { [key in Key]: string }) => number {
   return order === "desc"
     ? (a, b) => descendingComparator(a, b, orderBy)
     : (a, b) => -descendingComparator(a, b, orderBy);
@@ -68,7 +65,7 @@ interface EnhancedTableProps {
   order: Order;
   orderBy: string;
   rowCount: number;
-  headCells: any;
+  headCells: HeadCell[];
 }
 
 function EnhancedTableHead(props: EnhancedTableProps) {
@@ -157,7 +154,7 @@ export default function EnhancedTable({
   title,
   headCells,
 }: {
-  data: any;
+  data: UserPurchases[];
   title: string;
   headCells: any;
 }) {
@@ -240,9 +237,7 @@ export default function EnhancedTable({
                       <TableCell align="right">{row.totalPrice}</TableCell>
                       {(row.rating !== undefined && (
                         <TableCell align="right">{row.rating}</TableCell>
-                      )) || (
-                        <Rating value={row.rating} itemId={row.purchaseId} />
-                      )}
+                      )) || <Rating value={row.rating} itemId={row.itemId} />}
                     </TableRow>
                   );
                 })}

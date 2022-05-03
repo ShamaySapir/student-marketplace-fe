@@ -57,8 +57,15 @@ export interface UserPurchases {
   sellerName: string;
   itemId: string;
   itemName: string;
-  quantity: number;
-  price: number;
-  totalPrice: number;
-  rating?: number;
+  quantity: string;
+  price: string;
+  totalPrice: string;
+  rating: string;
+}
+
+export interface HeadCell {
+  disablePadding: boolean;
+  id: keyof UserPurchases;
+  label: string;
+  numeric: boolean;
 }
