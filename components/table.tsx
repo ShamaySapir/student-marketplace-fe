@@ -235,9 +235,11 @@ export default function EnhancedTable({
                       <TableCell align="right">{row.quantity}</TableCell>
                       <TableCell align="right">{row.price}</TableCell>
                       <TableCell align="right">{row.totalPrice}</TableCell>
-                      {(row.rating !== undefined && (
-                        <TableCell align="right">{row.rating}</TableCell>
-                      )) || <Rating value={row.rating} itemId={row.itemId} />}
+                      {row.rating !== undefined && (
+                        <TableCell align="right">
+                          <Rating value={row.rating} itemId={row.itemId} />
+                        </TableCell>
+                      )}
                     </TableRow>
                   );
                 })}

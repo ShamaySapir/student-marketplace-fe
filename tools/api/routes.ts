@@ -7,8 +7,9 @@ import {
   Service,
   DescriptionItem,
   PurchaseData,
-  GetUserPurchases,
+  GetUserIdPayload,
   UserPurchases,
+  RankedItem,
 } from "../../types/types";
 import { AxiosPromise, AxiosRequestConfig } from "axios";
 import { groupBy, reduce } from "lodash";
@@ -214,7 +215,7 @@ export const postPurchase = (data: PurchaseData): AxiosPromise => {
 };
 
 export const getPurchases = async (
-  data: GetUserPurchases
+  data: GetUserIdPayload
 ): Promise<UserPurchases[]> => {
   const payload = {
     method: "GET",
@@ -229,7 +230,7 @@ export const getPurchases = async (
 };
 
 export const getUserSells = async (
-  data: GetUserPurchases
+  data: GetUserIdPayload
 ): Promise<UserPurchases[]> => {
   const payload = {
     method: "GET",
@@ -270,4 +271,19 @@ export const getDisplayTileData = async (): Promise<GroupedItems> => {
     {}
   );
   return items;
+};
+
+export const getUserRankedItems = async (
+  data: GetUserIdPayload
+): Promise<RankedItem[]> => {
+  const payload = {
+    method: "GET",
+    route: `/rating/${data.userId}`,
+    data,
+  };
+  const resp = await getBaseRequestor({
+    url: payload.route,
+    ...payload,
+  } as AxiosRequestConfig);
+  return resp.data;
 };

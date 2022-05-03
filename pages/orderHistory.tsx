@@ -5,6 +5,7 @@ import * as routes from "../tools/api/routes";
 import { useSession } from "next-auth/client";
 import { UserPurchases, HeadCell } from "../types/types";
 import { UserType } from "../constants";
+import { keyBy } from "lodash";
 
 type Order = "asc" | "desc";
 
@@ -63,7 +64,16 @@ export default function EnhancedTable() {
       const userHistory = await routes.getPurchases({
         userId: session?.user.googleId as string,
       });
-      setPurchasesData(userHistory);
+
+      const userRankedItemsArr = await routes.getUserRankedItems({
+        userId: session?.user.googleId as string,
+      });
+      const userRankedItems = keyBy(userRankedItemsArr, "itemId");
+      const updatedUserHistory = userHistory.map((item) => ({
+        ...item,
+        rating: userRankedItems[item.itemId]?.rating || 0,
+      }));
+      setPurchasesData(updatedUserHistory);
     }
     async function getUserSellsHistory() {
       const userHistory = await routes.getUserSells({

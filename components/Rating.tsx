@@ -18,7 +18,7 @@ const ProductRating = ({ value, itemId, disabled = true }: any) => {
     });
     setValue(newValue);
   }
-  const isRated = value !== undefined;
+  const isRated = value !== 0;
   return (
     <Rating
       value={innerValue}

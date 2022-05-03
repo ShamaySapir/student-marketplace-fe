@@ -44,7 +44,7 @@ export interface PurchaseData {
   quantity: number;
 }
 
-export interface GetUserPurchases {
+export interface GetUserIdPayload {
   userId: string;
 }
 
@@ -60,7 +60,7 @@ export interface UserPurchases {
   quantity: string;
   price: string;
   totalPrice: string;
-  rating: string;
+  rating: number;
 }
 
 export interface HeadCell {
@@ -68,4 +68,9 @@ export interface HeadCell {
   id: keyof UserPurchases;
   label: string;
   numeric: boolean;
+}
+
+export interface RankedItem {
+  itemId: string;
+  rating: number;
 }
