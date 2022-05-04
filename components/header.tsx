@@ -14,10 +14,15 @@ import {
   Typography,
   Tooltip,
 } from "@mui/material";
+import { Button } from "@mui/material";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import Badge from "@mui/material/Badge";
 import * as routes from "../tools/api/routes";
 import { keyBy } from "lodash";
+//web 3
+import { injected } from "../wallet/connector";
+import { useWeb3React } from "@web3-react/core";
+
 
 const Div = styled("div")(({ theme }) => ({
   ...theme.typography.button,
@@ -32,9 +37,17 @@ const DecoratedLink = styled(Link)(({ theme }) => ({
 // component that works on pages which support both client and server side
 // rendering, and avoids any flash incorrect content on initial page load.
 
+
+
+
 export default function Header() {
   const [session, loading] = useSession();
   const [rankedItems, setRankedItems] = useState<number>(0);
+  const {
+    account,
+    activate,
+    active,
+  } = useWeb3React();
 
   useEffect(() => {
     async function getUserBuyHistory() {
@@ -53,6 +66,19 @@ export default function Header() {
     }
     getUserBuyHistory();
   }, []);
+
+  async function connect() {
+    try {
+      await activate(injected)
+      const accountAddress = await (window as any).ethereum.enable();
+      const btn = document.getElementById("connectBTN");
+      if (btn) {
+        btn.innerText = accountAddress;
+      }
+    } catch (error) {
+      console.log(error)
+    }
+  }
 
   return (
     <AppBar position="static">
@@ -76,6 +102,7 @@ export default function Header() {
           >
             Student social marketplace
           </Typography>
+          <Button color="secondary" id="connectBTN" onClick={() => connect()}>Connect to wallet</Button>
 
           <Box sx={{ display: { xs: "flex", md: "flex", flexGrow: 1 } }}>
             {session && (
@@ -95,7 +122,7 @@ export default function Header() {
           </Box>
         </Toolbar>
       </Container>
-    </AppBar>
+    </AppBar >
     // <Box
     //   sx={{ color: "primary.main", backgroundColor: "primary.main" }}
     //   marginBottom="10px"

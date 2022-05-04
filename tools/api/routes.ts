@@ -149,6 +149,7 @@ export const getService = async ({
     res.data;
   const sellerDesc = seller.description;
   const sellerPhone = seller.phoneNumber;
+  const walletNumber = seller.walletNumber;
   const servicenItem = {
     id,
     image,
@@ -159,6 +160,7 @@ export const getService = async ({
     description,
     sellerDesc,
     sellerPhone,
+    walletNumber
   };
   return servicenItem;
 };

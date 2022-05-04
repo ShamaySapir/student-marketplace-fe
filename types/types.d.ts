@@ -26,6 +26,7 @@ export interface DescriptionItem {
   rating: number;
   serviceGroup: string;
   title: string;
+  walletNumber: string;
 }
 
 export interface Service extends DescriptionItem {
