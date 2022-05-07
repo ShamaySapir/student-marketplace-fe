@@ -17,6 +17,7 @@ import {
   Dialog,
   DialogContent,
   DialogActions,
+  Divider,
 } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import * as routes from "../../tools/api/routes";
@@ -47,7 +48,7 @@ export default function ItemPage() {
     sellerPhone: "",
   });
   const [purchaseStatus, setPurchaseStatus] = useState<Boolean>(false);
-  const [open, setOpen] = useState<Boolean>(false);
+  const [open, setOpen] = useState<boolean>(false);
   const [quantity, setQuantity] = useState<number>(1);
 
   const router = useRouter();
@@ -95,7 +96,7 @@ export default function ItemPage() {
   return (
     <>
       <Grid container>
-        <Grid container item direction={"column"} xs>
+        <Grid container item direction={"column"} xs padding={4}>
           <Grid item>
             <Typography variant="h2">{getItemDesc.title}</Typography>
           </Grid>
@@ -110,31 +111,61 @@ export default function ItemPage() {
               <AttachMoneyIcon />
             </Grid>
           </Grid>
-          <Grid item>
-            <Rating defaultValue={getItemDesc.rating} />
+          <Grid container item>
+            <Typography variant="caption">Rating</Typography>
+            <Grid container item>
+              <Rating defaultValue={getItemDesc.rating} disabled />
+            </Grid>
           </Grid>
-          <Grid container item alignItems={"center"}>
-            <IconButton
-              color="primary"
-              aria-label="upload picture"
-              component="span"
-              onClick={() => {
-                setQuantity(Math.max(quantity - 1, 1));
-              }}
-            >
-              <RemoveIcon />
-            </IconButton>
-            <Typography>{quantity}</Typography>
-            <IconButton
-              color="primary"
-              aria-label="upload picture"
-              component="span"
-              onClick={() => {
-                setQuantity(quantity + 1);
-              }}
-            >
-              <AddIcon />
-            </IconButton>
+          <Divider />
+          <Grid container direction={"column"}>
+            <Grid item>
+              <Typography variant="h5">About the seller</Typography>
+            </Grid>
+            <Grid container item alignItems={"center"}>
+              <IconButton aria-label="add to favorites">
+                <InfoIcon />
+              </IconButton>
+              <Typography>{getItemDesc.sellerDesc}</Typography>
+            </Grid>
+            <Grid container>
+              <IconButton aria-label="add to favorites">
+                <LocalPhoneIcon />
+              </IconButton>
+              <Typography>{getItemDesc.sellerPhone}</Typography>
+            </Grid>
+          </Grid>
+          <Divider />
+          <Grid container item justifyContent={"space-around"}>
+            <Grid item>
+              <Typography variant="caption">Quantity</Typography>
+              <Grid container item alignItems={"center"}>
+                <IconButton
+                  color="primary"
+                  component="span"
+                  onClick={() => {
+                    setQuantity(Math.max(quantity - 1, 1));
+                  }}
+                >
+                  <RemoveIcon />
+                </IconButton>
+                <Typography>{quantity}</Typography>
+                <IconButton
+                  color="primary"
+                  component="span"
+                  onClick={() => {
+                    setQuantity(quantity + 1);
+                  }}
+                >
+                  <AddIcon />
+                </IconButton>
+              </Grid>
+            </Grid>
+            <Grid item padding={2}>
+              <Button variant="contained" onClick={purchase}>
+                Purchase ({quantity * getItemDesc.price}$)
+              </Button>
+            </Grid>
           </Grid>
         </Grid>
         <Grid item xs>
@@ -148,36 +179,9 @@ export default function ItemPage() {
           </Card>
         </Grid>
       </Grid>
-      <Grid container>
-        <Grid container direction={"column"}>
-          <Grid item>
-            <Typography variant="h5">About the seller</Typography>
-          </Grid>
-          <Grid container item alignItems={"center"}>
-            <IconButton aria-label="add to favorites">
-              <InfoIcon />
-            </IconButton>
-            <Typography>{getItemDesc.sellerDesc}</Typography>
-          </Grid>
-          <Grid container item alignItems={"center"}>
-            <IconButton aria-label="add to favorites">
-              <LocalPhoneIcon />
-            </IconButton>
-            <Typography>{getItemDesc.sellerPhone}</Typography>
-          </Grid>
+      <Grid container></Grid>
 
-          <Grid container item alignItems={"center"}>
-            <Grid item>
-              <Button variant="contained" onClick={purchase}>
-                Purchase
-              </Button>
-            </Grid>
-          </Grid>
-        </Grid>
-        <Grid></Grid>
-      </Grid>
-
-      <Dialog open={open === true} disableEscapeKeyDown={false}>
+      <Dialog open={open} disableEscapeKeyDown={false}>
         <BootstrapDialogTitle
           id="customized-dialog-title"
           onClose={() => handleClose()}
