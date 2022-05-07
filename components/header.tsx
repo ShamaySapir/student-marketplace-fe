@@ -12,7 +12,6 @@ import {
   Container,
   Toolbar,
   Typography,
-  Menu,
   Tooltip,
 } from "@mui/material";
 import NotificationsIcon from "@mui/icons-material/Notifications";
@@ -79,13 +78,15 @@ export default function Header() {
           </Typography>
 
           <Box sx={{ display: { xs: "flex", md: "flex", flexGrow: 1 } }}>
-            <IconButton size="large" color="inherit" edge="end">
-              <Link href="/orderHistory">
-                <Badge badgeContent={rankedItems} color="error">
-                  <NotificationsIcon />
-                </Badge>
-              </Link>
-            </IconButton>
+            {session && (
+              <IconButton size="large" color="inherit" edge="end">
+                <Link href="/orderHistory">
+                  <Badge badgeContent={rankedItems} color="error">
+                    <NotificationsIcon />
+                  </Badge>
+                </Link>
+              </IconButton>
+            )}
             <Tooltip title="Open settings">
               {(session && <UserAvatar />) || (
                 <GoogleProviderSignin onClick={() => signIn("google")} />

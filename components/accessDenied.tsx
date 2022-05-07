@@ -1,8 +1,8 @@
+import { Typography, Grid } from "@mui/material";
 export default function AccessDenied() {
   return (
-    <>
-      <h1>Access Denied</h1>
-      <p>please log in</p>
-    </>
+    <Grid>
+      <Typography>Student Social Marketplace</Typography>
+    </Grid>
   );
 }
