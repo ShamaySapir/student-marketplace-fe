@@ -4,6 +4,7 @@ import { useSession } from "next-auth/client";
 import LocalPhoneIcon from "@mui/icons-material/LocalPhone";
 import AttachMoneyIcon from "@mui/icons-material/AttachMoney";
 import InfoIcon from "@mui/icons-material/Info";
+import { Add as AddIcon, Remove as RemoveIcon } from "@mui/icons-material";
 import {
   Grid,
   Button,
@@ -14,7 +15,6 @@ import {
   IconButton,
   Rating,
   Dialog,
-  DialogTitle,
   DialogContent,
   DialogActions,
 } from "@mui/material";
@@ -48,6 +48,8 @@ export default function ItemPage() {
   });
   const [purchaseStatus, setPurchaseStatus] = useState<Boolean>(false);
   const [open, setOpen] = useState<Boolean>(false);
+  const [quantity, setQuantity] = useState<number>(1);
+
   const router = useRouter();
   const { id } = router.query;
 
@@ -73,7 +75,7 @@ export default function ItemPage() {
     const purchaseResult = await routes.postPurchase({
       buyerId: session?.user.googleId as string,
       itemId: id as string,
-      quantity: 1,
+      quantity,
     });
 
     if (purchaseResult.status === 201) {
@@ -111,6 +113,29 @@ export default function ItemPage() {
           <Grid item>
             <Rating defaultValue={getItemDesc.rating} />
           </Grid>
+          <Grid container item alignItems={"center"}>
+            <IconButton
+              color="primary"
+              aria-label="upload picture"
+              component="span"
+              onClick={() => {
+                setQuantity(Math.max(quantity - 1, 1));
+              }}
+            >
+              <RemoveIcon />
+            </IconButton>
+            <Typography>{quantity}</Typography>
+            <IconButton
+              color="primary"
+              aria-label="upload picture"
+              component="span"
+              onClick={() => {
+                setQuantity(quantity + 1);
+              }}
+            >
+              <AddIcon />
+            </IconButton>
+          </Grid>
         </Grid>
         <Grid item xs>
           <Card>
@@ -140,10 +165,13 @@ export default function ItemPage() {
             </IconButton>
             <Typography>{getItemDesc.sellerPhone}</Typography>
           </Grid>
+
           <Grid container item alignItems={"center"}>
-            <Button variant="contained" onClick={purchase}>
-              Purchase
-            </Button>
+            <Grid item>
+              <Button variant="contained" onClick={purchase}>
+                Purchase
+              </Button>
+            </Grid>
           </Grid>
         </Grid>
         <Grid></Grid>
