@@ -12,7 +12,7 @@ export default function AccessDenied() {
         columns={{ xs: 4, sm: 8, md: 12 }}
         style={{ marginTop: "10vh" }}
       >
-        <Grid item xs={3} style={{ flexBasis: "37.5%" }}></Grid>
+        <Grid item xs={3} style={{ flexBasis: "15%" }}></Grid>
         <Grid container direction={"row"} item xs spacing={5}>
           <Grid item>
             <Card>
@@ -79,7 +79,7 @@ export default function AccessDenied() {
             ))}
           </Grid>
         </Grid>
-        <Grid item xs={3} style={{ flexBasis: "37.5%" }}></Grid>
+        <Grid item xs={3} style={{ flexBasis: "15%" }}></Grid>
       </Grid>
     </Grid>
   );
