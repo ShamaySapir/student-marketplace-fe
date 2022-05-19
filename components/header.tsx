@@ -3,10 +3,7 @@ import { signIn, useSession } from "next-auth/client";
 import GoogleProviderSignin from "./providers/google/GoogleProviderSignin";
 import UserAvatar from "./userAvatar";
 import Image from "next/image";
-
-// import Logo from "./crewAvatar";
 import {
-  Adb as AdbIcon,
   AccountBalanceWalletTwoTone as WalletIcon,
   Notifications as NotificationsIcon,
 } from "@mui/icons-material";
@@ -94,13 +91,6 @@ export default function Header() {
               height={40}
             />
           </Avatar>
-          {/* <Logo
-            AVATAR_SIZE={40}
-            imgSrc={"/images/coin.png"}
-            name="logo"
-            sx={{ mr: 1 }}
-          /> */}
-          {/* <AdbIcon sx={{ mr: 1 }} /> */}
           <Typography variant="h2" noWrap component={Link} href="/">
             Student social marketplace
           </Typography>
