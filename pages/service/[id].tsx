@@ -58,7 +58,7 @@ export default function ItemPage() {
   const [purchaseStatus, setPurchaseStatus] = useState<Boolean>(false);
   const [open, setOpen] = useState<boolean>(false);
   const [quantity, setQuantity] = useState<number>(1);
-
+  const [transactionId, setTransactionId] = useState<string>("");
   const router = useRouter();
   const { id } = router.query;
 
@@ -99,10 +99,9 @@ export default function ItemPage() {
         .transfer(receiver_address, weiAmount)
         .send({ from: account });
       const { from, to, transactionHash } = result; // use this in the receipt TODO: Sapir - need to add this to the summary of the deal.
-      console.log(result);
+      setTransactionId(transactionHash);
       return result;
     } catch (error) {
-      console.log("Error:", error);
       return false;
     }
   }
@@ -114,7 +113,7 @@ export default function ItemPage() {
       const purchaseResult = await routes.postPurchase({
         buyerId: session?.user.googleId as string,
         itemId: id as string,
-        quantity: quantity,
+        quantity,
       });
 
       if (purchaseResult.status === 201) {
@@ -238,6 +237,9 @@ export default function ItemPage() {
             Seller Description: {getItemDesc.sellerDesc}
           </Typography>
           <Typography variant="h6">Price: {getItemDesc.price}</Typography>
+          <Typography variant="h6">
+            Transaction Hash: {transactionId}
+          </Typography>
         </DialogContent>
         <DialogActions>
           <Link href="/" passHref>
