@@ -33,6 +33,11 @@ const validationSchema = yup.object({
     .min(10, "Too Short!")
     .max(500, "Too Long!")
     .required("Required"),
+  walletNumber: yup
+    .string()
+    .min(3, "Too Short!")
+    .max(50, "Too Long!")
+    .required("Required"),
   phone: yup
     .string()
     .min(10, "Phone number is not valid")
@@ -79,6 +84,7 @@ export default function BecomeASellerForm() {
       sellerDesc: "", //user.description,
       imageId: "",
       phone: "",
+      walletNumber: "",
     },
     enableReinitialize: true,
     validationSchema: validationSchema,
@@ -91,6 +97,7 @@ export default function BecomeASellerForm() {
         email: session!.user.email,
         isSeller: true,
         description: values.sellerDesc,
+        walletNumber: values.walletNumber,
         profilePic: values.imageId,
         googleId: session!.user.googleId,
       };
@@ -135,6 +142,17 @@ export default function BecomeASellerForm() {
           onChange={formik.handleChange}
           error={formik.touched.phone && Boolean(formik.errors.phone)}
           helperText={formik.touched.phone && formik.errors.phone}
+        />
+        <TextField
+          fullWidth
+          id="walletNumber"
+          name="walletNumber"
+          value={formik.values.walletNumber}
+          onChange={formik.handleChange}
+          error={
+            formik.touched.walletNumber && Boolean(formik.errors.walletNumber)
+          }
+          helperText={formik.touched.walletNumber && formik.errors.walletNumber}
         />
         <Stack direction="row" alignItems="center" spacing={2}>
           <label htmlFor="icon-button-file">

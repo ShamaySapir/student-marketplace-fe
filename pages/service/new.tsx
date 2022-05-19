@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from "react";
+import { useRouter } from "next/router";
+
 import {
   TextField,
   MenuItem,
@@ -15,11 +17,10 @@ import { styled } from "@mui/material/styles";
 import { useFormik } from "formik";
 import * as routes from "../../tools/api/routes";
 import * as yup from "yup";
-import { map, pick } from "lodash";
+import { map } from "lodash";
 import { ItemType } from "../../types/types";
 import { PhotoCamera } from "@mui/icons-material";
 import { useSession } from "next-auth/client";
-import { Session } from "next-auth";
 
 const validationSchema = yup.object({
   itemTypeId: yup.string().required("Required"),
@@ -61,7 +62,7 @@ export default function AddServiceForm() {
   const [getLoading, setLoading] = useState<boolean>(false);
   const [itemTypes, setItemTypes] = useState<ItemType[]>([]);
   const [getSuccessfulMessage, setSuccessfulMessage] = useState<boolean>(false);
-
+  const router = useRouter();
   useEffect(() => {
     async function getItemTypes() {
       const resJson = await routes.getItemTypes();
@@ -94,7 +95,12 @@ export default function AddServiceForm() {
         sellerId: session!.user.googleId,
       };
       const response = await routes.addService(payload);
-      setSuccessfulMessage(response.status === 200);
+      if (response.status === 200) {
+        setSuccessfulMessage(true);
+        if (response.data.itemId) {
+          router.push(`/service/${response.data.itemId}`);
+        }
+      }
     },
   });
 

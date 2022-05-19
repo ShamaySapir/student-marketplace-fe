@@ -29,6 +29,11 @@ const validationSchema = yup.object({
     .min(2, "Too Short!")
     .max(20, "Too Long!")
     .required("Required"),
+  walletNumber: yup
+    .string()
+    .min(3, "Too Short!")
+    .max(50, "Too Long!")
+    .required("Required"),
 });
 type stringOrUndefinendOrNull = string | undefined | null;
 interface IUserDetails {
@@ -36,6 +41,7 @@ interface IUserDetails {
   firstName: stringOrUndefinendOrNull;
   lastName: stringOrUndefinendOrNull;
   displayName: stringOrUndefinendOrNull;
+  walletNumber: stringOrUndefinendOrNull;
 }
 
 export default function RegistrationForm() {
@@ -46,6 +52,7 @@ export default function RegistrationForm() {
     firstName: "",
     lastName: "",
     displayName: "",
+    walletNumber: "",
   });
 
   useEffect(() => {
@@ -56,6 +63,7 @@ export default function RegistrationForm() {
         firstName: session!.user.firstName as string,
         lastName: session!.user.lastName as string,
         displayName: session!.user.name as string,
+        walletNumber: session!.user.walletNumber as string,
       });
     }
   }, [session, loading]);
@@ -65,6 +73,7 @@ export default function RegistrationForm() {
       firstName: user.firstName,
       lastName: user.lastName,
       displayName: user.displayName,
+      walletNumber: user.walletNumber,
     },
     enableReinitialize: true,
     validationSchema: validationSchema,
@@ -128,6 +137,17 @@ export default function RegistrationForm() {
             formik.touched.displayName && Boolean(formik.errors.displayName)
           }
           helperText={formik.touched.displayName && formik.errors.displayName}
+        />
+        <TextField
+          fullWidth
+          id="walletNumber"
+          name="walletNumber"
+          value={formik.values.walletNumber}
+          onChange={formik.handleChange}
+          error={
+            formik.touched.walletNumber && Boolean(formik.errors.walletNumber)
+          }
+          helperText={formik.touched.walletNumber && formik.errors.walletNumber}
         />
         <Button color="primary" variant="contained" fullWidth type="submit">
           Submit

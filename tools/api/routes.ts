@@ -124,7 +124,6 @@ export const addService = (itemData: any): AxiosPromise => {
     method: "POST",
     route: `/items/add`,
     data: itemData,
-    // data: { data: itemData },
   };
   return getBaseRequestor({
     url: payload.route,
@@ -150,7 +149,7 @@ export const getService = async ({
   const sellerDesc = seller.description;
   const sellerPhone = seller.phoneNumber;
   const walletNumber = seller.walletNumber;
-  const servicenItem = {
+  const serviceItem = {
     id,
     image,
     price: +price,
@@ -160,9 +159,9 @@ export const getService = async ({
     description,
     sellerDesc,
     sellerPhone,
-    walletNumber
+    walletNumber,
   };
-  return servicenItem;
+  return serviceItem;
 };
 
 export const postUploadImage = (imageFiles: FileList): AxiosPromise => {
