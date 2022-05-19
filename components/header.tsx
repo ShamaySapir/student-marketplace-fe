@@ -2,7 +2,12 @@ import React, { useEffect, useState } from "react";
 import { signIn, useSession } from "next-auth/client";
 import GoogleProviderSignin from "./providers/google/GoogleProviderSignin";
 import UserAvatar from "./userAvatar";
-import { Adb as AdbIcon, Menu as MenuIcon } from "@mui/icons-material";
+import {
+  Adb as AdbIcon,
+  Menu as MenuIcon,
+  AccountBalanceWalletTwoTone as WalletIcon,
+} from "@mui/icons-material";
+
 import { styled } from "@mui/material/styles";
 import Link from "next/link";
 import {
@@ -92,9 +97,20 @@ export default function Header() {
           <Box sx={{ display: { xs: "flex", md: "flex" } }}>
             {session && (
               <>
-                <Button color="secondary" id="connectBTN" onClick={connect}>
-                  {walletAccount || "Connect to wallet"}
-                </Button>
+                <IconButton
+                  size="small"
+                  color="inherit"
+                  edge="end"
+                  onClick={connect}
+                >
+                  {walletAccount || (
+                    <>
+                      Connect To &nbsp;
+                      <WalletIcon />
+                    </>
+                  )}
+                </IconButton>
+
                 <IconButton size="large" color="inherit" edge="end">
                   <Link href="/orderHistory">
                     <Badge badgeContent={rankedItems} color="error">
