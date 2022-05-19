@@ -51,7 +51,8 @@ const uploadImage = async (
 ) => {
   setLoading(true);
   const res = await routes.postUploadImage(e.currentTarget.files!);
-  setImageId({ target: { value: res.data[0].id } });
+  // setImageId({ target: { value: res.data[0].id } });
+  setImageId({ target: { value: res.data } });
   setLoading(false);
 };
 
@@ -88,7 +89,7 @@ export default function AddServiceForm() {
         title: values.itemName,
         serviceGroup: values.itemTypeId,
         description: values.itemDesc,
-        images: values.imageId,
+        image: values.imageId,
         price: values.itemPrice,
         sellerId: session!.user.googleId,
       };
