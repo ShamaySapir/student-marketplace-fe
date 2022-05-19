@@ -1,3 +1,4 @@
+/* eslint-disable react/no-unescaped-entities */
 import { Typography, Grid, Card, CardContent, Avatar } from "@mui/material";
 import CrewAvatar from "./crewAvatar";
 
