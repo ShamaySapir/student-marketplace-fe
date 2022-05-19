@@ -143,10 +143,7 @@ export default function ItemPage() {
           </Grid>
           <Grid container item justifyContent="flex-end" alignItems="center">
             <Grid item>
-              <Typography variant="h5">{getItemDesc.price}</Typography>
-            </Grid>
-            <Grid item>
-              <AttachMoneyIcon />
+              <Typography variant="h5">{getItemDesc.price} S2S</Typography>
             </Grid>
           </Grid>
           <Grid container item>
@@ -201,7 +198,7 @@ export default function ItemPage() {
             </Grid>
             <Grid item padding={2}>
               <Button variant="contained" onClick={purchase}>
-                Purchase ({quantity * getItemDesc.price}$)
+                Purchase ({quantity * getItemDesc.price} S2S)
               </Button>
             </Grid>
           </Grid>
@@ -211,7 +208,11 @@ export default function ItemPage() {
             <CardMedia
               component="img"
               height="600"
-              image={getItemDesc.image}
+              image={
+                getItemDesc.image.startsWith("http")
+                  ? getItemDesc.image
+                  : `${process.env.NEXT_PUBLIC_MARKETPLACE_API}/${getItemDesc.image}`
+              }
               alt={getItemDesc.title}
             />
           </Card>
