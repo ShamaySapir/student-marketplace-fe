@@ -108,7 +108,7 @@ export default function RegistrationForm() {
           fullWidth
           id="firstName"
           name="firstName"
-          label="firstName"
+          label="First Name"
           disabled
           value={formik.values.firstName}
           onChange={formik.handleChange}
@@ -119,7 +119,7 @@ export default function RegistrationForm() {
           fullWidth
           id="lastName"
           name="lastName"
-          label="lastName"
+          label="Last Name"
           disabled
           value={formik.values.lastName}
           onChange={formik.handleChange}
@@ -130,7 +130,7 @@ export default function RegistrationForm() {
           fullWidth
           id="displayName"
           name="displayName"
-          label="displayName"
+          label="Display Name"
           value={formik.values.displayName}
           onChange={formik.handleChange}
           error={
@@ -142,6 +142,7 @@ export default function RegistrationForm() {
           fullWidth
           id="walletNumber"
           name="walletNumber"
+          label="Wallet number"
           value={formik.values.walletNumber}
           onChange={formik.handleChange}
           error={

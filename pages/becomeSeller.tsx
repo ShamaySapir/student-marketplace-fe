@@ -113,7 +113,7 @@ export default function BecomeASellerForm() {
         <TextField
           fullWidth
           id="displayName"
-          name="displayName"
+          name="Display Name"
           value={formik.values.displayName}
           onChange={formik.handleChange}
           error={
@@ -147,6 +147,7 @@ export default function BecomeASellerForm() {
           fullWidth
           id="walletNumber"
           name="walletNumber"
+          label="Wallet number"
           value={formik.values.walletNumber}
           onChange={formik.handleChange}
           error={
