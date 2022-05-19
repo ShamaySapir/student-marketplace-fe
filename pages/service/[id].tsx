@@ -236,7 +236,12 @@ export default function ItemPage() {
           <Typography variant="h6">
             Seller Description: {getItemDesc.sellerDesc}
           </Typography>
-          <Typography variant="h6">Price: {getItemDesc.price}</Typography>
+          <Typography variant="h6">Item Price: {getItemDesc.price}</Typography>
+          <Typography variant="h6">Quantity: {quantity}</Typography>
+
+          <Typography variant="h6">
+            Total Price: {quantity * getItemDesc.price}
+          </Typography>
           <Typography variant="h6">
             Transaction Hash: {transactionId}
           </Typography>
