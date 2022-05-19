@@ -22,6 +22,12 @@ import { ItemType } from "../../types/types";
 import { PhotoCamera } from "@mui/icons-material";
 import { useSession } from "next-auth/client";
 
+// Dor
+import * as filestack from 'filestack-js';
+let imgurl = '';
+
+
+
 const validationSchema = yup.object({
   itemTypeId: yup.string().required("Required"),
   itemName: yup
@@ -45,19 +51,31 @@ const Input = styled("input")({
   // display: "none",
 });
 
-const uploadImage = async (
-  e: React.ChangeEvent<HTMLInputElement>,
-  setLoading: React.Dispatch<React.SetStateAction<boolean>>,
-  setImageId: any
-) => {
-  setLoading(true);
-  const res = await routes.postUploadImage(e.currentTarget.files!);
-  // setImageId({ target: { value: res.data[0].id } });
-  setImageId({ target: { value: res.data } });
-  setLoading(false);
-};
+// const uploadImage = async (
+//   setLoading: React.Dispatch<React.SetStateAction<boolean>>,
+//   setImageId: any
+// ) => {
+//   setLoading(true);
+//   // const res = await routes.postUploadImage(e.currentTarget.files!);
+//   // setImageId({ target: { value: res.data[0].id } });
+//   setImageId({ target: { value: res.data } });
+//   setLoading(false);
+// };
 
 export default function AddServiceForm() {
+
+  const imageClient = filestack.init('AIJohRwxTRSzHwGr49Tkqz');
+  const options = {
+    maxFiles: 1,
+    uploadInBackground: false,
+    onOpen: () => console.log('opened!'),
+    onUploadDone: (res: any) => {
+      imgurl = res.filesUploaded[0].url
+    },
+  };
+  // Dor
+
+
   const [session, loading] = useSession();
   const [getLoading, setLoading] = useState<boolean>(false);
   const [itemTypes, setItemTypes] = useState<ItemType[]>([]);
@@ -90,12 +108,14 @@ export default function AddServiceForm() {
         title: values.itemName,
         serviceGroup: values.itemTypeId,
         description: values.itemDesc,
-        image: values.imageId,
+        image: imgurl,
         price: values.itemPrice,
         sellerId: session!.user.googleId,
       };
       const response = await routes.addService(payload);
       if (response.status === 200) {
+        console.log(imgurl);
+        imgurl = '';
         setSuccessfulMessage(true);
         if (response.data.itemId) {
           router.push(`/service/${response.data.itemId}`);
@@ -151,7 +171,14 @@ export default function AddServiceForm() {
           error={formik.touched.itemPrice && Boolean(formik.errors.itemPrice)}
           helperText={formik.touched.itemPrice && formik.errors.itemPrice}
         />
-        <Stack direction="row" alignItems="center" spacing={2}>
+        <Button
+          onClick={() => {
+            imageClient.picker(options).open()
+          }}
+        >
+          Add item image
+        </Button>
+        {/* <Stack direction="row" alignItems="center" spacing={2}>
           <label htmlFor="icon-button-file">
             <Input
               accept="image/*"
@@ -169,7 +196,7 @@ export default function AddServiceForm() {
               {getLoading ? <CircularProgress /> : <PhotoCamera />}
             </IconButton>
           </label>
-        </Stack>
+        </Stack> */}
 
         <Button color="primary" variant="contained" fullWidth type="submit">
           Add new item

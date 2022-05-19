@@ -144,10 +144,10 @@ export default function ItemPage() {
           <Grid container item justifyContent="flex-end" alignItems="center">
             <Grid item>
               <Typography variant="h5">{getItemDesc.price}</Typography>
-            </Grid>
-            <Grid item>
+            </Grid> - S2S
+            {/* <Grid item>
               <AttachMoneyIcon />
-            </Grid>
+            </Grid> */}
           </Grid>
           <Grid container item>
             <Typography variant="caption">Rating</Typography>
@@ -201,7 +201,7 @@ export default function ItemPage() {
             </Grid>
             <Grid item padding={2}>
               <Button variant="contained" onClick={purchase}>
-                Purchase ({quantity * getItemDesc.price}$)
+                Purchase ({quantity * getItemDesc.price} S2S)
               </Button>
             </Grid>
           </Grid>

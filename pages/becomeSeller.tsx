@@ -148,6 +148,7 @@ export default function BecomeASellerForm() {
           id="walletNumber"
           name="walletNumber"
           label="Wallet number"
+          placeholder="Wallet number"
           value={formik.values.walletNumber}
           onChange={formik.handleChange}
           error={
