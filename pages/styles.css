@@ -7,3 +7,10 @@ body {
 
   background-color: #edeff5;
 }
+a {
+  text-decoration: none;
+}
+a:visited {
+  color: white;
+  text-decoration: none;
+}

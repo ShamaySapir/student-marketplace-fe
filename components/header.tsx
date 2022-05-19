@@ -2,10 +2,13 @@ import React, { useEffect, useState } from "react";
 import { signIn, useSession } from "next-auth/client";
 import GoogleProviderSignin from "./providers/google/GoogleProviderSignin";
 import UserAvatar from "./userAvatar";
+import Image from "next/image";
+
+// import Logo from "./crewAvatar";
 import {
   Adb as AdbIcon,
-  Menu as MenuIcon,
   AccountBalanceWalletTwoTone as WalletIcon,
+  Notifications as NotificationsIcon,
 } from "@mui/icons-material";
 
 import { styled } from "@mui/material/styles";
@@ -13,15 +16,15 @@ import Link from "next/link";
 import {
   IconButton,
   AppBar,
+  Avatar,
   Box,
   Container,
   Toolbar,
   Typography,
   Tooltip,
+  Button,
+  Badge,
 } from "@mui/material";
-import { Button } from "@mui/material";
-import NotificationsIcon from "@mui/icons-material/Notifications";
-import Badge from "@mui/material/Badge";
 import * as routes from "../tools/api/routes";
 import { keyBy } from "lodash";
 //web 3
@@ -79,17 +82,26 @@ export default function Header() {
     <AppBar position="static">
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-          <AdbIcon sx={{ mr: 1 }} />
-          <Typography
-            variant="h6"
-            noWrap
-            component={Link}
-            href="/"
-            sx={{
-              display: { xs: "none", md: "flex" },
-              mr: 1,
-            }}
+          <Avatar
+            alt="logo"
+            sx={{ width: 40, height: 40 }}
+            style={{ marginRight: 10 }}
           >
+            <Image
+              src={"/images/coin.png"}
+              alt={"logo"}
+              width={40}
+              height={40}
+            />
+          </Avatar>
+          {/* <Logo
+            AVATAR_SIZE={40}
+            imgSrc={"/images/coin.png"}
+            name="logo"
+            sx={{ mr: 1 }}
+          /> */}
+          {/* <AdbIcon sx={{ mr: 1 }} /> */}
+          <Typography variant="h2" noWrap component={Link} href="/">
             Student social marketplace
           </Typography>
 
@@ -110,7 +122,6 @@ export default function Header() {
                     </>
                   )}
                 </IconButton>
-
                 <IconButton size="large" color="inherit" edge="end">
                   <Link href="/orderHistory">
                     <Badge badgeContent={rankedItems} color="error">
@@ -129,46 +140,5 @@ export default function Header() {
         </Toolbar>
       </Container>
     </AppBar>
-    // <Box
-    //   sx={{ color: "primary.main", backgroundColor: "primary.main" }}
-    //   marginBottom="10px"
-    // >
-    //   <Box
-    //     sx={{
-    //       display: "grid",
-    //       gridTemplateColumns: "repeat(1, 1fr)",
-    //       gridTemplateAreas: `"title avatar"`,
-    //       alignItems: "center",
-    //     }}
-    //   >
-    //     <Box sx={{ backgroundColor: "primary.main" }}>
-    //       <Box sx={{ gridArea: "title", backgroundColor: "primary.main" }}>
-    //         {/* <Div
-    //           style={{
-    //             display: "flex",
-    //             justifyContent: "space-between",
-    //             backgroundColor: "primary.main",
-    //           }}
-    //         > */}
-    //         <DecoratedLink href="/">Student social marketplace</DecoratedLink>
-    //         <IconButton size="large" color="inherit">
-    //           <Link href="/orderHistory">
-    //             <Badge badgeContent={rankedItems} color="error">
-    //               <NotificationsIcon />
-    //             </Badge>
-    //           </Link>
-    //         </IconButton>
-    //         {/* </Div> */}
-    //       </Box>
-    //     </Box>
-    //     <Box sx={{ gridArea: "avatar" }}>
-    //       <Box>
-    //         {(session && <UserAvatar />) || (
-    //           <GoogleProviderSignin onClick={() => signIn("google")} />
-    //         )}
-    //       </Box>
-    //     </Box>
-    //   </Box>
-    // </Box>
   );
 }
