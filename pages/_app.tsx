@@ -4,7 +4,7 @@ import { Web3ReactProvider } from "@web3-react/core";
 import Web3 from "web3";
 
 import "./styles.css";
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { useSession } from "next-auth/client";
 import AccessDenied from "../components/accessDenied";
 import { Session } from "next-auth";
@@ -25,25 +25,15 @@ interface IProps {
 // `useSession()` anywhere in your application to access the `session` object.
 export default function App({ Component, pageProps }: IProps) {
   const [session, loading] = useSession();
-  const [content, setContent] = useState();
 
   SwiperCore.use([Virtual]);
-  useEffect(() => {
-    const fetchData = async () => {
-      const res = await fetch("/api/examples/protected");
-      const json = await res.json();
-      if (json.content) {
-        setContent(json.content);
-      }
-    };
-    fetchData();
-  }, [session]);
+
   // When rendering client side don't display anything until loading is complete
   if (typeof window !== "undefined" && loading) return null;
   const { renderLayout } = pageProps;
 
   function getLibrary(provider) {
-    return new Web3(provider)
+    return new Web3(provider);
   }
 
   return (
