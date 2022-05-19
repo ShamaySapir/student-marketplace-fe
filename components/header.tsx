@@ -83,29 +83,26 @@ export default function Header() {
             sx={{
               display: { xs: "none", md: "flex" },
               mr: 1,
-              // fontFamily: "monospace",
-              // fontWeight: 700,
-              // letterSpacing: ".3rem",
-              // color: "inherit",
-              // textDecoration: "none",
             }}
           >
             Student social marketplace
           </Typography>
-          {session && (
-            <Button color="secondary" id="connectBTN" onClick={connect}>
-              {walletAccount || "Connect to wallet"}
-            </Button>
-          )}
-          <Box sx={{ display: { xs: "flex", md: "flex", flexGrow: 1 } }}>
+
+          <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}></Box>
+          <Box sx={{ display: { xs: "flex", md: "flex" } }}>
             {session && (
-              <IconButton size="large" color="inherit" edge="end">
-                <Link href="/orderHistory">
-                  <Badge badgeContent={rankedItems} color="error">
-                    <NotificationsIcon />
-                  </Badge>
-                </Link>
-              </IconButton>
+              <>
+                <Button color="secondary" id="connectBTN" onClick={connect}>
+                  {walletAccount || "Connect to wallet"}
+                </Button>
+                <IconButton size="large" color="inherit" edge="end">
+                  <Link href="/orderHistory">
+                    <Badge badgeContent={rankedItems} color="error">
+                      <NotificationsIcon />
+                    </Badge>
+                  </Link>
+                </IconButton>
+              </>
             )}
             <Tooltip title="Open settings">
               {(session && <UserAvatar />) || (
