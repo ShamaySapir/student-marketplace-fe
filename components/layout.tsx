@@ -38,7 +38,7 @@ export default function Layout({
     fetchData();
   }, [session]);
   return (
-    <>
+    <div>
       {renderHeader && <Header />}
       {(renderSides && (
         <Box
@@ -59,6 +59,6 @@ export default function Layout({
         </Box>
       )}
       {renderFooter && <Footer />}
-    </>
+    </div>
   );
 }
