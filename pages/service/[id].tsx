@@ -7,10 +7,10 @@ import InfoIcon from "@mui/icons-material/Info";
 import { Add as AddIcon, Remove as RemoveIcon } from "@mui/icons-material";
 // web3
 import Web3 from "web3";
-const MyContract = require("../../contracts/S2SABI.json");
-const tokenAddress = "0x28eAc900e08E7473c922Dc925e56330CB11692D2"; // might need to be changed..
+import MyContract from "../../contracts/S2SABI.json";
 import { useWeb3React } from "@web3-react/core";
 // end web3
+const tokenAddress = "0x28eAc900e08E7473c922Dc925e56330CB11692D2"; // might need to be changed..
 
 import {
   Grid,
@@ -53,7 +53,7 @@ export default function ItemPage() {
     description: "",
     sellerDesc: "",
     sellerPhone: "",
-    walletNumber: ""
+    walletNumber: "",
   });
   const [purchaseStatus, setPurchaseStatus] = useState<Boolean>(false);
   const [open, setOpen] = useState<boolean>(false);
@@ -63,9 +63,7 @@ export default function ItemPage() {
   const { id } = router.query;
 
   // web3
-  const {
-    account
-  } = useWeb3React();
+  const { account } = useWeb3React();
   let web3;
   let contract;
   // web3 - end
@@ -92,12 +90,14 @@ export default function ItemPage() {
   async function transferMoney() {
     try {
       web3 = new Web3((window as any).ethereum);
-      contract = new web3.eth.Contract(MyContract.abi, tokenAddress);
+      contract = new web3.eth.Contract((MyContract as any).abi, tokenAddress);
       console.log(contract);
-      let receiver_address = getItemDesc.walletNumber;  // change this when using the real marketplace (seller wallet address)
-      let tokens_count = quantity * getItemDesc.price;  // change this when using the real marketplace (price of item * quantity) TODO: add quantity to form, and mul with price!!!!
+      let receiver_address = getItemDesc.walletNumber; // change this when using the real marketplace (seller wallet address)
+      let tokens_count = quantity * getItemDesc.price; // change this when using the real marketplace (price of item * quantity) TODO: add quantity to form, and mul with price!!!!
       let weiAmount = Web3.utils.toWei(tokens_count.toString());
-      const result = await contract.methods.transfer(receiver_address, weiAmount).send({ from: account })
+      const result = await contract.methods
+        .transfer(receiver_address, weiAmount)
+        .send({ from: account });
       const { from, to, transactionHash } = result; // use this in the receipt TODO: Sapir - need to add this to the summary of the deal.
       console.log(result);
       return result;
@@ -105,10 +105,8 @@ export default function ItemPage() {
       console.log("Error:", error);
       return false;
     }
-
   }
   // web3 - end
-
 
   const purchase = async () => {
     const blockchainTransferResult = await transferMoney();
@@ -125,7 +123,6 @@ export default function ItemPage() {
       }
       handleClickOpen();
     }
-
   };
 
   const handleClickOpen = () => {
