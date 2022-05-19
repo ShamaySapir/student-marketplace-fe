@@ -143,11 +143,8 @@ export default function ItemPage() {
           </Grid>
           <Grid container item justifyContent="flex-end" alignItems="center">
             <Grid item>
-              <Typography variant="h5">{getItemDesc.price}</Typography>
-            </Grid> - S2S
-            {/* <Grid item>
-              <AttachMoneyIcon />
-            </Grid> */}
+              <Typography variant="h5">{getItemDesc.price} S2S</Typography>
+            </Grid>
           </Grid>
           <Grid container item>
             <Typography variant="caption">Rating</Typography>
@@ -211,7 +208,11 @@ export default function ItemPage() {
             <CardMedia
               component="img"
               height="600"
-              image={getItemDesc.image}
+              image={
+                getItemDesc.image.startsWith("http")
+                  ? getItemDesc.image
+                  : `${process.env.NEXT_PUBLIC_MARKETPLACE_API}/${getItemDesc.image}`
+              }
               alt={getItemDesc.title}
             />
           </Card>

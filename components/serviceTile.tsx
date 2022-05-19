@@ -32,7 +32,16 @@ export default function ServiceTile({
   return (
     <Link href={`/service/${id}`} key={id}>
       <Card>
-        <CardMedia component="img" height="140" image={image} alt={title} />
+        <CardMedia
+          component="img"
+          height="140"
+          image={
+            image.startsWith("http")
+              ? image
+              : `${process.env.NEXT_PUBLIC_MARKETPLACE_API}/${image}`
+          }
+          alt={title}
+        />
         <CardContent>
           <Typography gutterBottom variant="h5" component="div">
             {title}
