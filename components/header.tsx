@@ -23,7 +23,6 @@ import { keyBy } from "lodash";
 import { injected } from "../wallet/connector";
 import { useWeb3React } from "@web3-react/core";
 
-
 const Div = styled("div")(({ theme }) => ({
   ...theme.typography.button,
   backgroundColor: theme.palette.background.paper,
@@ -37,17 +36,11 @@ const DecoratedLink = styled(Link)(({ theme }) => ({
 // component that works on pages which support both client and server side
 // rendering, and avoids any flash incorrect content on initial page load.
 
-
-
-
 export default function Header() {
   const [session, loading] = useSession();
   const [rankedItems, setRankedItems] = useState<number>(0);
-  const {
-    account,
-    activate,
-    active,
-  } = useWeb3React();
+  const [walletAccount, setWalletAccount] = useState<string>("");
+  const { account, activate, active } = useWeb3React();
 
   useEffect(() => {
     async function getUserBuyHistory() {
@@ -69,14 +62,11 @@ export default function Header() {
 
   async function connect() {
     try {
-      await activate(injected)
+      await activate(injected);
       const accountAddress = await (window as any).ethereum.enable();
-      const btn = document.getElementById("connectBTN");
-      if (btn) {
-        btn.innerText = accountAddress;
-      }
+      setWalletAccount(accountAddress);
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
   }
 
@@ -102,8 +92,11 @@ export default function Header() {
           >
             Student social marketplace
           </Typography>
-          <Button color="secondary" id="connectBTN" onClick={() => connect()}>Connect to wallet</Button>
-
+          {session && (
+            <Button color="secondary" id="connectBTN" onClick={connect}>
+              {walletAccount || "Connect to wallet"}
+            </Button>
+          )}
           <Box sx={{ display: { xs: "flex", md: "flex", flexGrow: 1 } }}>
             {session && (
               <IconButton size="large" color="inherit" edge="end">
@@ -122,7 +115,7 @@ export default function Header() {
           </Box>
         </Toolbar>
       </Container>
-    </AppBar >
+    </AppBar>
     // <Box
     //   sx={{ color: "primary.main", backgroundColor: "primary.main" }}
     //   marginBottom="10px"
