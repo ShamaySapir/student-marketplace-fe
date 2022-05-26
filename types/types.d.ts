@@ -33,6 +33,7 @@ export interface Service extends DescriptionItem {
   description: string;
   sellerDesc: string;
   sellerPhone: string;
+  sellerName: string;
 }
 
 export interface GroupedItems {

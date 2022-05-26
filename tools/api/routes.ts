@@ -148,18 +148,20 @@ export const getService = async ({
     res.data;
   const sellerDesc = seller.description;
   const sellerPhone = seller.phoneNumber;
+  const sellerName = seller.displayName;
   const walletNumber = seller.walletNumber;
   const serviceItem = {
     id,
     image,
     price: +price,
-    rating: +rating,
+    rating,
     serviceGroup,
     title,
     description,
     sellerDesc,
     sellerPhone,
     walletNumber,
+    sellerName,
   };
   return serviceItem;
 };

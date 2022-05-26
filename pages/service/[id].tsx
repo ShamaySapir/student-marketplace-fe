@@ -5,6 +5,9 @@ import LocalPhoneIcon from "@mui/icons-material/LocalPhone";
 import AttachMoneyIcon from "@mui/icons-material/AttachMoney";
 import InfoIcon from "@mui/icons-material/Info";
 import { Add as AddIcon, Remove as RemoveIcon } from "@mui/icons-material";
+import CircularProgress from '@mui/material/CircularProgress';
+import Box from '@mui/material/Box';
+
 // web3
 import Web3 from "web3";
 import MyContract from "../../contracts/S2SABI.json";
@@ -24,7 +27,7 @@ import {
   Dialog,
   DialogContent,
   DialogActions,
-  Divider,
+  Divider
 } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import * as routes from "../../tools/api/routes";
@@ -52,10 +55,12 @@ export default function ItemPage() {
     title: "",
     description: "",
     sellerDesc: "",
+    sellerName: "",
     sellerPhone: "",
     walletNumber: "",
   });
   const [purchaseStatus, setPurchaseStatus] = useState<Boolean>(false);
+  const [transferStatus, setTransferStatus] = useState<Boolean>(false);
   const [open, setOpen] = useState<boolean>(false);
   const [quantity, setQuantity] = useState<number>(1);
   const [transactionId, setTransactionId] = useState<string>("");
@@ -102,13 +107,16 @@ export default function ItemPage() {
       setTransactionId(transactionHash);
       return result;
     } catch (error) {
+      console.log("Error", error);
       return false;
     }
   }
   // web3 - end
 
   const purchase = async () => {
+    setTransferStatus(true);
     const blockchainTransferResult = await transferMoney();
+    setTransferStatus(false);
     if (blockchainTransferResult !== false) {
       const purchaseResult = await routes.postPurchase({
         buyerId: session?.user.googleId as string,
@@ -149,13 +157,13 @@ export default function ItemPage() {
           <Grid container item>
             <Typography variant="caption">Rating</Typography>
             <Grid container item>
-              <Rating defaultValue={getItemDesc.rating} disabled />
+              <Rating value={getItemDesc.rating} precision={0.5} readOnly />
             </Grid>
           </Grid>
           <Divider />
           <Grid container direction={"column"}>
             <Grid item>
-              <Typography variant="h5">About the seller</Typography>
+              <Typography variant="h5">About {getItemDesc.sellerName}</Typography>
             </Grid>
             <Grid container item alignItems={"center"}>
               <IconButton aria-label="add to favorites">
@@ -197,8 +205,9 @@ export default function ItemPage() {
               </Grid>
             </Grid>
             <Grid item padding={2}>
-              <Button variant="contained" onClick={purchase}>
+              <Button variant="contained" onClick={purchase} >
                 Purchase ({quantity * getItemDesc.price} S2S)
+                <span hidden={!transferStatus}><CircularProgress color="inherit" size={20}></CircularProgress></span>
               </Button>
             </Grid>
           </Grid>
