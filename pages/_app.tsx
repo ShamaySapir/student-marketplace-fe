@@ -26,6 +26,8 @@ export default function App({ Component, pageProps }: IProps) {
 
   SwiperCore.use([Virtual]);
 
+  // When rendering client side don't display anything until loading is complete
+  if (typeof window !== "undefined" && loading) return null;
   const { renderLayout } = pageProps;
 
   return (
