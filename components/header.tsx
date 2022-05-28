@@ -58,11 +58,7 @@ export default function Header() {
   const [rankedItems, setRankedItems] = useState<number>(0);
   const [walletAccount, setWalletAccount] = useState<string>("");
   const { account, activate, active } = useWeb3React();
-  // useEffect(() => {
-  //   return () => {
-  //     console.log("unmounted");
-  //   };
-  // });
+
   useEffect(() => {
     async function getUserBuyHistory() {
       const userHistory = await routes.getPurchases({
@@ -94,75 +90,71 @@ export default function Header() {
   const getLibrary = (providerInstance: provider) => new Web3(providerInstance);
 
   return (
-    <Web3ReactProvider getLibrary={getLibrary}>
-      <AppBar sx={{ backgroundColor: "#224870" }} position="sticky">
-        <Container maxWidth="xl">
-          <StyledNavBar disableGutters>
-            <Avatar
-              alt="logo"
-              sx={{ width: 40, height: 40 }}
-              style={{ marginRight: 10 }}
-            >
-              <Image
-                src={"/images/ether.png"}
-                alt={"logo"}
-                width={40}
-                height={40}
-              />
-            </Avatar>
-            <Box
-              sx={{ display: { xs: "none", sm: "none", md: "flex" } }}
-              component={Link}
-              href="/"
-            >
-              <Typography
-                m={2}
-                color={"white"}
-                fontSize={"18px"}
-                sx={{ ":hover": { fontWeight: "bold" } }}
-              >
-                Student social marketplace{" "}
-              </Typography>
-            </Box>
+    <AppBar sx={{ backgroundColor: "#224870" }} position="sticky">
+      <Container maxWidth="xl">
+        <StyledNavBar disableGutters>
+          <Avatar
+            alt="logo"
+            sx={{ width: 40, height: 40 }}
+            style={{ marginRight: 10 }}
+          >
+            <Image
+              src={"/images/ether.png"}
+              alt={"logo"}
+              width={40}
+              height={40}
+            />
+          </Avatar>
+          <Box
+            sx={{ display: { xs: "none", sm: "none", md: "flex" } }}
+            component={() => (
+              <Link href="/" passHref>
+                <Typography
+                  m={2}
+                  color={"white"}
+                  fontSize={"18px"}
+                  sx={{ ":hover": { fontWeight: "bold" } }}
+                >
+                  Student social marketplace
+                </Typography>
+              </Link>
+            )}
+          ></Box>
 
-            <Box
-              sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}
-            ></Box>
-            <Box sx={{ display: { xs: "flex", md: "flex" }, gap: 2 }}>
-              {session && (
-                <>
-                  <IconButton
-                    size="small"
-                    color="inherit"
-                    edge="end"
-                    onClick={connect}
-                  >
-                    {walletAccount || (
-                      <>
-                        {" "}
-                        &nbsp;
-                        <WalletIcon />
-                      </>
-                    )}
-                  </IconButton>
-                  <IconButton size="large" color="inherit" edge="end">
-                    <Link href="/orderHistory">
-                      <Badge badgeContent={rankedItems} color="error">
-                        <NotificationsIcon />
-                      </Badge>
-                    </Link>
-                  </IconButton>
-                </>
+          <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}></Box>
+          <Box sx={{ display: { xs: "flex", md: "flex" }, gap: 2 }}>
+            {session && (
+              <Web3ReactProvider getLibrary={getLibrary}>
+                <IconButton
+                  size="small"
+                  color="inherit"
+                  edge="end"
+                  onClick={connect}
+                >
+                  {walletAccount || (
+                    <>
+                      &nbsp;
+                      <WalletIcon />
+                    </>
+                  )}
+                </IconButton>
+                <IconButton size="large" color="inherit" edge="end">
+                  <Link href="/orderHistory">
+                    <Badge badgeContent={rankedItems} color="error">
+                      <NotificationsIcon />
+                    </Badge>
+                  </Link>
+                </IconButton>
+              </Web3ReactProvider>
+            )}
+            <Tooltip title="Open settings">
+              {(session && <UserAvatar />) || (
+                <GoogleProviderSignin onClick={() => signIn("google")} />
               )}
-              <Tooltip title="Open settings">
-                {(session && <UserAvatar />) || (
-                  <GoogleProviderSignin onClick={() => signIn("google")} />
-                )}
-              </Tooltip>
-            </Box>
-          </StyledNavBar>
-        </Container>
-      </AppBar>
-    </Web3ReactProvider>
+            </Tooltip>
+          </Box>
+        </StyledNavBar>
+      </Container>
+    </AppBar>
   );
 }

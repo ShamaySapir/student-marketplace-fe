@@ -10,7 +10,7 @@ import {
   Rating,
   Stack,
 } from "@mui/material";
-import { Link } from "@mui/material";
+import Link from "next/link";
 import { DescriptionItem } from "../types/types";
 import { makeStyles } from "@mui/styles";
 
@@ -30,9 +30,20 @@ export default function ServiceTile({
   const classes = useStyles();
 
   return (
-    <Link href={`/service/${id}`} key={id}>
+    <Link href={`/service/${id}`} passHref key={id}>
       <Card>
-        <CardMedia p={3} component="img" width={"200px"} height={"200px"} image={image.startsWith("http")? image: `${process.env.NEXT_PUBLIC_MARKETPLACE_API}/${image}`}alt={title}/>
+        <CardMedia
+          p={3}
+          component="img"
+          width={"200px"}
+          height={"200px"}
+          image={
+            image.startsWith("http")
+              ? image
+              : `${process.env.NEXT_PUBLIC_MARKETPLACE_API}/${image}`
+          }
+          alt={title}
+        />
         <CardContent>
           <Typography gutterBottom variant="h5" component="div">
             {title}

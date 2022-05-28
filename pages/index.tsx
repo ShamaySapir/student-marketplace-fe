@@ -152,19 +152,36 @@ export default function Page() {
   });
 
   return (
-    <Grid container >
+    <Grid container>
       <Grid item xs={2}>
-        <Filters services={displayItems} dispatch={dispatch} onFilterServices={setDisplayTileItems} servicesState={servicesState}/>
+        <Filters
+          services={displayItems}
+          dispatch={dispatch}
+          onFilterServices={setDisplayTileItems}
+          servicesState={servicesState}
+        />
       </Grid>
       <Grid item xs={10}>
         <center>
-        <Typography variant="h3" color={"#224870"} justifyContent={"center"} m={5} ><strong>Marketplace </strong></Typography>
-        <Divider></Divider>
+          <Typography
+            variant="h3"
+            color={"#224870"}
+            justifyContent={"center"}
+            m={5}
+          >
+            <strong>Marketplace </strong>
+          </Typography>
+          <Divider></Divider>
         </center>
         <Grid container direction="column">
-          {map(groupBy(servicesState.currentServices, "serviceGroup"),(tileData, category) => (
+          {map(
+            groupBy(servicesState.currentServices, "serviceGroup"),
+            (tileData, category) => (
               <Grid container item key={category}>
-                <SwimLane serviceTiles={prepareSlides(tileData)} name={category}/>
+                <SwimLane
+                  serviceTiles={prepareSlides(tileData)}
+                  name={category}
+                />
               </Grid>
             )
           )}
