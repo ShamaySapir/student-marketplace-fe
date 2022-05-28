@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import {
-  Paper,
   Grid,
   Typography,
   Box,
@@ -15,7 +14,7 @@ import { UserPurchases, HeadCell } from "../types/types";
 import { UserType } from "../constants";
 import { keyBy } from "lodash";
 import { Home, Person } from "@mui/icons-material";
-import ReorderIcon from '@mui/icons-material/Reorder';
+import ReorderIcon from "@mui/icons-material/Reorder";
 
 type Order = "asc" | "desc";
 
@@ -96,7 +95,7 @@ export default function EnhancedTable() {
   }, []);
 
   return (
-    <Box sx={{ml:20,mr:20,mt:5,mb:10}}>
+    <Box sx={{ ml: 20, mr: 20, mt: 5, mb: 10 }}>
       <Grid
         className="breadCrumbs"
         mt={2}
@@ -163,7 +162,7 @@ export default function EnhancedTable() {
             sx={{ mt: 4, color: "#224870" }}
           >
             <strong>Sells History</strong>
-          </Typography>{" "}
+          </Typography>
           <Grid mt={5}>
             <Table data={sellsData} title={"Sells"} headCells={headCells} />
           </Grid>

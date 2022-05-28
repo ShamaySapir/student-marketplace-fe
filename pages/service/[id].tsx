@@ -47,7 +47,6 @@ import BootstrapDialogTitle from "../../components/dialogTitle";
 import { setCookie, getCookie } from "../../tools/cookieUtil";
 import SellIcon from "@mui/icons-material/Sell";
 import type { ButtonProps } from "@mui/material";
-import { boolean } from "yup";
 
 const Item = styled(Paper)(({ theme }) => ({
   ...theme.typography.body2,
