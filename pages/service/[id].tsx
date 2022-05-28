@@ -4,7 +4,15 @@ import { useSession } from "next-auth/client";
 import LocalPhoneIcon from "@mui/icons-material/LocalPhone";
 import AttachMoneyIcon from "@mui/icons-material/AttachMoney";
 import InfoIcon from "@mui/icons-material/Info";
-import { Add as AddIcon, Remove as RemoveIcon } from "@mui/icons-material";
+import Input from "@mui/material/Input";
+import InputLabel from "@mui/material/InputLabel";
+import InputAdornment from "@mui/material/InputAdornment";
+import AccountCircle from "@mui/icons-material/AccountCircle";
+import PhoneIcon from "@mui/icons-material/Phone";
+import DescriptionIcon from "@mui/icons-material/Description";
+import AccessibilityIcon from "@mui/icons-material/Accessibility";
+
+import { Add as AddIcon, Home, Remove as RemoveIcon } from "@mui/icons-material";
 // web3
 import Web3 from "web3";
 import MyContract from "../../contracts/S2SABI.json";
@@ -14,7 +22,6 @@ const tokenAddress = "0x28eAc900e08E7473c922Dc925e56330CB11692D2"; // might need
 
 import {
   Grid,
-  Button,
   Paper,
   Card,
   CardMedia,
@@ -25,13 +32,20 @@ import {
   DialogContent,
   DialogActions,
   Divider,
+  TextField,
+  Stack,
+  Box,
+  Breadcrumbs,
+  Link
 } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import * as routes from "../../tools/api/routes";
 import { Service } from "../../types/types";
 import BootstrapDialogTitle from "../../components/dialogTitle";
-import Link from "next/link";
 import { setCookie, getCookie } from "../../tools/cookieUtil";
+import SellIcon from "@mui/icons-material/Sell";
+import Button, { ButtonProps } from "@mui/material/Button";
+import ShoppingBagIcon from '@mui/icons-material/ShoppingBag';
 
 const Item = styled(Paper)(({ theme }) => ({
   ...theme.typography.body2,
@@ -131,49 +145,155 @@ export default function ItemPage() {
     setOpen(false);
   };
 
+  const ColorButton = styled(Button)<ButtonProps>(({ theme }) => ({
+    color: "white",
+    backgroundColor: "#224870",
+    borderRadius: "4",
+    "&:hover": {
+      backgroundColor: "#224870",
+      color: "#44CFCB",
+      border: "2px solid",
+      borderColor: "white",
+    },
+  }));
+
   return (
     <>
-      <Grid container>
-        <Grid container item direction={"column"} xs padding={4}>
+    <Box sx={{ml:10,mr:10,mt:5,mb:10}}>
+      <Grid
+        className="breadCrumbs"
+        mt={2}
+        mb={2}
+        container
+        spacing={0}
+        direction="column"
+        alignItems="center"
+        justifyContent="center"
+      >
+        <Breadcrumbs aria-label="breadcrumb">
+          <Link
+            underline="hover"
+            sx={{
+              display: "flex",
+              alignItems: "center",
+              ":hover": { color: "#205375" },
+            }}
+            color="inherit"
+            href="/"
+            fontSize={"20px"}
+          >
+            <Home sx={{ mr: 0.5 }} fontSize="inherit" />
+            Home
+          </Link>
+          <Link
+            underline="hover"
+            sx={{
+              display: "flex",
+              alignItems: "center",
+              ":hover": { color: "#205375" },
+            }}
+            color="inherit"
+            href="/" //change here
+            fontSize={"20px"}
+          >
+            <ShoppingBagIcon sx={{ mr: 0.5 }} fontSize="inherit" />
+            Item page
+          </Link>
+        </Breadcrumbs>
+      </Grid>
+
+      <Divider />
+      <Typography
+        variant="h3"
+        textAlign={"center"}
+        sx={{ mt: 4, color: "#224870" }}
+      >
+        <strong>Item page</strong>
+      </Typography>
+
+      <Grid  container>
+        <Grid lg={7} container item direction={"column"} xs padding={5}>
           <Grid item>
-            <Typography variant="h2">{getItemDesc.title}</Typography>
+            <Typography textAlign={"center"} color={"#224870"} variant="h5">
+              <strong>Item</strong>
+            </Typography>
           </Grid>
-          <Grid item>
-            <Typography variant="h4">{getItemDesc.description}</Typography>
+          <Stack ml={3} mt={2} direction={"row"} spacing={3}>
+            <TextField
+              InputProps={{
+                startAdornment: (
+                  <InputAdornment position="start">
+                    <InfoIcon />
+                  </InputAdornment>
+                ),
+              }}
+              // variant="filled"
+              disabled
+              label="Item type"
+              value={getItemDesc.serviceGroup}
+            />
+
+            <TextField
+              InputProps={{
+                startAdornment: (
+                  <InputAdornment position="start">
+                    <DescriptionIcon />
+                  </InputAdornment>
+                ),
+              }}
+              // variant="filled"
+              disabled
+              multiline
+              label="Item description"
+              value={getItemDesc.description}
+            />
+          </Stack>
+
+          <Grid item mt={2}>
+            <Typography textAlign={"center"} color={"#224870"} variant="h5">
+              <strong>Seller</strong>
+            </Typography>
           </Grid>
-          <Grid container item justifyContent="flex-end" alignItems="center">
+
+          <Stack ml={3} mt={2} direction={"row"} spacing={3}>
+            <TextField
+              InputProps={{
+                startAdornment: (
+                  <InputAdornment position="start">
+                    <PhoneIcon />
+                  </InputAdornment>
+                ),
+              }}
+              // variant="filled"
+              disabled
+              label="Seller phone"
+              value={getItemDesc.sellerPhone}
+            />
+            <TextField
+              InputProps={{
+                startAdornment: (
+                  <InputAdornment position="start">
+                    <AccessibilityIcon />
+                  </InputAdornment>
+                ),
+              }}
+              // variant="filled"
+              disabled
+              multiline
+              label="Seller description"
+              value={getItemDesc.sellerDesc}
+            />
+          </Stack>
+
+          <Grid container item mt={4} justifyContent={"center"}>
+            <Rating defaultValue={getItemDesc.rating} disabled />
+          </Grid>
+
+          <Grid ml={4} mt={7} container item justifyContent={"space-between"}>
             <Grid item>
-              <Typography variant="h5">{getItemDesc.price} S2S</Typography>
-            </Grid>
-          </Grid>
-          <Grid container item>
-            <Typography variant="caption">Rating</Typography>
-            <Grid container item>
-              <Rating defaultValue={getItemDesc.rating} disabled />
-            </Grid>
-          </Grid>
-          <Divider />
-          <Grid container direction={"column"}>
-            <Grid item>
-              <Typography variant="h5">About the seller</Typography>
-            </Grid>
-            <Grid container item alignItems={"center"}>
-              <IconButton aria-label="add to favorites">
-                <InfoIcon />
-              </IconButton>
-              <Typography>{getItemDesc.sellerDesc}</Typography>
-            </Grid>
-            <Grid container>
-              <IconButton aria-label="add to favorites">
-                <LocalPhoneIcon />
-              </IconButton>
-              <Typography>{getItemDesc.sellerPhone}</Typography>
-            </Grid>
-          </Grid>
-          <Divider />
-          <Grid container item justifyContent={"space-around"}>
-            <Grid item>
-              <Typography variant="caption">Quantity</Typography>
+              <Typography variant="h6">
+                <strong>Quantity</strong>
+              </Typography>
               <Grid container item alignItems={"center"}>
                 <IconButton
                   color="primary"
@@ -196,18 +316,22 @@ export default function ItemPage() {
                 </IconButton>
               </Grid>
             </Grid>
-            <Grid item padding={2}>
-              <Button variant="contained" onClick={purchase}>
-                Purchase ({quantity * getItemDesc.price} S2S)
-              </Button>
+            <Grid mr={7} item padding={2}>
+              <ColorButton
+                endIcon={<SellIcon />}
+                variant="contained"
+                onClick={purchase}
+              >
+                <strong> Buy now </strong>({quantity * getItemDesc.price} S2S)
+              </ColorButton>
             </Grid>
           </Grid>
         </Grid>
-        <Grid item xs>
+        <Grid lg={5} item xs p={5}>
           <Card>
             <CardMedia
               component="img"
-              height="600"
+              height="400"
               image={
                 getItemDesc.image.startsWith("http")
                   ? getItemDesc.image
@@ -248,11 +372,12 @@ export default function ItemPage() {
           </Typography>
         </DialogContent>
         <DialogActions>
-          <Link href="/" passHref>
+          <Link href="/">
             <Button>Back to main page</Button>
           </Link>
         </DialogActions>
       </Dialog>
+      </Box>
     </>
   );
 }

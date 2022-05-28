@@ -2,15 +2,16 @@ body {
   font-family: -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans,
     sans-serif, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif,
     "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
-  margin: 0 auto;
+  margin: 0 auto; 
   height: 100vh;
 
-  background-color: #edeff5;
+  background-color: #eaebed;
 }
 a {
   text-decoration: none;
+  color: "white";
 }
-a:visited {
-  color: white;
+a:hover {
+  color: "#44CFCB";
   text-decoration: none;
 }
