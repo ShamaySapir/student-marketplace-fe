@@ -257,7 +257,7 @@ export default function ItemPage() {
 
             <Grid item mt={2}>
               <Typography textAlign={"center"} color={"#224870"} variant="h5">
-                <strong>Seller</strong>
+                <strong>About {getItemDesc.sellerName} </strong>
               </Typography>
             </Grid>
 
