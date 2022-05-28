@@ -1,25 +1,80 @@
 /* eslint-disable react/no-unescaped-entities */
-import { Typography, Grid, Card, CardContent, Avatar } from "@mui/material";
+import {
+  Typography,
+  Grid,
+  Card,
+  CardContent,
+  Avatar,
+  ButtonGroup,
+  Stack,
+} from "@mui/material";
 import CrewAvatar from "./crewAvatar";
+import Image from "next/image";
+import { styled } from "@mui/material/styles";
+import Button, { ButtonProps } from "@mui/material/Button";
+import Divider from "@mui/material/Divider";
+
+const ColorButton = styled(Button)<ButtonProps>(({ theme }) => ({
+  color: "#224870",
+  backgroundColor: "white",
+  borderRadius: "30px",
+  "&:hover": {
+    backgroundColor: "white",
+    color: "#44CFCB",
+    border: "2px solid",
+    borderColor: "white",
+  },
+}));
 
 export default function AccessDenied() {
   const AVATAR_SIZE = 180;
   return (
-    <Grid container direction="column">
-      <Grid
-        container
-        item
-        columns={{ xs: 4, sm: 8, md: 12 }}
-        style={{ marginTop: "10vh" }}
-      >
+    <Grid container direction="row">
+        {/* <Grid container direction="column">
+          <Grid item container justifyContent="center">
+          <Grid item lg={12}>
+              <Typography variant="h2" color={"#224870"}>
+                <strong> Student Social Marketplace </strong>
+              </Typography>
+            </Grid> 
+           <Grid lg={6}>
+              <ColorButton size="large">Join us</ColorButton>
+            </Grid>
+            <Grid lg={6}>
+              <ColorButton size="large" href="#CardInfo">
+                About us
+              </ColorButton>
+            </Grid>
+        </Grid>
+        {/* <Grid item>
+            <Image
+              src={"/images/ether.png"}
+              alt={"logo"}
+              width={"350px"}
+              height={"100px"}
+            ></Image>
+        </Grid> */}
+      {/* </Grid> */}
+
+
+      <Grid container item columns={{ xs: 4, sm: 8, md: 12 }}>
         <Grid item xs={3} style={{ flexBasis: "15%" }}></Grid>
-        <Grid container direction={"row"} item xs spacing={5}>
-          <Grid item>
-            <Card>
+        <Grid container direction={"row"} m={15} item xs spacing={5}>
+          <Grid item marginTop={"70px"}>
+            <Card
+              variant="outlined"
+              sx={{
+                transition: "0.3s",
+                boxShadow: "0 8px 40px -12px rgba(0,0,0,0.3)",
+                "&:hover": {
+                  boxShadow: "0 16px 70px -12.125px rgba(0,0,0,0.3)",
+                },
+              }}
+            >
               <CardContent>
                 <Typography gutterBottom variant="h5" component="div">
-                  The Student Social Marketplace is a social-economic
-                  enterprise.
+                  The <strong>Student Social Marketplace</strong> is a
+                  social-economic enterprise.
                 </Typography>
 
                 <Typography gutterBottom variant="h5" component="div">
@@ -48,6 +103,20 @@ export default function AccessDenied() {
                 </Typography>
               </CardContent>
             </Card>
+          </Grid>
+          <Grid
+            flex={"auto"}
+            paddingTop={10}
+            alignItems="center"
+            justifyContent="center"
+          >
+            <Divider variant="fullWidth" />
+            <br />
+            <Typography variant="h3" textAlign={"center"} color={"#224870"}>
+              <strong>Meet the team</strong>
+            </Typography>
+            <br />
+            <Divider variant="fullWidth" />
           </Grid>
           <Grid item container justifyContent="center" spacing={15}>
             {[

@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import {
   TextField,
-  Button,
   IconButton,
   Stack,
   CircularProgress,
@@ -10,16 +9,24 @@ import {
   DialogTitle,
   DialogContent,
   DialogActions,
+  Box,
+  Divider,
+  Grid,
+  Breadcrumbs,
+  Link
 } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import { useFormik } from "formik";
 import { useSession } from "next-auth/client";
 import { Session } from "next-auth";
 import * as yup from "yup";
-import { PhotoCamera } from "@mui/icons-material";
+import { Home, PhotoCamera } from "@mui/icons-material";
 import * as routes from "../tools/api/routes";
-import Link from "next/link";
 import { UserType } from "../constants";
+import SellIcon from '@mui/icons-material/Sell';
+import Button, { ButtonProps } from '@mui/material/Button';
+import StorefrontIcon from '@mui/icons-material/Storefront';
+
 
 const validationSchema = yup.object({
   displayName: yup
@@ -107,9 +114,73 @@ export default function BecomeASellerForm() {
     },
   });
 
+  const ColorButton = styled(Button)<ButtonProps>(({ theme }) => ({
+    color:"white",
+    backgroundColor: "#224870",
+    borderRadius:'4',
+    '&:hover': {
+      backgroundColor: "#224870",
+      color:"#44CFCB",
+      border: '2px solid',
+      borderColor:"white"
+    },
+  }));
+
   return (
     <>
+    <Box sx={{ml:20,mr:20,mt:5,mb:10}}>
+      <Grid
+        className="breadCrumbs"
+        mt={2}
+        mb={2}
+        container
+        spacing={0}
+        direction="column"
+        alignItems="center"
+        justifyContent="center"
+      >
+        <Breadcrumbs aria-label="breadcrumb">
+          <Link
+            underline="hover"
+            sx={{
+              display: "flex",
+              alignItems: "center",
+              ":hover": { color: "#205375" },
+            }}
+            color="inherit"
+            href="/"
+            fontSize={"20px"}
+          >
+            <Home sx={{ mr: 0.5 }} fontSize="inherit" />
+            Home
+          </Link>
+          <Link
+            underline="hover"
+            sx={{
+              display: "flex",
+              alignItems: "center",
+              ":hover": { color: "#205375" },
+            }}
+            color="inherit"
+            href="/orderHistory"
+            fontSize={"20px"}
+          >
+            <StorefrontIcon sx={{ mr: 0.5 }} fontSize="inherit" />
+            Become a seller
+          </Link>
+        </Breadcrumbs>
+      </Grid>
+
+      <Divider />
+      <Typography
+        variant="h4"
+        textAlign={"center"}
+        sx={{ mt: 4, color: "#224870" }}
+      >
+        <strong>Become a seller</strong>
+      </Typography>
       <form onSubmit={formik.handleSubmit}>
+      <Stack direction="column" spacing={2} >
         <TextField
           fullWidth
           id="displayName"
@@ -176,32 +247,37 @@ export default function BecomeASellerForm() {
           </label>
         </Stack>
 
-        <Button
+        <ColorButton
           disabled={getLoading}
           color="primary"
           variant="contained"
           fullWidth
           type="submit"
+          endIcon={<SellIcon/>}
         >
-          Become a seller
-        </Button>
+          <strong>Become a seller</strong>
+        </ColorButton>
+        </Stack>
       </form>
+      </Box>
+
       <Dialog
         open={getSuccessfulMessage}
         onClose={() => setSuccessfulMessage(false)}
         disableEscapeKeyDown={false}
       >
         <DialogTitle>
-          <Typography variant="h6" component="h2">
+          <Typography variant="h2" component="h2">
             Congratulations!
           </Typography>
+          <Divider></Divider>
         </DialogTitle>
         <DialogContent>
           <Typography sx={{ mt: 2 }}>You are now a seller</Typography>
         </DialogContent>
         <DialogActions>
-          <Link href="/service/new" passHref>
-            <Button>Add your first service/product </Button>
+          <Link href="/service/new">
+            <ColorButton>Add your first service/product </ColorButton>
           </Link>
         </DialogActions>
       </Dialog>

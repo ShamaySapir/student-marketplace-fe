@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { List, ListSubheader } from "@mui/material";
+import { Divider, List, ListSubheader,Typography } from "@mui/material";
 import { map, reduce, upperFirst, values, flatten } from "lodash";
 import FilterItem, { IFilterItemProps } from "./FilterItem";
 import { GroupedItems } from "../../types/types";
@@ -60,11 +60,9 @@ export default function FiltersList({
   }, [services]);
 
   return (
-    <List
-      sx={{ width: "100%", maxWidth: 360, bgcolor: "background.paper" }}
-      component="nav"
-      subheader={<ListSubheader component="div">Filters</ListSubheader>}
-    >
+    <List sx={{ margin:2, width: "100%", maxWidth: 360}} component="nav">
+      <Typography variant="h5" sx={{margin:2,color:"#224870"}} ><strong>Filters</strong></Typography>
+      <Divider></Divider>
       {map(servicesState.initState, (filterDetails, idx) => (
         <FilterItem
           key={idx}

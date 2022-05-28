@@ -1,11 +1,21 @@
 import React, { useEffect, useState } from "react";
-import { Paper, Grid } from "@mui/material";
+import {
+  Paper,
+  Grid,
+  Typography,
+  Box,
+  Divider,
+  Link,
+  Breadcrumbs,
+} from "@mui/material";
 import Table from "../components/table";
 import * as routes from "../tools/api/routes";
 import { useSession } from "next-auth/client";
 import { UserPurchases, HeadCell } from "../types/types";
 import { UserType } from "../constants";
 import { keyBy } from "lodash";
+import { Home, Person } from "@mui/icons-material";
+import ReorderIcon from '@mui/icons-material/Reorder';
 
 type Order = "asc" | "desc";
 
@@ -86,23 +96,79 @@ export default function EnhancedTable() {
   }, []);
 
   return (
-    <Grid container>
-      <Grid item>
-        <Paper sx={{ width: "100%", mb: 2 }}>
-          <Table
-            data={purchasesData}
-            title={"Orders History"}
-            headCells={buyerHeadCells}
-          />
-        </Paper>
+    <Box sx={{ml:20,mr:20,mt:5,mb:10}}>
+      <Grid
+        className="breadCrumbs"
+        mt={2}
+        mb={2}
+        container
+        spacing={0}
+        direction="column"
+        alignItems="center"
+        justifyContent="center"
+      >
+        <Breadcrumbs aria-label="breadcrumb">
+          <Link
+            underline="hover"
+            sx={{
+              display: "flex",
+              alignItems: "center",
+              ":hover": { color: "#205375" },
+            }}
+            color="inherit"
+            href="/"
+            fontSize={"20px"}
+          >
+            <Home sx={{ mr: 0.5 }} fontSize="inherit" />
+            Home
+          </Link>
+          <Link
+            underline="hover"
+            sx={{
+              display: "flex",
+              alignItems: "center",
+              ":hover": { color: "#205375" },
+            }}
+            color="inherit"
+            href="/orderHistory"
+            fontSize={"20px"}
+          >
+            <ReorderIcon sx={{ mr: 0.5 }} fontSize="inherit" />
+            Order history
+          </Link>
+        </Breadcrumbs>
       </Grid>
+
+      <Divider />
+      <Typography
+        variant="h4"
+        textAlign={"center"}
+        sx={{ mt: 4, color: "#224870" }}
+      >
+        <strong>Orders History</strong>
+      </Typography>
+      <Grid mt={5} item>
+        <Table
+          data={purchasesData}
+          title={"Orders"}
+          headCells={buyerHeadCells}
+        />
+      </Grid>
+
       {session?.user.type === UserType.seller && (
-        <Grid item>
-          <Paper sx={{ width: "100%", mb: 2 }}>
+        <Grid mt={5}>
+          <Typography
+            variant="h4"
+            textAlign={"center"}
+            sx={{ mt: 4, color: "#224870" }}
+          >
+            <strong>Sells History</strong>
+          </Typography>{" "}
+          <Grid mt={5}>
             <Table data={sellsData} title={"Sells"} headCells={headCells} />
-          </Paper>
+          </Grid>
         </Grid>
       )}
-    </Grid>
+    </Box>
   );
 }

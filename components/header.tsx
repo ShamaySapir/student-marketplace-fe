@@ -21,6 +21,7 @@ import {
   Tooltip,
   Button,
   Badge,
+  Divider
 } from "@mui/material";
 import * as routes from "../tools/api/routes";
 import { keyBy } from "lodash";
@@ -34,9 +35,16 @@ const Div = styled("div")(({ theme }) => ({
   padding: theme.spacing(1),
 }));
 
+const StyledNavBar = styled(Toolbar)({
+  display: "flex",
+  justifyContent: "space-between",
+  backgroundColor: "#224870"
+});
+
 const DecoratedLink = styled(Link)(({ theme }) => ({
   "text-transform": "none",
 }));
+
 // The approach used in this component shows how to build a sign in and sign out
 // component that works on pages which support both client and server side
 // rendering, and avoids any flash incorrect content on initial page load.
@@ -76,38 +84,24 @@ export default function Header() {
   }
 
   return (
-    <AppBar position="static">
+    <AppBar sx={{backgroundColor:"#224870"}} position="sticky">
       <Container maxWidth="xl">
-        <Toolbar disableGutters>
-          <Avatar
-            alt="logo"
-            sx={{ width: 40, height: 40 }}
-            style={{ marginRight: 10 }}
-          >
-            <Image
-              src={"/images/coin.png"}
-              alt={"logo"}
-              width={40}
-              height={40}
-            />
+        <StyledNavBar disableGutters>
+          <Avatar alt="logo" sx={{ width: 40, height: 40 }} style={{ marginRight: 10 }}>
+            <Image src={"/images/ether.png"} alt={"logo"} width={40} height={40}/>
           </Avatar>
-          <Typography variant="h2" noWrap component={Link} href="/">
-            Student social marketplace
-          </Typography>
+          <Box sx={{ display: {xs: "none", sm: "none",md:"flex" }}}  component={Link} href="/">
+            <Typography m={2} color={"white"} fontSize={"18px"} sx={{":hover":{fontWeight: 'bold'}}} >Student social marketplace </Typography>
+          </Box>
+
 
           <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}></Box>
-          <Box sx={{ display: { xs: "flex", md: "flex" } }}>
+          <Box sx={{ display: { xs: "flex", md: "flex" },gap: 2  }}>
             {session && (
               <>
-                <IconButton
-                  size="small"
-                  color="inherit"
-                  edge="end"
-                  onClick={connect}
-                >
-                  {walletAccount || (
-                    <>
-                      Connect To &nbsp;
+              
+                <IconButton size="small" color="inherit" edge="end"onClick={connect}>
+                  {walletAccount || (<> &nbsp;
                       <WalletIcon />
                     </>
                   )}
@@ -127,7 +121,7 @@ export default function Header() {
               )}
             </Tooltip>
           </Box>
-        </Toolbar>
+        </StyledNavBar>
       </Container>
     </AppBar>
   );

@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { useRouter } from "next/router";
-
+import Button, { ButtonProps } from '@mui/material/Button';
+import AddIcon from '@mui/icons-material/Add';
 import {
   TextField,
   MenuItem,
-  Button,
   CircularProgress,
   IconButton,
   Stack,
@@ -12,6 +12,11 @@ import {
   DialogTitle,
   Typography,
   DialogContent,
+  Box,
+  Grid,
+  Breadcrumbs,
+  Link,
+  Divider,
 } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import { useFormik } from "formik";
@@ -19,7 +24,7 @@ import * as routes from "../../tools/api/routes";
 import * as yup from "yup";
 import { map } from "lodash";
 import { ItemType } from "../../types/types";
-import { PhotoCamera } from "@mui/icons-material";
+import { Home, PhotoCamera } from "@mui/icons-material";
 import { useSession } from "next-auth/client";
 
 // Dor
@@ -98,7 +103,7 @@ export default function AddServiceForm() {
       itemTypeId: itemTypes?.[0]?.id,
       itemName: "",
       itemDesc: "",
-      itemPrice: 0.0,
+      itemPrice: "",
       imageId: "",
     },
     enableReinitialize: true,
@@ -123,10 +128,73 @@ export default function AddServiceForm() {
       }
     },
   });
+  const ColorButton = styled(Button)<ButtonProps>(({ theme }) => ({
+    color:"white",
+    backgroundColor: "#224870",
+    borderRadius:'4',
+    '&:hover': {
+      backgroundColor: "#224870",
+      color:"#44CFCB",
+      border: '2px solid',
+      borderColor:"white"
+    },
+  }));
 
   return (
     <>
+    <Box sx={{ml:20,mr:20,mt:5,mb:10}}>
+      <Grid
+        className="breadCrumbs"
+        mt={2}
+        mb={2}
+        container
+        spacing={0}
+        direction="column"
+        alignItems="center"
+        justifyContent="center"
+      >
+        <Breadcrumbs aria-label="breadcrumb">
+          <Link
+            underline="hover"
+            sx={{
+              display: "flex",
+              alignItems: "center",
+              ":hover": { color: "#205375" },
+            }}
+            color="inherit"
+            href="/"
+            fontSize={"20px"}
+          >
+            <Home sx={{ mr: 0.5 }} fontSize="inherit" />
+            Home
+          </Link>
+          <Link
+            underline="hover"
+            sx={{
+              display: "flex",
+              alignItems: "center",
+              ":hover": { color: "#205375" },
+            }}
+            color="inherit"
+            href="/orderHistory"
+            fontSize={"20px"}
+          >
+            <AddIcon sx={{ mr: 0.5 }} fontSize="inherit" />
+            Add new item
+          </Link>
+        </Breadcrumbs>
+      </Grid>
+
+      <Divider />
+      <Typography
+        variant="h4"
+        textAlign={"center"}
+        sx={{ mt: 4, color: "#224870" }}
+      >
+        <strong>Add new item</strong>
+      </Typography>
       <form onSubmit={formik.handleSubmit}>
+      <Stack direction="column" spacing={2} >
         <TextField
           id="itemTypeId"
           select
@@ -172,11 +240,8 @@ export default function AddServiceForm() {
           helperText={formik.touched.itemPrice && formik.errors.itemPrice}
         />
         <Button
-          onClick={() => {
-            imageClient.picker(options).open()
-          }}
-        >
-          Add item image
+          onClick={() => {imageClient.picker(options).open()}}>
+          Add image
         </Button>
         {/* <Stack direction="row" alignItems="center" spacing={2}>
           <label htmlFor="icon-button-file">
@@ -198,9 +263,10 @@ export default function AddServiceForm() {
           </label>
         </Stack> */}
 
-        <Button color="primary" variant="contained" fullWidth type="submit">
-          Add new item
-        </Button>
+        <ColorButton color="primary" variant="contained" fullWidth type="submit" endIcon={<AddIcon/>}>
+          <strong>Add </strong>
+        </ColorButton>
+        </Stack>
       </form>
       <Dialog
         open={getSuccessfulMessage}
@@ -218,6 +284,7 @@ export default function AddServiceForm() {
           </Typography>
         </DialogContent>
       </Dialog>
+    </Box>
     </>
   );
 }

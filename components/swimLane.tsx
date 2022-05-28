@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Grid, Typography } from "@mui/material";
+import { Divider, Grid, Typography } from "@mui/material";
 import SwiperCore, { Navigation, Pagination, Scrollbar, A11y } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { isObject } from "lodash";
@@ -24,18 +24,19 @@ const SwimLane = ({
   // const NUMBER_OF_ LIZARDS = Math.min(serviceTiles.length, MIN_LIZARDS);
   return (
     <Grid item container>
-      <Grid item>
-        <Typography>{name}</Typography>
+      <Grid item alignItems={"center"} flex={"auto"}>
+      <Divider/>
+        <Typography textAlign={"center"} variant="h4" sx={{mt:7,mb:7,color:"#4E5166"}} ><strong>{name}</strong></Typography>
+        <Divider/>
       </Grid>
-      <Grid container item>
+      <Grid sx={{margin:2,justifyContent:"space-evenly"}} container item>
         <Swiper
           onSwiper={setSwiperRef as any}
-          spaceBetween={10}
+          spaceBetween={25}
           slidesPerView={MIN_LIZARDS}
           navigation
           virtual
           modules={[Pagination]}
-
           // pagination={{ clickable: true }}
         >
           {serviceTilesWithSpaces.map((slideContent: any, index: number) => (
@@ -43,6 +44,7 @@ const SwimLane = ({
               {isObject(slideContent) ? slideContent : null}
             </SwiperSlide>
           ))}
+          
         </Swiper>
       </Grid>
     </Grid>
