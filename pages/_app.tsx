@@ -53,9 +53,7 @@ export default function App({ Component, pageProps }: IProps) {
         session={session}
       >
         <Layout renderOptions={renderLayout}>
-          {/* {(!session && <AccessDenied />) || */}
-          <Component {...pageProps} />
-          {/* } */}
+          {(!session && <AccessDenied />) || <Component {...pageProps} />}
         </Layout>
       </Provider>
     </ThemeProvider>
