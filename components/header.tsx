@@ -1,9 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { signIn, useSession } from "next-auth/client";
-import { Web3ReactProvider } from "@web3-react/core";
-import type { provider } from "web3-core";
-
-import Web3 from "web3";
 import GoogleProviderSignin from "./providers/google/GoogleProviderSignin";
 import UserAvatar from "./userAvatar";
 import Image from "next/image";
@@ -87,8 +83,6 @@ export default function Header() {
     }
   }
 
-  const getLibrary = (providerInstance: provider) => new Web3(providerInstance);
-
   return (
     <AppBar sx={{ backgroundColor: "#224870" }} position="sticky">
       <Container maxWidth="xl">
@@ -124,7 +118,7 @@ export default function Header() {
           <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}></Box>
           <Box sx={{ display: { xs: "flex", md: "flex" }, gap: 2 }}>
             {session && (
-              <Web3ReactProvider getLibrary={getLibrary}>
+              <>
                 <IconButton
                   size="small"
                   color="inherit"
@@ -145,7 +139,7 @@ export default function Header() {
                     </Badge>
                   </Link>
                 </IconButton>
-              </Web3ReactProvider>
+              </>
             )}
             <Tooltip title="Open settings">
               {(session && <UserAvatar />) || (

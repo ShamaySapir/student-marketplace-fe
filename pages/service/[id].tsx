@@ -292,7 +292,7 @@ export default function ItemPage() {
             </Stack>
 
             <Grid container item mt={4} justifyContent={"center"}>
-              <Rating defaultValue={getItemDesc.rating} disabled />
+              <Rating value={getItemDesc.rating} disabled />
             </Grid>
 
             <Grid ml={4} mt={7} container item justifyContent={"space-between"}>
