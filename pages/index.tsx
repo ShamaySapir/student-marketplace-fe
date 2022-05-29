@@ -158,7 +158,7 @@ export default function Page() {
       </Grid>
       <Grid item xs={10}>
         <center>
-        <Typography variant="h3" color={"#224870"} justifyContent={"center"} m={5} ><strong>Marketplace </strong></Typography>
+        <Typography variant="h4" color={"#224870"} justifyContent={"center"} m={5} ><strong>Marketplace </strong></Typography>
         <Divider></Divider>
         </center>
         <Grid container direction="column">

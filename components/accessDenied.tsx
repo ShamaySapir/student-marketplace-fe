@@ -30,6 +30,47 @@ export default function AccessDenied() {
   const AVATAR_SIZE = 180;
   return (
     <Grid container direction="row">
+
+  <Grid container spacing={2}>
+  <Grid item xs={6} mt={10} ml={20}>
+    <Typography variant="h2" color={"#224870"}>
+        <strong> Student Social </strong>  
+    </Typography>
+    <Typography variant="h2" color={"#224870"}>
+        <strong> Marketplace </strong> 
+    </Typography>
+  </Grid>
+  <Grid item xs={4} mt={15}>
+            <Image
+              src={"/images/ether.png"}
+              alt={"logo"}
+              width={"300px"}
+              height={"180px"}
+            ></Image>
+  </Grid>
+  <Grid item xs={3}>
+    <ColorButton size="large" sx={{ml: 25}}>Join us</ColorButton>
+  </Grid>
+  <Grid item xs={4}>
+    <ColorButton size="large" href="#CardInfo">About us</ColorButton>
+  </Grid>
+    </Grid>
+
+    <Grid
+          flex={"auto"}
+          paddingTop={10}
+          id="CardInfo"
+          // alignItems="center"
+          // justifyContent="center"
+      >
+          <Divider variant="middle"/>
+          <br />
+          <Typography variant="h3" textAlign={"center"} color={"#224870"}>
+            <strong>About Us</strong>
+          </Typography>
+          <br />
+          <Divider variant="middle"/>
+      </Grid>
         {/* <Grid container direction="column">
           <Grid item container justifyContent="center">
           <Grid item lg={12}>
@@ -57,11 +98,26 @@ export default function AccessDenied() {
       {/* </Grid> */}
 
 
+      {/* <Grid
+          flex={"auto"}
+          paddingTop={10}
+          // alignItems="center"
+          // justifyContent="center"
+      >
+          <Divider variant="fullWidth" />
+          <br />
+          <Typography variant="h3" textAlign={"center"} color={"#224870"}>
+            <strong>Student Social Marketplace</strong>
+          </Typography>
+          <br />
+          <Divider variant="fullWidth" />
+      </Grid> */}
+
       <Grid container item columns={{ xs: 4, sm: 8, md: 12 }}>
         <Grid item xs={3} style={{ flexBasis: "15%" }}></Grid>
-        <Grid container direction={"row"} m={15} item xs spacing={5}>
-          <Grid item marginTop={"70px"}>
-            <Card
+        <Grid container direction={"row"} m={5} item xs spacing={5}>
+          <Grid item marginTop={"1px"}>
+            <Card 
               variant="outlined"
               sx={{
                 transition: "0.3s",
