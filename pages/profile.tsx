@@ -11,9 +11,11 @@ import {
   Breadcrumbs,
   Link,
   Grid,
-  Avatar
+  Avatar,
 } from "@mui/material";
 import SendIcon from "@mui/icons-material/Send";
+import { useAppSelector } from "../redux/hooks";
+import { getWalletAddress } from "../redux/slices/crypto";
 
 import { useFormik } from "formik";
 import { useSession } from "next-auth/client";
@@ -21,10 +23,8 @@ import * as routes from "../tools/api/routes";
 import * as yup from "yup";
 import { styled } from "@mui/material/styles";
 import Button, { ButtonProps } from "@mui/material/Button";
-import { purple } from "@mui/material/colors";
 import HomeIcon from "@mui/icons-material/Home";
 import PersonIcon from "@mui/icons-material/Person";
-import { Image } from "@mui/icons-material";
 
 const validationSchema = yup.object({
   firstName: yup
@@ -71,6 +71,7 @@ const ColorButton = styled(Button)<ButtonProps>(({ theme }) => ({
 }));
 
 export default function RegistrationForm() {
+  const walletAccount = useAppSelector(getWalletAddress);
   const [session, loading] = useSession();
   const [getSuccessfulMessage, setSuccessfulMessage] = useState<boolean>(false);
   const [user, setUser] = useState<IUserDetails>({
@@ -89,10 +90,10 @@ export default function RegistrationForm() {
         firstName: session!.user.firstName as string,
         lastName: session!.user.lastName as string,
         displayName: session!.user.name as string,
-        walletNumber: session!.user.walletNumber as string,
+        walletNumber: (session!.user.walletNumber as string) || walletAccount,
       });
     }
-  }, [session, loading]);
+  }, [session, walletAccount, loading]);
   const formik = useFormik({
     initialValues: {
       email: user.email,
@@ -119,8 +120,9 @@ export default function RegistrationForm() {
 
   return (
     <>
-      <Box sx={{ ml:20 ,mr:20, mt:5,mb:10 }}>
-        <Grid className="breadCrumbs"
+      <Box sx={{ ml: 20, mr: 20, mt: 5, mb: 10 }}>
+        <Grid
+          className="breadCrumbs"
           mt={2}
           mb={2}
           container
@@ -130,20 +132,27 @@ export default function RegistrationForm() {
           justifyContent="center"
         >
           <Breadcrumbs aria-label="breadcrumb">
-            <Link 
+            <Link
               underline="hover"
-              sx={{ display: "flex", alignItems: "center",":hover":{color:"#205375"} }}
+              sx={{
+                display: "flex",
+                alignItems: "center",
+                ":hover": { color: "#205375" },
+              }}
               color="inherit"
               href="/"
               fontSize={"20px"}
-
             >
               <HomeIcon sx={{ mr: 0.5 }} fontSize="inherit" />
               Home
             </Link>
             <Link
               underline="hover"
-              sx={{ display: "flex", alignItems: "center",":hover":{color:"#205375"} }}
+              sx={{
+                display: "flex",
+                alignItems: "center",
+                ":hover": { color: "#205375" },
+              }}
               color="inherit"
               href="/profile"
               fontSize={"20px"}
@@ -156,16 +165,15 @@ export default function RegistrationForm() {
 
         <Divider />
         <Stack alignItems={"center"} spacing={1}>
-        <Typography
-          variant="h4"
-          textAlign={"center"}
-          sx={{ mt: 4, color: "#224870" }}
-        >
-          <strong>User profile</strong>
-        </Typography>
-
+          <Typography
+            variant="h4"
+            textAlign={"center"}
+            sx={{ mt: 4, color: "#224870" }}
+          >
+            <strong>User profile</strong>
+          </Typography>
         </Stack>
-        
+
         <form onSubmit={formik.handleSubmit}>
           <Stack direction="column" mt={4} spacing={2}>
             <TextField
