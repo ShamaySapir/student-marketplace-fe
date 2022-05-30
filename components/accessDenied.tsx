@@ -42,9 +42,9 @@ export default function AccessDenied() {
   </Grid>
   <Grid item xs={4} mt={15}>
             <Image
-              src={"/images/ether.png"}
+              src={"/images/coin.png"}
               alt={"logo"}
-              width={"300px"}
+              width={"200px"}
               height={"180px"}
             ></Image>
   </Grid>

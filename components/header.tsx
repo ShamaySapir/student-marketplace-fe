@@ -104,7 +104,7 @@ export default function Header() {
               style={{ marginRight: 10 }}
             >
               <Image
-                src={"/images/ether.png"}
+                src={"/images/coin.png"}
                 alt={"logo"}
                 width={40}
                 height={40}
