@@ -67,7 +67,6 @@ export default function Header() {
     try {
       await activate(injected);
       const accountAddress = await (window as any).ethereum.enable();
-      // setWalletAccount(accountAddress);
       dispatch(setWalletAddress(accountAddress));
     } catch (error) {
       console.log(error);
