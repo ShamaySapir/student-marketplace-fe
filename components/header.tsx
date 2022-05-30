@@ -19,9 +19,7 @@ import {
   Toolbar,
   Typography,
   Tooltip,
-  Button,
   Badge,
-  Divider,
 } from "@mui/material";
 import * as routes from "../tools/api/routes";
 import { keyBy } from "lodash";
@@ -29,31 +27,23 @@ import { keyBy } from "lodash";
 import { injected } from "../wallet/connector";
 import { useWeb3React } from "@web3-react/core";
 
-const Div = styled("div")(({ theme }) => ({
-  ...theme.typography.button,
-  backgroundColor: theme.palette.background.paper,
-  padding: theme.spacing(1),
-}));
-
 const StyledNavBar = styled(Toolbar)({
   display: "flex",
   justifyContent: "space-between",
   backgroundColor: "#224870",
 });
-
-const DecoratedLink = styled(Link)(({ theme }) => ({
-  "text-transform": "none",
-}));
-
+import { useAppDispatch, useAppSelector } from "../redux/hooks";
+import { setWalletAddress, getWalletAddress } from "../redux/slices/crypto";
 // The approach used in this component shows how to build a sign in and sign out
 // component that works on pages which support both client and server side
 // rendering, and avoids any flash incorrect content on initial page load.
 
 export default function Header() {
+  const dispatch = useAppDispatch();
+  const walletAccount = useAppSelector(getWalletAddress);
   const [session, loading] = useSession();
   const [rankedItems, setRankedItems] = useState<number>(0);
-  const [walletAccount, setWalletAccount] = useState<string>("");
-  const { account, activate, active } = useWeb3React();
+  const { activate } = useWeb3React();
 
   useEffect(() => {
     async function getUserBuyHistory() {
@@ -77,7 +67,8 @@ export default function Header() {
     try {
       await activate(injected);
       const accountAddress = await (window as any).ethereum.enable();
-      setWalletAccount(accountAddress);
+      // setWalletAccount(accountAddress);
+      dispatch(setWalletAddress(accountAddress));
     } catch (error) {
       console.log(error);
     }
@@ -133,7 +124,7 @@ export default function Header() {
                   )}
                 </IconButton>
                 <IconButton size="large" color="inherit" edge="end">
-                  <Link href="/orderHistory">
+                  <Link href="/orderHistory" passHref>
                     <Badge badgeContent={rankedItems} color="error">
                       <NotificationsIcon />
                     </Badge>
