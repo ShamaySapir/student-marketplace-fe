@@ -8,6 +8,7 @@ import {
   ButtonGroup,
   Stack,
 } from "@mui/material";
+import { signIn, useSession } from "next-auth/client";
 import CrewAvatar from "./crewAvatar";
 import Image from "next/image";
 import { styled } from "@mui/material/styles";
@@ -49,10 +50,12 @@ export default function AccessDenied() {
             ></Image>
   </Grid>
   <Grid item xs={3}>
-    <ColorButton size="large" sx={{ml: 25}}>Join us</ColorButton>
+    <ColorButton size="large" sx={{ml: 25}} style={{fontFamily:"Lato"}} 
+      onClick={() => signIn("google")}
+    >Join us</ColorButton>
   </Grid>
   <Grid item xs={4}>
-    <ColorButton size="large" href="#CardInfo">About us</ColorButton>
+    <ColorButton size="large" href="#CardInfo" style={{fontFamily:"Lato"}}>About us</ColorButton>
   </Grid>
     </Grid>
 
