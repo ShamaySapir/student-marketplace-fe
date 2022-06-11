@@ -12,8 +12,11 @@ import Menu from "./Menu";
 import Link from "next/link";
 import ExitToAppIcon from "@mui/icons-material/ExitToApp";
 import PersonIcon from "@mui/icons-material/Person";
-import StorefrontIcon from "@mui/icons-material/Storefront";
-import ShopTwoIcon from "@mui/icons-material/ShopTwo";
+import {
+  Storefront as StorefrontIcon,
+  ShopTwo as ShopTwoIcon,
+  Add as AddIcon,
+} from "@mui/icons-material";
 import { styled } from "@mui/material/styles";
 import { UserType } from "../../constants";
 
@@ -26,9 +29,12 @@ const SignOutComponent = () => (
         </ListItemIcon>
       </Grid>
       <Grid item>
-      <ListItemText
+        <ListItemText
           disableTypography
-          primary={<Typography style={{fontFamily: 'Lato'}}>Logout</Typography>}/>
+          primary={
+            <Typography style={{ fontFamily: "Lato" }}>Logout</Typography>
+          }
+        />
       </Grid>
     </Grid>
   </div>
@@ -43,9 +49,12 @@ const MyProfileComponent = () => (
         </ListItemIcon>
       </Grid>
       <Grid item>
-      <ListItemText
+        <ListItemText
           disableTypography
-          primary={<Typography style={{fontFamily: 'Lato'}}>My Profile</Typography>}/>
+          primary={
+            <Typography style={{ fontFamily: "Lato" }}>My Profile</Typography>
+          }
+        />
       </Grid>
     </Grid>
   </Link>
@@ -62,7 +71,12 @@ const BecomeASellerComponent = () => (
       <Grid item>
         <ListItemText
           disableTypography
-          primary={<Typography style={{fontFamily: 'Lato'}}>Become A Seller</Typography>}/>
+          primary={
+            <Typography style={{ fontFamily: "Lato" }}>
+              Become A Seller
+            </Typography>
+          }
+        />
       </Grid>
     </Grid>
   </Link>
@@ -79,7 +93,12 @@ const OrderHistoryComponent = () => (
       <Grid item>
         <ListItemText
           disableTypography
-          primary={<Typography style={{fontFamily: 'Lato'}}>Orders History</Typography>}/>
+          primary={
+            <Typography style={{ fontFamily: "Lato" }}>
+              Orders History
+            </Typography>
+          }
+        />
       </Grid>
     </Grid>
   </Link>
@@ -90,13 +109,16 @@ const AddServiceComponent = () => (
     <Grid container>
       <Grid item>
         <ListItemIcon>
-          <ShopTwoIcon fontSize="small" />
+          <AddIcon fontSize="small" />
         </ListItemIcon>
       </Grid>
       <Grid item>
         <ListItemText
           disableTypography
-          primary={<Typography style={{fontFamily: 'Lato'}}>Add Service</Typography>}/>
+          primary={
+            <Typography style={{ fontFamily: "Lato" }}>Add Service</Typography>
+          }
+        />
       </Grid>
     </Grid>
   </Link>
