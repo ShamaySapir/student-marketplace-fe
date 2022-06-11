@@ -17,8 +17,8 @@ export default function Page() {
   // If session exists, display content
   return (
     <div>
-      <h1>Home</h1>
-      <p>
+      <h1 style={{fontFamily:"Lato"}}>Home</h1>
+      <p style={{fontFamily:"Lato"}}>
         <strong>{content || "\u00a0"}</strong>
       </p>
     </div>

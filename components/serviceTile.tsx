@@ -46,7 +46,8 @@ export default function ServiceTile({
             display="flex"
             justifyContent={"space-between"}
           >
-            <Grid item display="inline-block">Price: {price}</Grid>
+            <Grid><Rating defaultValue={rating} disabled /></Grid>
+            <Grid item display="inline-block">{price} S2S</Grid>
           </Grid>
         </CardActions>
       </Card>

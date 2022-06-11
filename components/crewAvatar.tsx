@@ -22,8 +22,8 @@ const CrewAvatar = ({
         </Avatar>
         {fullName && (
           <Grid item style={{ textAlign: "center" }}>
-            <Typography variant="h5">{fullName}</Typography>
-            <Typography variant="h6">{description}</Typography>
+            <Typography fontFamily="Lato" variant="h5">{fullName}</Typography>
+            <Typography fontFamily="Lato" variant="h6">{description}</Typography>
           </Grid>
         )}
       </Grid>

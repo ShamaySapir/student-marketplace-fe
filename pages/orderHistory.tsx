@@ -22,7 +22,7 @@ const headCells: readonly HeadCell[] = [
   {
     id: "date",
     numeric: false,
-    disablePadding: true,
+    disablePadding: false,
     label: "Date",
   },
   {
@@ -95,7 +95,7 @@ export default function EnhancedTable() {
   }, []);
 
   return (
-    <Box sx={{ ml: 20, mr: 20, mt: 5, mb: 10 }}>
+    <Box sx={{ ml: 10, mr: 10, mt: 3, mb: 7 }}>
       <Grid
         className="breadCrumbs"
         mt={2}

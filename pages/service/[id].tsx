@@ -155,6 +155,7 @@ export default function ItemPage() {
     color: "white",
     backgroundColor: "#224870",
     borderRadius: "4",
+    fontFamily: "Lato",
     "&:hover": {
       backgroundColor: "#224870",
       color: "#44CFCB",
@@ -187,8 +188,9 @@ export default function ItemPage() {
               color="inherit"
               href="/"
               fontSize={"20px"}
+              fontFamily="Lato"
             >
-              <Home sx={{ mr: 0.5 }} fontSize="inherit" />
+              <Home fontFamily="Lato" sx={{ mr: 0.5 }} fontSize="inherit" />
               Home
             </Link>
             <Link
@@ -201,9 +203,10 @@ export default function ItemPage() {
               color="inherit"
               href="/" //change here
               fontSize={"20px"}
+              fontFamily="Lato"
             >
               <ShoppingBagIcon sx={{ mr: 0.5 }} fontSize="inherit" />
-              Item page
+              {getItemDesc.title}
             </Link>
           </Breadcrumbs>
         </Grid>
@@ -213,14 +216,15 @@ export default function ItemPage() {
           variant="h3"
           textAlign={"center"}
           sx={{ mt: 4, color: "#224870" }}
+          fontFamily="Lato"
         >
-          <strong>Item page</strong>
+          <strong>{getItemDesc.title}</strong>
         </Typography>
 
         <Grid container>
           <Grid lg={7} container item direction={"column"} xs padding={5}>
             <Grid item>
-              <Typography textAlign={"center"} color={"#224870"} variant="h5">
+              <Typography fontFamily="Lato" textAlign={"center"} color={"#224870"} variant="h5">
                 <strong>Item</strong>
               </Typography>
             </Grid>
@@ -232,6 +236,14 @@ export default function ItemPage() {
                       <InfoIcon />
                     </InputAdornment>
                   ),
+                  style:{
+                    fontFamily:"Lato"
+                  }
+                }}
+                InputLabelProps={{
+                  style:{
+                    fontFamily:"Lato"
+                  }
                 }}
                 // variant="filled"
                 disabled
@@ -243,9 +255,17 @@ export default function ItemPage() {
                 InputProps={{
                   startAdornment: (
                     <InputAdornment position="start">
-                      <DescriptionIcon />
+                      <InfoIcon />
                     </InputAdornment>
                   ),
+                  style:{
+                    fontFamily:"Lato"
+                  }
+                }}
+                InputLabelProps={{
+                  style:{
+                    fontFamily:"Lato"
+                  }
                 }}
                 // variant="filled"
                 disabled
@@ -256,7 +276,7 @@ export default function ItemPage() {
             </Stack>
 
             <Grid item mt={2}>
-              <Typography textAlign={"center"} color={"#224870"} variant="h5">
+              <Typography fontFamily="Lato" textAlign={"center"} color={"#224870"} variant="h5">
                 <strong>Seller</strong>
               </Typography>
             </Grid>
@@ -266,9 +286,17 @@ export default function ItemPage() {
                 InputProps={{
                   startAdornment: (
                     <InputAdornment position="start">
-                      <PhoneIcon />
+                      <InfoIcon />
                     </InputAdornment>
                   ),
+                  style:{
+                    fontFamily:"Lato"
+                  }
+                }}
+                InputLabelProps={{
+                  style:{
+                    fontFamily:"Lato"
+                  }
                 }}
                 // variant="filled"
                 disabled
@@ -279,9 +307,17 @@ export default function ItemPage() {
                 InputProps={{
                   startAdornment: (
                     <InputAdornment position="start">
-                      <AccessibilityIcon />
+                      <InfoIcon />
                     </InputAdornment>
                   ),
+                  style:{
+                    fontFamily:"Lato"
+                  }
+                }}
+                InputLabelProps={{
+                  style:{
+                    fontFamily:"Lato"
+                  }
                 }}
                 // variant="filled"
                 disabled
@@ -297,7 +333,7 @@ export default function ItemPage() {
 
             <Grid ml={4} mt={7} container item justifyContent={"space-between"}>
               <Grid item>
-                <Typography variant="h6">
+                <Typography fontFamily="Lato" variant="h6">
                   <strong>Quantity</strong>
                 </Typography>
                 <Grid container item alignItems={"center"}>
@@ -310,7 +346,7 @@ export default function ItemPage() {
                   >
                     <RemoveIcon />
                   </IconButton>
-                  <Typography>{quantity}</Typography>
+                  <Typography fontFamily="Lato">{quantity}</Typography>
                   <IconButton
                     color="primary"
                     component="span"
@@ -361,30 +397,30 @@ export default function ItemPage() {
             Your purchase completed successfully
           </BootstrapDialogTitle>
           <DialogContent>
-            <Typography variant="h6" sx={{ mt: 2 }}>
+            <Typography fontFamily="Lato" variant="h6" sx={{ mt: 2 }}>
               Purchase Details:
             </Typography>
-            <Typography variant="h6" sx={{ mt: 2 }}>
+            <Typography fontFamily="Lato" variant="h6" sx={{ mt: 2 }}>
               Product/Service Name: {getItemDesc.title}
             </Typography>
             <Typography variant="h6">
               Seller Description: {getItemDesc.sellerDesc}
             </Typography>
-            <Typography variant="h6">
+            <Typography fontFamily="Lato" variant="h6">
               Item Price: {getItemDesc.price}
             </Typography>
-            <Typography variant="h6">Quantity: {quantity}</Typography>
+            <Typography fontFamily="Lato" variant="h6">Quantity: {quantity}</Typography>
 
-            <Typography variant="h6">
+            <Typography fontFamily="Lato" variant="h6">
               Total Price: {quantity * getItemDesc.price}
             </Typography>
-            <Typography variant="h6">
+            <Typography fontFamily="Lato" variant="h6">
               Transaction Hash: {transactionId}
             </Typography>
           </DialogContent>
           <DialogActions>
             <Link href="/">
-              <Button>Back to main page</Button>
+              <Button style={{fontFamily:"Lato"}}>Back to main page</Button>
             </Link>
           </DialogActions>
         </Dialog>

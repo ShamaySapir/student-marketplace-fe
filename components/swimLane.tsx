@@ -36,6 +36,10 @@ const SwimLane = ({
           slidesPerView={MIN_LIZARDS}
           navigation
           virtual
+          // grid={{
+          //   rows:3,
+          //   fill:"row"
+          // }}
           modules={[Pagination]}
           // pagination={{ clickable: true }}
         >
