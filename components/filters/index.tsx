@@ -61,7 +61,7 @@ export default function FiltersList({
 
   return (
     <List sx={{ margin:2, width: "100%", maxWidth: 360}} component="nav">
-      <Typography variant="h5" sx={{margin:2,color:"#224870"}} ><strong>Filters</strong></Typography>
+      <Typography fontFamily="Lato" variant="h5" sx={{margin:2,color:"#224870"}} ><strong>Filters</strong></Typography>
       <Divider></Divider>
       {map(servicesState.initState, (filterDetails, idx) => (
         <FilterItem

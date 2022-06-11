@@ -77,13 +77,15 @@ function EnhancedTableHead(props: EnhancedTableProps) {
 
   return (
     <TableHead>
-      <TableRow>
+      <TableRow
+        style={{fontFamily:"Lato"}}>
         {headCells.map((headCell) => (
           <TableCell
             key={headCell.id}
             align={headCell.numeric ? "right" : "left"}
             padding={headCell.disablePadding ? "none" : "normal"}
             sortDirection={orderBy === headCell.id ? order : false}
+            style={{fontFamily:"Lato"}}
           >
             <TableSortLabel
               active={orderBy === headCell.id}
@@ -132,6 +134,7 @@ const EnhancedTableToolbar = (props: EnhancedTableToolbarProps) => {
           color="inherit"
           variant="subtitle1"
           component="div"
+          fontFamily="Lato"
         >
           {numSelected} selected
         </Typography>
@@ -141,6 +144,7 @@ const EnhancedTableToolbar = (props: EnhancedTableToolbarProps) => {
           variant="h6"
           id="tableTitle"
           component="div"
+          fontFamily="Lato"
         >
           {title}
         </Typography>
@@ -194,9 +198,10 @@ export default function EnhancedTable({
         <EnhancedTableToolbar numSelected={selected.length} title={title} />
         <TableContainer>
           <Table
-            sx={{ minWidth: 650 }}
+            sx={{ minWidth: 800 }}
             aria-labelledby="tableTitle"
             size={dense ? "small" : "medium"}
+            
           >
             <EnhancedTableHead
               numSelected={selected.length}
@@ -220,6 +225,9 @@ export default function EnhancedTable({
                       hover
                       key={row.purchaseId}
                       selected={isItemSelected}
+                      style={{
+                        fontFamily:"Lato",
+                      }}
                     >
                       <TableCell
                         component="th"
@@ -245,6 +253,7 @@ export default function EnhancedTable({
               {emptyRows > 0 && (
                 <TableRow
                   style={{
+                    fontFamily:"Lato",
                     height: (dense ? 33 : 53) * emptyRows,
                   }}
                 >

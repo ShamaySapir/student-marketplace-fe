@@ -116,12 +116,13 @@ export default function Header() {
               href="/"
             >
               <Typography
+                fontFamily={'Lato'}
                 m={2}
                 color={"white"}
                 fontSize={"18px"}
                 sx={{ ":hover": { fontWeight: "bold" } }}
               >
-                Student social marketplace{" "}
+                Student Social Marketplace{" "}
               </Typography>
             </Box>
 

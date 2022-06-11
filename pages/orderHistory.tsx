@@ -105,6 +105,7 @@ export default function EnhancedTable() {
         direction="column"
         alignItems="center"
         justifyContent="center"
+        minWidth="800px"
       >
         <Breadcrumbs aria-label="breadcrumb">
           <Link
@@ -117,6 +118,7 @@ export default function EnhancedTable() {
             color="inherit"
             href="/"
             fontSize={"20px"}
+            fontFamily="Lato"
           >
             <Home sx={{ mr: 0.5 }} fontSize="inherit" />
             Home
@@ -131,6 +133,8 @@ export default function EnhancedTable() {
             color="inherit"
             href="/orderHistory"
             fontSize={"20px"}
+            fontFamily="Lato"
+
           >
             <ReorderIcon sx={{ mr: 0.5 }} fontSize="inherit" />
             Order history
@@ -140,6 +144,7 @@ export default function EnhancedTable() {
 
       <Divider />
       <Typography
+        fontFamily="Lato"
         variant="h4"
         textAlign={"center"}
         sx={{ mt: 4, color: "#224870" }}
@@ -157,6 +162,7 @@ export default function EnhancedTable() {
       {session?.user.type === UserType.seller && (
         <Grid mt={5}>
           <Typography
+            fontFamily="Lato"
             variant="h4"
             textAlign={"center"}
             sx={{ mt: 4, color: "#224870" }}

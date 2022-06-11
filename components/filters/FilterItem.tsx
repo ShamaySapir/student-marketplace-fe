@@ -6,6 +6,7 @@ import {
   ListItemButton,
   Collapse,
   Checkbox,
+  Typography,
 } from "@mui/material";
 import { ExpandLess, ExpandMore } from "@mui/icons-material";
 import { map, noop } from "lodash";
@@ -54,7 +55,9 @@ export default function FilterItem({
               }}
             />
           </ListItemIcon>
-          <ListItemText primary={title} />
+          <ListItemText
+          disableTypography
+          primary={<Typography style={{fontFamily: 'Lato'}}>{title}</Typography>}/>
           {subFilters && (open ? <ExpandLess /> : <ExpandMore />)}
         </ListItemButton>
         {subFilters && (

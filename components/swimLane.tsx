@@ -26,7 +26,7 @@ const SwimLane = ({
     <Grid item container>
       <Grid item alignItems={"center"} flex={"auto"}>
       <Divider/>
-        <Typography textAlign={"center"} variant="h4" sx={{mt:7,mb:7,color:"#4E5166"}} ><strong>{name}</strong></Typography>
+        <Typography fontFamily={'Lato'} textAlign={"center"} variant="h4" sx={{mt:7,mb:7,color:"#4E5166"}} ><strong>{name}</strong></Typography>
         <Divider/>
       </Grid>
       <Grid sx={{margin:2,justifyContent:"space-evenly"}} container item>

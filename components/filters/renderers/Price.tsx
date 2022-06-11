@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Grid, Typography, TextField } from "@mui/material";
 import { min, max, isNumber, toNumber, isNaN } from "lodash";
+import classes from "*.module.css";
 
 export default function RangeSlider({ subFilters, title, onFilter }: any) {
   const [ranges, setRanges] = useState([0, 0]);
@@ -39,7 +40,7 @@ export default function RangeSlider({ subFilters, title, onFilter }: any) {
   return (
     <Grid container>
       <Grid item>
-        <Typography>{title}</Typography>
+        <Typography fontFamily={'Lato'}>{title}</Typography>
       </Grid>
       <Grid container item justifyContent="center" alignItems="center">
         <Grid item>
@@ -51,14 +52,20 @@ export default function RangeSlider({ subFilters, title, onFilter }: any) {
             // defaultValue={ranges[0]}
             sx={{ m: 1, width: "5ch" }}
             variant="standard"
+            InputProps={{
+              style:{
+                fontFamily: 'Lato'
+              }
+          }}
             // fullWidth
           />
         </Grid>
         <Grid item>
-          <Typography>To:</Typography>
+          <Typography fontFamily={'Lato'}>To:</Typography>
         </Grid>
         <Grid item>
           <TextField
+            // style={{fontFamily:'Lato', justifyContent:'center'}}
             error={false}
             // label="Error"
             value={currentRanges[1]}
@@ -66,6 +73,11 @@ export default function RangeSlider({ subFilters, title, onFilter }: any) {
             onChange={(e) => handleChange(e, "max")}
             variant="standard"
             sx={{ m: 1, width: "5ch" }}
+            InputProps={{
+              style:{
+                fontFamily: 'Lato'
+              }
+          }}
             // fullWidth
           />
           {/* </div> */}

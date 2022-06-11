@@ -6,6 +6,7 @@ import {
   ListItemIcon,
   ListItemText,
   Grid,
+  Typography,
 } from "@mui/material";
 import Menu from "./Menu";
 import Link from "next/link";
@@ -25,7 +26,9 @@ const SignOutComponent = () => (
         </ListItemIcon>
       </Grid>
       <Grid item>
-        <ListItemText>Logout</ListItemText>
+      <ListItemText
+          disableTypography
+          primary={<Typography style={{fontFamily: 'Lato'}}>Logout</Typography>}/>
       </Grid>
     </Grid>
   </div>
@@ -40,7 +43,9 @@ const MyProfileComponent = () => (
         </ListItemIcon>
       </Grid>
       <Grid item>
-        <ListItemText>My Profile</ListItemText>
+      <ListItemText
+          disableTypography
+          primary={<Typography style={{fontFamily: 'Lato'}}>My Profile</Typography>}/>
       </Grid>
     </Grid>
   </Link>
@@ -55,7 +60,9 @@ const BecomeASellerComponent = () => (
         </ListItemIcon>
       </Grid>
       <Grid item>
-        <ListItemText>Become A Seller</ListItemText>
+        <ListItemText
+          disableTypography
+          primary={<Typography style={{fontFamily: 'Lato'}}>Become A Seller</Typography>}/>
       </Grid>
     </Grid>
   </Link>
@@ -70,7 +77,9 @@ const OrderHistoryComponent = () => (
         </ListItemIcon>
       </Grid>
       <Grid item>
-        <ListItemText>Orders History</ListItemText>
+        <ListItemText
+          disableTypography
+          primary={<Typography style={{fontFamily: 'Lato'}}>Orders History</Typography>}/>
       </Grid>
     </Grid>
   </Link>
@@ -85,7 +94,9 @@ const AddServiceComponent = () => (
         </ListItemIcon>
       </Grid>
       <Grid item>
-        <ListItemText>Add Service</ListItemText>
+        <ListItemText
+          disableTypography
+          primary={<Typography style={{fontFamily: 'Lato'}}>Add Service</Typography>}/>
       </Grid>
     </Grid>
   </Link>

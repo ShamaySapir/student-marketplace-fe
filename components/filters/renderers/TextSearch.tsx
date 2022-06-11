@@ -13,6 +13,11 @@ export default function TextSearch({ onFilter }: { onFilter: any }) {
         sx={{ ml: 1, flex: 1 }}
         placeholder="Search..."
         onChange={handleChange}
+        inputProps={{
+          style:{
+            fontFamily: 'Lato'
+          }
+      }}
       />
       <IconButton type="submit" sx={{ p: "10px" }} aria-label="search">
         <SearchIcon />

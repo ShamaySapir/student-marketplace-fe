@@ -33,10 +33,10 @@ export default function AccessDenied() {
 
   <Grid container spacing={2}>
   <Grid item xs={6} mt={10} ml={20}>
-    <Typography variant="h2" color={"#224870"}>
+    <Typography variant="h2" color={"#224870"} fontFamily="Lato">
         <strong> Student Social </strong>  
     </Typography>
-    <Typography variant="h2" color={"#224870"}>
+    <Typography variant="h2" color={"#224870"} fontFamily="Lato">
         <strong> Marketplace </strong> 
     </Typography>
   </Grid>
@@ -65,7 +65,7 @@ export default function AccessDenied() {
       >
           <Divider variant="middle"/>
           <br />
-          <Typography variant="h3" textAlign={"center"} color={"#224870"}>
+          <Typography variant="h3" textAlign={"center"} color={"#224870"} fontFamily="Lato">
             <strong>About Us</strong>
           </Typography>
           <br />
@@ -128,29 +128,29 @@ export default function AccessDenied() {
               }}
             >
               <CardContent>
-                <Typography gutterBottom variant="h5" component="div">
+                <Typography gutterBottom variant="h5" component="div" fontFamily="Lato">
                   The <strong>Student Social Marketplace</strong> is a
                   social-economic enterprise.
                 </Typography>
 
-                <Typography gutterBottom variant="h5" component="div">
+                <Typography gutterBottom variant="h5" component="div" fontFamily="Lato">
                   It is the first of its kind in the country that brings an
                   exclusive trading ground designed exclusively for students,
                   who share common interests.
                 </Typography>
 
-                <Typography gutterBottom variant="h5" component="div">
+                <Typography gutterBottom variant="h5" component="div" fontFamily="Lato">
                   This marketplace allows each user to advertise a wide range of
                   services that he is interested in offering at no cost to the
                   user.
                 </Typography>
 
-                <Typography gutterBottom variant="h5" component="div">
+                <Typography gutterBottom variant="h5" component="div" fontFamily="Lato">
                   The entire payment system will be based on a unique
                   cryptographic currency that was developed for this project.
                 </Typography>
 
-                <Typography gutterBottom variant="h5" component="div">
+                <Typography gutterBottom variant="h5" component="div" fontFamily="Lato">
                   This cryptocurrency includes a unique infrastructure that
                   allows the allocation of the profits from all the transactions
                   for the purpose of promoting and helping the project grow and
@@ -168,7 +168,7 @@ export default function AccessDenied() {
           >
             <Divider variant="fullWidth" />
             <br />
-            <Typography variant="h3" textAlign={"center"} color={"#224870"}>
+            <Typography variant="h3" textAlign={"center"} color={"#224870"} fontFamily="Lato">
               <strong>Meet the team</strong>
             </Typography>
             <br />

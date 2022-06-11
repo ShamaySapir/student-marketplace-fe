@@ -179,7 +179,7 @@ export default function AddServiceForm() {
             href="/orderHistory"
             fontSize={"20px"}
           >
-            <AddIcon sx={{ mr: 0.5 }} fontSize="inherit" />
+            <AddIcon sx={{ mr: 0.5 }} fontSize="inherit" fontFamily="Lato"/>
             Add new item
           </Link>
         </Breadcrumbs>
@@ -190,6 +190,7 @@ export default function AddServiceForm() {
         variant="h4"
         textAlign={"center"}
         sx={{ mt: 4, color: "#224870" }}
+        fontFamily="Lato"
       >
         <strong>Add new item</strong>
       </Typography>
@@ -204,9 +205,24 @@ export default function AddServiceForm() {
           error={formik.touched.itemTypeId && Boolean(formik.errors.itemTypeId)}
           margin="normal"
           fullWidth
+          InputLabelProps={{
+            style:{
+              fontFamily: 'Lato'
+            }
+          }}
+          inputProps={{
+            style:{
+              fontFamily:"Lato"
+            }
+          }}
+          SelectProps={{
+            style:{
+              fontFamily:"Lato"
+            }
+          }}
         >
           {map(itemTypes, ({ id, name }) => (
-            <MenuItem value={id} key={id}>
+            <MenuItem value={id} key={id} style={{fontFamily:"Lato"}}>
               {name}
             </MenuItem>
           ))}
@@ -219,6 +235,17 @@ export default function AddServiceForm() {
           onChange={formik.handleChange}
           error={formik.touched.itemName && Boolean(formik.errors.itemName)}
           helperText={formik.touched.itemName && formik.errors.itemName}
+
+          InputLabelProps={{
+            style:{
+              fontFamily: 'Lato'
+            }
+          }}
+          inputProps={{
+            style:{
+              fontFamily:"Lato"
+            }
+          }}
         />
         <TextField
           fullWidth
@@ -229,6 +256,16 @@ export default function AddServiceForm() {
           onChange={formik.handleChange}
           error={formik.touched.itemDesc && Boolean(formik.errors.itemDesc)}
           helperText={formik.touched.itemDesc && formik.errors.itemDesc}
+          InputLabelProps={{
+            style:{
+              fontFamily: 'Lato'
+            }
+          }}
+          inputProps={{
+            style:{
+              fontFamily:"Lato"
+            }
+          }}
         />
         <TextField
           fullWidth
@@ -238,8 +275,19 @@ export default function AddServiceForm() {
           onChange={formik.handleChange}
           error={formik.touched.itemPrice && Boolean(formik.errors.itemPrice)}
           helperText={formik.touched.itemPrice && formik.errors.itemPrice}
+          InputLabelProps={{
+            style:{
+              fontFamily: 'Lato'
+            }
+          }}
+          inputProps={{
+            style:{
+              fontFamily:"Lato"
+            }
+          }}
         />
         <Button
+          style={{fontFamily:"Lato"}}
           onClick={() => {imageClient.picker(options).open()}}>
           Add image
         </Button>
@@ -263,7 +311,7 @@ export default function AddServiceForm() {
           </label>
         </Stack> */}
 
-        <ColorButton color="primary" variant="contained" fullWidth type="submit" endIcon={<AddIcon/>}>
+        <ColorButton style={{fontFamily:"Lato"}} color="primary" variant="contained" fullWidth type="submit" endIcon={<AddIcon/>}>
           <strong>Add </strong>
         </ColorButton>
         </Stack>
@@ -274,12 +322,12 @@ export default function AddServiceForm() {
         disableEscapeKeyDown={false}
       >
         <DialogTitle>
-          <Typography variant="h6" component="h2">
+          <Typography fontFamily="Lato" variant="h6" component="h2">
             Congratulations!
           </Typography>
         </DialogTitle>
         <DialogContent>
-          <Typography sx={{ mt: 2 }}>
+          <Typography fontFamily="Lato" sx={{ mt: 2 }}>
             Your item was added successfuly
           </Typography>
         </DialogContent>

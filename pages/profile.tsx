@@ -128,6 +128,8 @@ export default function RegistrationForm() {
           direction="column"
           alignItems="center"
           justifyContent="center"
+          fontFamily="Lato"
+
         >
           <Breadcrumbs aria-label="breadcrumb">
             <Link 
@@ -136,6 +138,7 @@ export default function RegistrationForm() {
               color="inherit"
               href="/"
               fontSize={"20px"}
+              fontFamily="Lato"
 
             >
               <HomeIcon sx={{ mr: 0.5 }} fontSize="inherit" />
@@ -147,6 +150,7 @@ export default function RegistrationForm() {
               color="inherit"
               href="/profile"
               fontSize={"20px"}
+              fontFamily="Lato"
             >
               <PersonIcon sx={{ mr: 0.5 }} fontSize="inherit" />
               Profile
@@ -157,6 +161,7 @@ export default function RegistrationForm() {
         <Divider />
         <Stack alignItems={"center"} spacing={1}>
         <Typography
+          fontFamily={"Lato"}
           variant="h4"
           textAlign={"center"}
           sx={{ mt: 4, color: "#224870" }}
@@ -176,6 +181,17 @@ export default function RegistrationForm() {
               value={formik.values.email}
               error={formik.touched.email && Boolean(formik.errors.email)}
               helperText={formik.touched.email && formik.errors.email}
+              inputProps={{
+                style:{
+                  fontFamily: 'Lato',
+                  fontWeight: 400
+                }
+              }}
+              InputLabelProps={{
+                style:{
+                  fontFamily: 'Lato'
+                }
+              }}
             />
             <TextField
               id="firstName"
@@ -188,6 +204,16 @@ export default function RegistrationForm() {
                 formik.touched.firstName && Boolean(formik.errors.firstName)
               }
               helperText={formik.touched.firstName && formik.errors.firstName}
+              inputProps={{
+                style:{
+                  fontFamily: 'Lato'
+                }
+              }}
+              InputLabelProps={{
+                style:{
+                  fontFamily: 'Lato'
+                }
+              }}
             />
             <TextField
               id="lastName"
@@ -198,6 +224,16 @@ export default function RegistrationForm() {
               onChange={formik.handleChange}
               error={formik.touched.lastName && Boolean(formik.errors.lastName)}
               helperText={formik.touched.lastName && formik.errors.lastName}
+              inputProps={{
+                style:{
+                  fontFamily: 'Lato'
+                }
+              }}
+              InputLabelProps={{
+                style:{
+                  fontFamily: 'Lato'
+                }
+              }}
             />
             <TextField
               id="displayName"
@@ -211,6 +247,16 @@ export default function RegistrationForm() {
               helperText={
                 formik.touched.displayName && formik.errors.displayName
               }
+              inputProps={{
+                style:{
+                  fontFamily: 'Lato'
+                }
+            }}
+            InputLabelProps={{
+              style:{
+                fontFamily: 'Lato'
+              }
+            }}
             />
             <TextField
               id="walletNumber"
@@ -225,11 +271,22 @@ export default function RegistrationForm() {
               helperText={
                 formik.touched.walletNumber && formik.errors.walletNumber
               }
+              inputProps={{
+                style:{
+                  fontFamily: 'Lato'
+                }
+              }}
+              InputLabelProps={{
+                style:{
+                  fontFamily: 'Lato'
+                }
+              }}
             />
             <ColorButton
               variant="contained"
               type="submit"
               endIcon={<SendIcon />}
+              style={{fontFamily:"Lato"}}
             >
               <strong>Submit</strong>
             </ColorButton>
@@ -243,12 +300,12 @@ export default function RegistrationForm() {
         disableEscapeKeyDown={false}
       >
         <DialogTitle>
-          <Typography variant="h6" component="h2">
+          <Typography fontFamily="Lato" variant="h6" component="h2">
             Congratulations!
           </Typography>
         </DialogTitle>
         <DialogContent>
-          <Typography sx={{ mt: 2 }}>
+          <Typography fontFamily="Lato" sx={{ mt: 2 }}>
             Your display name was changed successfuly
           </Typography>
         </DialogContent>

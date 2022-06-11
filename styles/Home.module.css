@@ -1,5 +1,7 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@300&display=swap');
 .container {
   padding: 0 2rem;
+  font-family: 'Lato', sans-serif;
 }
 
 .main {
@@ -10,6 +12,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  font-family: 'Lato', sans-serif;
 }
 
 .footer {
@@ -31,6 +34,7 @@
 .title a {
   color: #0070f3;
   text-decoration: none;
+  font-family: 'Lato', sans-serif;
 }
 
 .title a:hover,
@@ -43,17 +47,21 @@
   margin: 0;
   line-height: 1.15;
   font-size: 4rem;
+  font-family: 'Lato', sans-serif;
+
 }
 
 .title,
 .description {
   text-align: center;
+  font-family: 'Lato', sans-serif;
 }
 
 .description {
   margin: 4rem 0;
   line-height: 1.5;
   font-size: 1.5rem;
+  font-family: 'Lato', sans-serif;
 }
 
 .code {
@@ -61,16 +69,16 @@
   border-radius: 5px;
   padding: 0.75rem;
   font-size: 1.1rem;
-  font-family: Menlo, Monaco, Lucida Console, Liberation Mono, DejaVu Sans Mono,
-    Bitstream Vera Sans Mono, Courier New, monospace;
+  font-family: 'Lato', sans-serif;
 }
 
 .grid {
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
   flex-wrap: wrap;
   max-width: 800px;
+  font-family: 'Lato', sans-serif;
 }
 
 .card {
@@ -83,6 +91,7 @@
   border-radius: 10px;
   transition: color 0.15s ease, border-color 0.15s ease;
   max-width: 300px;
+  font-family: 'Lato', sans-serif;
 }
 
 .card:hover,
@@ -95,12 +104,14 @@
 .card h2 {
   margin: 0 0 1rem 0;
   font-size: 1.5rem;
+  font-family: 'Lato', sans-serif;
 }
 
 .card p {
   margin: 0;
   font-size: 1.25rem;
   line-height: 1.5;
+  font-family: 'Lato', sans-serif;
 }
 
 .logo {

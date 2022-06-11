@@ -176,6 +176,7 @@ export default function BecomeASellerForm() {
         variant="h4"
         textAlign={"center"}
         sx={{ mt: 4, color: "#224870" }}
+        fontFamily="Lato"
       >
         <strong>Become a seller</strong>
       </Typography>
@@ -191,6 +192,11 @@ export default function BecomeASellerForm() {
             formik.touched.displayName && Boolean(formik.errors.displayName)
           }
           helperText={formik.touched.displayName && formik.errors.displayName}
+          inputProps={{
+            style:{
+              fontFamily: 'Lato'
+            }
+          }}
         />
         <TextField
           fullWidth
@@ -202,6 +208,16 @@ export default function BecomeASellerForm() {
           onChange={formik.handleChange}
           error={formik.touched.sellerDesc && Boolean(formik.errors.sellerDesc)}
           helperText={formik.touched.sellerDesc && formik.errors.sellerDesc}
+          inputProps={{
+            style:{
+              fontFamily: 'Lato'
+            }
+          }}
+          InputLabelProps={{
+            style:{
+              fontFamily: 'Lato'
+            }
+        }}
         />
         <TextField
           fullWidth
@@ -213,6 +229,16 @@ export default function BecomeASellerForm() {
           onChange={formik.handleChange}
           error={formik.touched.phone && Boolean(formik.errors.phone)}
           helperText={formik.touched.phone && formik.errors.phone}
+          inputProps={{
+            style:{
+              fontFamily: 'Lato'
+            }
+          }}
+          InputLabelProps={{
+            style:{
+              fontFamily: 'Lato'
+            }
+          }}
         />
         <TextField
           fullWidth
@@ -226,9 +252,19 @@ export default function BecomeASellerForm() {
             formik.touched.walletNumber && Boolean(formik.errors.walletNumber)
           }
           helperText={formik.touched.walletNumber && formik.errors.walletNumber}
+          inputProps={{
+            style:{
+              fontFamily: 'Lato'
+            }
+          }}
+          InputLabelProps={{
+            style:{
+              fontFamily: 'Lato'
+            }
+          }}
         />
-        <Stack direction="row" alignItems="center" spacing={2}>
-          <label htmlFor="icon-button-file">
+        <Stack direction="row" alignItems="center" spacing={2} style={{fontFamily:"Lato"}}>
+          <label style={{fontFamily:"Lato"}} htmlFor="icon-button-file">
             <Input
               accept="image/*"
               id="icon-button-file"
@@ -236,11 +272,13 @@ export default function BecomeASellerForm() {
               onChange={(e) =>
                 uploadImage(e, setLoading, formik.handleChange("imageId"))
               }
+              style={{fontFamily:"Lato"}}
             />
             <IconButton
               color="primary"
               aria-label="upload picture"
               component="span"
+              style={{fontFamily:"Lato"}}
             >
               {getLoading ? <CircularProgress /> : <PhotoCamera />}
             </IconButton>
@@ -253,6 +291,7 @@ export default function BecomeASellerForm() {
           variant="contained"
           fullWidth
           type="submit"
+          style={{fontFamily:"Lato"}}
           endIcon={<SellIcon/>}
         >
           <strong>Become a seller</strong>
@@ -267,17 +306,19 @@ export default function BecomeASellerForm() {
         disableEscapeKeyDown={false}
       >
         <DialogTitle>
-          <Typography variant="h2" component="h2">
+          <Typography fontFamily="Lato" variant="h2" component="h2">
             Congratulations!
           </Typography>
           <Divider></Divider>
         </DialogTitle>
         <DialogContent>
-          <Typography sx={{ mt: 2 }}>You are now a seller</Typography>
+          <Typography fontFamily="Lato" sx={{ mt: 2 }}>You are now a seller</Typography>
         </DialogContent>
         <DialogActions>
           <Link href="/service/new">
-            <ColorButton>Add your first service/product </ColorButton>
+            <ColorButton               
+              style={{fontFamily:"Lato"}}
+              >Add your first service/product </ColorButton>
           </Link>
         </DialogActions>
       </Dialog>
