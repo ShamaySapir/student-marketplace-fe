@@ -161,7 +161,7 @@ export default function Page() {
           servicesState={servicesState}
         />
       </Grid>
-      <Grid item xs={10}>
+      <Grid item xs={10} paddingLeft={3}>
         <center>
           <Typography
             fontFamily={"Lato"}
@@ -172,7 +172,6 @@ export default function Page() {
           >
             <strong>Marketplace </strong>
           </Typography>
-          <Divider></Divider>
         </center>
         <Grid container direction="column">
           {map(

@@ -53,21 +53,17 @@ const SwimLane = ({
   const MIN_TILES = 4;
 
   return (
-    <Grid item container>
-      <Grid item alignItems={"center"} flex={"auto"}>
-        <Divider />
+    <Grid container direction="column">
+      <Grid item>
         <Typography
           fontFamily={"Lato"}
-          textAlign={"center"}
           variant="h4"
-          sx={{ mt: 7, mb: 7, color: "#4E5166" }}
+          sx={{ mt: 4, mb: 4, color: "#4E5166" }}
         >
           <strong>{name}</strong>
         </Typography>
-        <Divider />
       </Grid>
-
-      <div style={{ width: "100%" }}>
+      <Grid item style={{ width: "90%" }}>
         <Slider
           dots
           infinite={false}
@@ -84,7 +80,7 @@ const SwimLane = ({
             ).map((x) => <div></div>),
           ]}
         </Slider>
-      </div>
+      </Grid>
     </Grid>
   );
 };
