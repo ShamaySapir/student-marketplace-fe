@@ -41,6 +41,9 @@ export default function ServiceTile({
               ? image
               : `${process.env.NEXT_PUBLIC_MARKETPLACE_API}/${image}`
           }
+          onError={(e) =>
+            (e.target.src = "/_next/image?url=%2Fimages%2Fcoin.png&w=96&q=75")
+          }
           alt={title}
         />
         <CardContent>

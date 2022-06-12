@@ -118,7 +118,9 @@ export default function Page() {
             currentServices: action.payload.value
               ? [
                   ...filter(state.initServices, (service) => {
-                    return service.title.includes(action.payload.value);
+                    return service.title
+                      .toLowerCase()
+                      .includes(action.payload.value.toLowerCase());
                   }),
                 ]
               : state.initServices,

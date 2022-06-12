@@ -43,13 +43,9 @@ const validationSchema = yup.object({
     .required("Required"),
   itemPrice: yup
     .number()
-    // .min(0, "Too cheap")
+    .min(0, "Too cheap")
     // .max(100, "Too expensive")
     .required("Required"),
-});
-
-const Input = styled("input")({
-  // display: "none",
 });
 
 // const uploadImage = async (
@@ -166,7 +162,7 @@ export default function AddServiceForm() {
             <div>
               <AddIcon sx={{ mr: 0.5 }} fontSize="inherit" fontFamily="Lato" />
               Add new item
-            </div>{" "}
+            </div>
           </Breadcrumbs>
         </Grid>
 
