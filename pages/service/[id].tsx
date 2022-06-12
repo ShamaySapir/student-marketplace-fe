@@ -380,7 +380,7 @@ export default function ItemPage() {
                     ? getItemDesc.image
                     : `${process.env.NEXT_PUBLIC_MARKETPLACE_API}/${getItemDesc.image}`
                 }
-                onError={(e) =>
+                onError={(e: any) =>
                   (e.target.src =
                     "/_next/image?url=%2Fimages%2Fcoin.png&w=96&q=75")
                 }
