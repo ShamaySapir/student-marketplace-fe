@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import { useSession } from "next-auth/client";
+import { styled } from "@mui/material/styles";
+import { makeStyles } from "@mui/styles";
 
 import {
   Add as AddIcon,
@@ -39,8 +41,8 @@ import {
   CircularProgress,
   InputAdornment,
   Button,
+  StandardTextFieldProps,
 } from "@mui/material";
-import { styled } from "@mui/material/styles";
 import * as routes from "../../tools/api/routes";
 import { Service } from "../../types/types";
 import BootstrapDialogTitle from "../../components/dialogTitle";
@@ -164,6 +166,50 @@ export default function ItemPage() {
     },
   }));
 
+  const StyledItemTitle = styled(Typography)(({ theme })=>({
+    textAlign:"left",
+    sx:{ 
+      mt: 4, 
+    },
+    fontFamily:"Lato",
+    color: "#224870" 
+
+  }));
+
+  const StyledMidTitle = styled(Typography)(({ theme })=>({
+    fontFamily:"Lato",
+    textAlign:"center",
+    color:"#224870",
+  }));
+
+  const StyledLink = styled(Link)(({ theme })=>({
+    underline:"hover",
+    sx:{
+        display: "flex",
+        alignItems: "center",
+        ":hover": 
+          { color: "#205375" },
+    },
+    color:"inherit",
+    fontSize:"20px",
+    fontFamily:"Lato"
+  }));
+
+  const StyledDialogText = styled(Typography)(({ theme })=>({
+    fontFamily:"Lato"
+  }));
+
+  const useStyles = makeStyles(() => ({
+    textField: {
+      fontFamily: "Lato",
+    },
+    input: {
+      fontFamily: "Lato",
+    }
+  }));
+  
+  const classes = useStyles();
+
   return (
     <>
       <Box sx={{ ml: 10, mr: 10, mt: 5, mb: 10 }}>
@@ -178,77 +224,48 @@ export default function ItemPage() {
           justifyContent="center"
         >
           <Breadcrumbs aria-label="breadcrumb">
-            <Link
-              underline="hover"
-              sx={{
-                display: "flex",
-                alignItems: "center",
-                ":hover": { color: "#205375" },
-              }}
-              color="inherit"
+            <StyledLink
               href="/"
-              fontSize={"20px"}
-              fontFamily="Lato"
             >
-              <Home fontFamily="Lato" sx={{ mr: 0.5 }} fontSize="inherit" />
+              <Home sx={{ mr: 0.5 }} fontSize="inherit" />
               Home
-            </Link>
-            <Link
-              underline="hover"
-              sx={{
-                display: "flex",
-                alignItems: "center",
-                ":hover": { color: "#205375" },
-              }}
-              color="inherit"
-              href="/" //change here
-              fontSize={"20px"}
-              fontFamily="Lato"
+            </StyledLink>
+            <StyledLink
+              href={"/service/"+getItemDesc.id} //change here
             >
               <ShoppingBagIcon sx={{ mr: 0.5 }} fontSize="inherit" />
               {getItemDesc.title}
-            </Link>
+            </StyledLink>
           </Breadcrumbs>
         </Grid>
 
         <Divider />
-        <Typography
-          variant="h3"
-          textAlign={"center"}
-          sx={{ mt: 4, color: "#224870" }}
-          fontFamily="Lato"
-        >
+        <StyledItemTitle
+          variant="h2">
           <strong>{getItemDesc.title}</strong>
-        </Typography>
+        </StyledItemTitle>
 
         <Grid container>
           <Grid lg={7} container item direction={"column"} xs padding={5}>
             <Grid item>
-              <Typography
-                fontFamily="Lato"
-                textAlign={"center"}
-                color={"#224870"}
-                variant="h5"
-              >
-                <strong>Item</strong>
-              </Typography>
+              <StyledMidTitle
+                  variant="h5">
+                <strong>Item Information</strong>
+              </StyledMidTitle>
             </Grid>
             <Stack ml={3} mt={2} direction={"row"} spacing={3}>
               <TextField
-                InputProps={{
+                className={classes.textField}
+                inputProps={{
+                  className: classes.input,
                   startAdornment: (
                     <InputAdornment position="start">
                       <InfoIcon />
                     </InputAdornment>
                   ),
-                  style: {
-                    fontFamily: "Lato",
-                  },
                 }}
                 InputLabelProps={{
-                  style: {
-                    fontFamily: "Lato",
-                  },
+                  className: classes.textField
                 }}
                 // variant="filled"
                 disabled
@@ -257,20 +274,17 @@ export default function ItemPage() {
               />
 
               <TextField
-                InputProps={{
+                className={classes.textField}
+                inputProps={{
+                  className: classes.input,
                   startAdornment: (
                     <InputAdornment position="start">
                       <InfoIcon />
                     </InputAdornment>
                   ),
-                  style: {
-                    fontFamily: "Lato",
-                  },
                 }}
                 InputLabelProps={{
-                  style: {
-                    fontFamily: "Lato",
-                  },
+                  className: classes.textField
                 }}
                 // variant="filled"
                 disabled
@@ -281,32 +295,25 @@ export default function ItemPage() {
             </Stack>
 
             <Grid item mt={2}>
-              <Typography
-                fontFamily="Lato"
-                textAlign={"center"}
-                color={"#224870"}
-                variant="h5"
-              >
+              <StyledMidTitle
+                variant="h5">
                 <strong>About {getItemDesc.sellerName}</strong>
-              </Typography>
+              </StyledMidTitle>
             </Grid>
 
             <Stack ml={3} mt={2} direction={"row"} spacing={3}>
               <TextField
-                InputProps={{
+                className={classes.textField}
+                inputProps={{
+                  className: classes.input,
                   startAdornment: (
                     <InputAdornment position="start">
                       <InfoIcon />
                     </InputAdornment>
                   ),
-                  style: {
-                    fontFamily: "Lato",
-                  },
                 }}
                 InputLabelProps={{
-                  style: {
-                    fontFamily: "Lato",
-                  },
+                  className: classes.textField
                 }}
                 // variant="filled"
                 disabled
@@ -314,20 +321,17 @@ export default function ItemPage() {
                 value={getItemDesc.sellerPhone}
               />
               <TextField
-                InputProps={{
+                className={classes.textField}
+                inputProps={{
+                  className: classes.input,
                   startAdornment: (
                     <InputAdornment position="start">
                       <InfoIcon />
                     </InputAdornment>
                   ),
-                  style: {
-                    fontFamily: "Lato",
-                  },
                 }}
                 InputLabelProps={{
-                  style: {
-                    fontFamily: "Lato",
-                  },
+                  className: classes.textField
                 }}
                 // variant="filled"
                 disabled
@@ -407,32 +411,32 @@ export default function ItemPage() {
             Your purchase completed successfully
           </BootstrapDialogTitle>
           <DialogContent>
-            <Typography fontFamily="Lato" variant="h6" sx={{ mt: 2 }}>
+            <StyledDialogText variant="h6" sx={{ mt: 2 }}>
               Purchase Details:
-            </Typography>
-            <Typography fontFamily="Lato" variant="h6" sx={{ mt: 2 }}>
+            </StyledDialogText>
+            <StyledDialogText variant="h6" sx={{ mt: 2 }}>
               Product/Service Name: {getItemDesc.title}
-            </Typography>
-            <Typography variant="h6">
+            </StyledDialogText>
+            <StyledDialogText variant="h6">
               Seller Description: {getItemDesc.sellerDesc}
-            </Typography>
-            <Typography fontFamily="Lato" variant="h6">
+            </StyledDialogText>
+            <StyledDialogText variant="h6">
               Item Price: {getItemDesc.price}
-            </Typography>
-            <Typography fontFamily="Lato" variant="h6">
+            </StyledDialogText>
+            <StyledDialogText variant="h6">
               Quantity: {quantity}
-            </Typography>
+            </StyledDialogText>
 
-            <Typography fontFamily="Lato" variant="h6">
+            <StyledDialogText variant="h6">
               Total Price: {quantity * getItemDesc.price}
-            </Typography>
-            <Typography fontFamily="Lato" variant="h6">
+            </StyledDialogText>
+            <StyledDialogText variant="h6">
               Transaction Hash: {transactionId}
-            </Typography>
+            </StyledDialogText>
           </DialogContent>
           <DialogActions>
             <Link href="/">
-              <Button style={{ fontFamily: "Lato" }}>Back to main page</Button>
+              <ColorButton>Back to main page</ColorButton>
             </Link>
           </DialogActions>
         </Dialog>

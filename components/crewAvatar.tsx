@@ -1,6 +1,18 @@
 import React from "react";
 import Image from "next/image";
 import { Grid, Avatar, Typography } from "@mui/material";
+import { styled } from "@mui/material/styles";
+
+
+const StyledAvaterName = styled(Typography)(({ theme })=>({
+  fontFamily:"Lato",
+  variant:"h5"
+}));
+
+const StyledAvaterDescription = styled(Typography)(({ theme })=>({
+  fontFamily:"Lato",
+  variant:"h6"
+}));
 
 const CrewAvatar = ({
   AVATAR_SIZE,
@@ -22,8 +34,8 @@ const CrewAvatar = ({
         </Avatar>
         {fullName && (
           <Grid item style={{ textAlign: "center" }}>
-            <Typography fontFamily="Lato" variant="h5">{fullName}</Typography>
-            <Typography fontFamily="Lato" variant="h6">{description}</Typography>
+            <StyledAvaterName >{fullName}</StyledAvaterName>
+            <StyledAvaterDescription >{description}</StyledAvaterDescription>
           </Grid>
         )}
       </Grid>

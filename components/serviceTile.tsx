@@ -13,12 +13,24 @@ import {
 import Link from "next/link";
 import { DescriptionItem } from "../types/types";
 import { makeStyles } from "@mui/styles";
+import { styled } from "@mui/material/styles";
 
 const useStyles = makeStyles({
   // link: {
   //   cursor: "pointer",
   // },
 });
+
+const StyledCardMedia = styled(CardMedia)(({ theme })=>({
+  p:3,
+  width:"240px",
+  height:"200px"
+}));
+
+const StyledCardContentTitle = styled(Typography)(({ theme })=>({
+  variant:"h5",
+  fontFamily:"Lato"
+}));
 
 export default function ServiceTile({
   image,
@@ -32,11 +44,8 @@ export default function ServiceTile({
   return (
     <Link href={`/service/${id}`} passHref key={id}>
       <Card>
-        <CardMedia
-          p={3}
+        <StyledCardMedia
           component="img"
-          width={"240px"}
-          height={"200px"}
           image={
             image.startsWith("http")
               ? image
@@ -45,14 +54,12 @@ export default function ServiceTile({
           alt={title}
         />
         <CardContent>
-          <Typography
+          <StyledCardContentTitle
             gutterBottom
-            variant="h5"
             component="div"
-            fontFamily="Lato"
           >
             {title}
-          </Typography>
+          </StyledCardContentTitle>
         </CardContent>
         <CardActions>
           <Grid

@@ -16,6 +16,7 @@ import {
 import Rating from "../components/Rating";
 import { visuallyHidden } from "@mui/utils";
 import { HeadCell, UserPurchases } from "../types/types";
+import { styled } from "@mui/material/styles";
 
 function descendingComparator<T>(a: T, b: T, orderBy: keyof T) {
   if (b[orderBy] < a[orderBy]) {
@@ -75,10 +76,11 @@ function EnhancedTableHead(props: EnhancedTableProps) {
       onRequestSort(event, property);
     };
 
+  
+
   return (
     <TableHead>
-      <TableRow
-        style={{fontFamily:"Lato"}}>
+      <TableRow>
         {headCells.map((headCell) => (
           <TableCell
             key={headCell.id}
@@ -111,6 +113,21 @@ interface EnhancedTableToolbarProps {
   title: string;
 }
 
+const StyledSelectedLabel = styled(Typography)(({ theme })=>({
+  component:"div",
+  fontFamily:"Lato",
+  variant:"subtitle1",
+  sx:{mflex: "1 1 100%"},
+  color:"inherit"
+}));
+
+const StyledSelectedText = styled(Typography)(({ theme })=>({
+  fontFamily:"Lato",
+  variant:"h6",
+  sx:{mflex: "1 1 100%"},
+  color:"inherit"
+}));
+
 const EnhancedTableToolbar = (props: EnhancedTableToolbarProps) => {
   const { numSelected, title } = props;
 
@@ -129,25 +146,15 @@ const EnhancedTableToolbar = (props: EnhancedTableToolbarProps) => {
       }}
     >
       {numSelected > 0 ? (
-        <Typography
-          sx={{ flex: "1 1 100%" }}
-          color="inherit"
-          variant="subtitle1"
-          component="div"
-          fontFamily="Lato"
-        >
+        <StyledSelectedLabel>
           {numSelected} selected
-        </Typography>
+        </StyledSelectedLabel>
       ) : (
-        <Typography
-          sx={{ flex: "1 1 100%" }}
-          variant="h6"
+        <StyledSelectedText
           id="tableTitle"
-          component="div"
-          fontFamily="Lato"
         >
           {title}
-        </Typography>
+        </StyledSelectedText>
       )}
     </Toolbar>
   );
@@ -191,6 +198,10 @@ export default function EnhancedTable({
   // Avoid a layout jump when reaching the last page with empty rows.
   const emptyRows =
     page > 0 ? Math.max(0, (1 + page) * rowsPerPage - data.length) : 0;
+
+    const StyledTableCell = styled(TableCell)(({ theme })=>({
+      align:"right"
+    }));
 
   return (
     <Box sx={{ width: "100%" }}>
@@ -239,11 +250,11 @@ export default function EnhancedTable({
                       </TableCell>
                       <TableCell>{row.sellerName}</TableCell>
                       <TableCell>{row.itemName}</TableCell>
-                      <TableCell align="right">{row.quantity}</TableCell>
-                      <TableCell align="right">{row.price}</TableCell>
-                      <TableCell align="right">{row.totalPrice}</TableCell>
+                      <TableCell >{row.quantity}</TableCell>
+                      <TableCell>{row.price}</TableCell>
+                      <TableCell>{row.totalPrice}</TableCell>
                       {row.rating !== undefined && (
-                        <TableCell align="right">
+                        <TableCell>
                           <Rating value={row.rating} itemId={row.itemId} />
                         </TableCell>
                       )}

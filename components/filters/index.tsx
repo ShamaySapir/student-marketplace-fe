@@ -3,6 +3,7 @@ import { Divider, List, ListSubheader,Typography } from "@mui/material";
 import { map, reduce, upperFirst, values, flatten } from "lodash";
 import FilterItem, { IFilterItemProps } from "./FilterItem";
 import { GroupedItems } from "../../types/types";
+import { styled } from "@mui/material/styles";
 interface IFiltersListProps {
   services: GroupedItems;
   onFilterServices: any;
@@ -59,9 +60,15 @@ export default function FiltersList({
     });
   }, [services]);
 
+  const StyledTypography = styled(Typography)(({ theme })=>({
+    fontFamily:"Lato",
+    variant:"h5",
+    sx:{margin:2,color:"#224870"}
+  }));
+
   return (
     <List sx={{ margin:2, width: "100%", maxWidth: 360}} component="nav">
-      <Typography fontFamily="Lato" variant="h5" sx={{margin:2,color:"#224870"}} ><strong>Filters</strong></Typography>
+      <StyledTypography  ><strong>Filters</strong></StyledTypography>
       <Divider></Divider>
       {map(servicesState.initState, (filterDetails, idx) => (
         <FilterItem

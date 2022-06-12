@@ -10,6 +10,8 @@ import {
 } from "@mui/material";
 import { ExpandLess, ExpandMore } from "@mui/icons-material";
 import { map, noop } from "lodash";
+import { styled } from "@mui/material/styles";
+
 export interface IFilterItemProps {
   title: string;
   subFilters?: IFilterItemProps[];
@@ -41,6 +43,7 @@ export default function FilterItem({
   const handleClick = () => {
     setOpen(!open);
   };
+  
   return (
     customRenderers(title, subFilters, onFilter) || (
       <>
@@ -56,8 +59,8 @@ export default function FilterItem({
             />
           </ListItemIcon>
           <ListItemText
-          disableTypography
-          primary={<Typography style={{fontFamily: 'Lato'}}>{title}</Typography>}/>
+            disableTypography
+            primary={<Typography style={{fontFamily: 'Lato'}}>{title}</Typography>}/>
           {subFilters && (open ? <ExpandLess /> : <ExpandMore />)}
         </ListItemButton>
         {subFilters && (

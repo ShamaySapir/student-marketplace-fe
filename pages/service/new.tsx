@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import Button, { ButtonProps } from '@mui/material/Button';
 import AddIcon from '@mui/icons-material/Add';
+import { makeStyles } from "@mui/styles";
+
 import {
   TextField,
   MenuItem,
@@ -138,7 +140,47 @@ export default function AddServiceForm() {
       border: '2px solid',
       borderColor:"white"
     },
+    fontFamily:"Lato"
   }));
+
+  const StyledPageTitle = styled(Typography)(({ theme })=>({
+    textAlign:"center",
+    sx:{ 
+      mt: 4, 
+    },
+    fontFamily:"Lato",
+    color: "#224870"
+
+  }));
+
+  const StyledLink = styled(Link)(({ theme })=>({
+    underline:"hover",
+    sx:{
+        display: "flex",
+        alignItems: "center",
+        ":hover": 
+          { color: "#205375" },
+    },
+    color:"inherit",
+    fontSize:"20px",
+    fontFamily:"Lato"
+  }));
+
+  const StyledDialogText = styled(Typography)(({ theme })=>({
+    component:"h2",
+    fontFamily:"Lato"
+  }));
+
+  const useStyles = makeStyles(() => ({
+    textField: {
+      fontFamily: "Lato",
+    },
+    input: {
+      fontFamily: "Lato",
+    }
+  }));
+  
+  const classes = useStyles();
 
   return (
     <>
@@ -154,49 +196,30 @@ export default function AddServiceForm() {
         justifyContent="center"
       >
         <Breadcrumbs aria-label="breadcrumb">
-          <Link
-            underline="hover"
-            sx={{
-              display: "flex",
-              alignItems: "center",
-              ":hover": { color: "#205375" },
-            }}
-            color="inherit"
+          <StyledLink
             href="/"
-            fontSize={"20px"}
           >
             <Home sx={{ mr: 0.5 }} fontSize="inherit" />
             Home
-          </Link>
-          <Link
-            underline="hover"
-            sx={{
-              display: "flex",
-              alignItems: "center",
-              ":hover": { color: "#205375" },
-            }}
-            color="inherit"
-            href="/orderHistory"
-            fontSize={"20px"}
+          </StyledLink>
+          <StyledLink
+            href="/service/new"
           >
-            <AddIcon sx={{ mr: 0.5 }} fontSize="inherit" fontFamily="Lato"/>
+            <AddIcon sx={{ mr: 0.5 }} fontSize="inherit"/>
             Add new item
-          </Link>
+          </StyledLink>
         </Breadcrumbs>
       </Grid>
 
       <Divider />
-      <Typography
-        variant="h4"
-        textAlign={"center"}
-        sx={{ mt: 4, color: "#224870" }}
-        fontFamily="Lato"
-      >
+      <StyledPageTitle
+        variant="h4">
         <strong>Add new item</strong>
-      </Typography>
+      </StyledPageTitle>
       <form onSubmit={formik.handleSubmit}>
       <Stack direction="column" spacing={2} >
         <TextField
+          className={classes.textField}
           id="itemTypeId"
           select
           label="Type"
@@ -206,19 +229,13 @@ export default function AddServiceForm() {
           margin="normal"
           fullWidth
           InputLabelProps={{
-            style:{
-              fontFamily: 'Lato'
-            }
+            className: classes.textField
           }}
           inputProps={{
-            style:{
-              fontFamily:"Lato"
-            }
+            className: classes.input,
           }}
           SelectProps={{
-            style:{
-              fontFamily:"Lato"
-            }
+            className: classes.input,
           }}
         >
           {map(itemTypes, ({ id, name }) => (
@@ -228,6 +245,7 @@ export default function AddServiceForm() {
           ))}
         </TextField>
         <TextField
+          className={classes.textField}
           fullWidth
           id="itemName"
           label="Name"
@@ -235,19 +253,15 @@ export default function AddServiceForm() {
           onChange={formik.handleChange}
           error={formik.touched.itemName && Boolean(formik.errors.itemName)}
           helperText={formik.touched.itemName && formik.errors.itemName}
-
           InputLabelProps={{
-            style:{
-              fontFamily: 'Lato'
-            }
+            className: classes.textField
           }}
           inputProps={{
-            style:{
-              fontFamily:"Lato"
-            }
+            className: classes.input,
           }}
         />
         <TextField
+          className={classes.textField}
           fullWidth
           multiline
           id="itemDesc"
@@ -257,17 +271,14 @@ export default function AddServiceForm() {
           error={formik.touched.itemDesc && Boolean(formik.errors.itemDesc)}
           helperText={formik.touched.itemDesc && formik.errors.itemDesc}
           InputLabelProps={{
-            style:{
-              fontFamily: 'Lato'
-            }
+            className: classes.textField
           }}
           inputProps={{
-            style:{
-              fontFamily:"Lato"
-            }
+            className: classes.input,
           }}
         />
         <TextField
+          className={classes.textField}
           fullWidth
           id="itemPrice"
           label="Price"
@@ -276,14 +287,10 @@ export default function AddServiceForm() {
           error={formik.touched.itemPrice && Boolean(formik.errors.itemPrice)}
           helperText={formik.touched.itemPrice && formik.errors.itemPrice}
           InputLabelProps={{
-            style:{
-              fontFamily: 'Lato'
-            }
+            className: classes.textField
           }}
           inputProps={{
-            style:{
-              fontFamily:"Lato"
-            }
+            className: classes.input,
           }}
         />
         <Button
@@ -311,7 +318,7 @@ export default function AddServiceForm() {
           </label>
         </Stack> */}
 
-        <ColorButton style={{fontFamily:"Lato"}} color="primary" variant="contained" fullWidth type="submit" endIcon={<AddIcon/>}>
+        <ColorButton variant="contained" fullWidth type="submit" endIcon={<AddIcon/>}>
           <strong>Add </strong>
         </ColorButton>
         </Stack>
@@ -322,14 +329,14 @@ export default function AddServiceForm() {
         disableEscapeKeyDown={false}
       >
         <DialogTitle>
-          <Typography fontFamily="Lato" variant="h6" component="h2">
+          <StyledDialogText variant="h6">
             Congratulations!
-          </Typography>
+          </StyledDialogText>
         </DialogTitle>
         <DialogContent>
-          <Typography fontFamily="Lato" sx={{ mt: 2 }}>
+          <StyledDialogText sx={{ mt: 2 }}>
             Your item was added successfuly
-          </Typography>
+          </StyledDialogText>
         </DialogContent>
       </Dialog>
     </Box>

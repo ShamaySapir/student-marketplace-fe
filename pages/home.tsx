@@ -1,6 +1,9 @@
 import { useState } from "react";
 import { useSession } from "next-auth/client";
 import AccessDenied from "../components/accessDenied";
+import { styled } from "@mui/material/styles";
+import { string } from "yup/lib/locale";
+import { Typography } from "@mui/material";
 
 export default function Page() {
   const [session, loading] = useSession();
@@ -14,13 +17,17 @@ export default function Page() {
     return <AccessDenied />;
   }
 
+  const StyledText = styled(Typography)(({ theme })=>({
+    fontFamily:"Lato",
+  }));
+
   // If session exists, display content
   return (
     <div>
-      <h1 style={{fontFamily:"Lato"}}>Home</h1>
-      <p style={{fontFamily:"Lato"}}>
+      <Typography variant="h1">Home</Typography>
+      <Typography variant="h6">
         <strong>{content || "\u00a0"}</strong>
-      </p>
+      </Typography>
     </div>
   );
 }

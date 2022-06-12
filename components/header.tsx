@@ -73,6 +73,14 @@ export default function Header() {
     }
   }
 
+  const StyledSiteTitle = styled(Typography)(({ theme })=>({
+    fontFamily:"Lato",
+    m:2,
+    color:"white",
+    fontSize:"18px",
+    sx:{":hover": { fontWeight: "bold" }}
+  }));
+
   return (
     <AppBar sx={{ backgroundColor: "#224870" }} position="sticky">
       <Container maxWidth="xl">
@@ -94,15 +102,9 @@ export default function Header() {
             component={Link}
             href="/"
           >
-            <Typography
-              fontFamily={"Lato"}
-              m={2}
-              color={"white"}
-              fontSize={"18px"}
-              sx={{ ":hover": { fontWeight: "bold" } }}
-            >
+            <StyledSiteTitle>
               Student Social Marketplace{" "}
-            </Typography>
+            </StyledSiteTitle>
           </Box>
 
           <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}></Box>

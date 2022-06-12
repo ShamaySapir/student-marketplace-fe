@@ -26,6 +26,9 @@ import { UserType } from "../constants";
 import SellIcon from "@mui/icons-material/Sell";
 import Button, { ButtonProps } from "@mui/material/Button";
 import StorefrontIcon from "@mui/icons-material/Storefront";
+import { makeStyles } from "@mui/styles";
+
+
 
 const validationSchema = yup.object({
   displayName: yup
@@ -123,7 +126,47 @@ export default function BecomeASellerForm() {
       border: "2px solid",
       borderColor: "white",
     },
+    fontFamily:"Lato"
   }));
+
+  const StyledLink = styled(Link)(({ theme })=>({
+    underline:"hover",
+    sx:{
+        display: "flex",
+        alignItems: "center",
+        ":hover": 
+          { color: "#205375" },
+    },
+    color:"inherit",
+    fontSize:"20px",
+    fontFamily:"Lato"
+  }));
+
+  const StyledPageTitle = styled(Typography)(({ theme })=>({
+    textAlign:"center",
+    sx:{ 
+      mt: 4, 
+    },
+    fontFamily:"Lato",
+    color: "#224870"
+
+  }));
+
+  const StyledDialogText = styled(Typography)(({ theme })=>({
+    fontFamily:"Lato"
+  }));
+
+  const useStyles = makeStyles(() => ({
+    textField: {
+      fontFamily: "Lato",
+    },
+    input: {
+      fontFamily: "Lato",
+    }
+  }));
+  
+  const classes = useStyles();
+
 
   return (
     <>
@@ -139,49 +182,31 @@ export default function BecomeASellerForm() {
           justifyContent="center"
         >
           <Breadcrumbs aria-label="breadcrumb">
-            <Link
-              underline="hover"
-              sx={{
-                display: "flex",
-                alignItems: "center",
-                ":hover": { color: "#205375" },
-              }}
-              color="inherit"
+            <StyledLink
               href="/"
-              fontSize={"20px"}
             >
               <Home sx={{ mr: 0.5 }} fontSize="inherit" />
               Home
-            </Link>
-            <Link
-              underline="hover"
-              sx={{
-                display: "flex",
-                alignItems: "center",
-                ":hover": { color: "#205375" },
-              }}
-              color="inherit"
-              href="/orderHistory"
-              fontSize={"20px"}
+            </StyledLink>
+            <StyledLink
+              href="/becomeSeller"
             >
               <StorefrontIcon sx={{ mr: 0.5 }} fontSize="inherit" />
               Become a seller
-            </Link>
+            </StyledLink>
           </Breadcrumbs>
         </Grid>
 
         <Divider />
-        <Typography
+        <StyledPageTitle
           variant="h4"
-          textAlign={"center"}
-          sx={{ mt: 4, color: "#224870" }}
-          fontFamily="Lato"
         >
           <strong>Become a seller</strong>
-        </Typography>
+        </StyledPageTitle>
         <form onSubmit={formik.handleSubmit}>
           <Stack direction="column" spacing={2}>
             <TextField
+              className={classes.textField}
               fullWidth
               id="displayName"
               name="Display Name"
@@ -193,13 +218,15 @@ export default function BecomeASellerForm() {
               helperText={
                 formik.touched.displayName && formik.errors.displayName
               }
+              InputLabelProps={{
+                className: classes.textField
+              }}
               inputProps={{
-                style: {
-                  fontFamily: "Lato",
-                },
+                className: classes.input,
               }}
             />
             <TextField
+              className={classes.textField}
               fullWidth
               id="sellerDesc"
               name="sellerDesc"
@@ -211,18 +238,15 @@ export default function BecomeASellerForm() {
                 formik.touched.sellerDesc && Boolean(formik.errors.sellerDesc)
               }
               helperText={formik.touched.sellerDesc && formik.errors.sellerDesc}
-              inputProps={{
-                style: {
-                  fontFamily: "Lato",
-                },
-              }}
               InputLabelProps={{
-                style: {
-                  fontFamily: "Lato",
-                },
+                className: classes.textField
+              }}
+              inputProps={{
+                className: classes.input,
               }}
             />
             <TextField
+              className={classes.textField}
               fullWidth
               id="phone"
               name="phone"
@@ -232,18 +256,15 @@ export default function BecomeASellerForm() {
               onChange={formik.handleChange}
               error={formik.touched.phone && Boolean(formik.errors.phone)}
               helperText={formik.touched.phone && formik.errors.phone}
-              inputProps={{
-                style: {
-                  fontFamily: "Lato",
-                },
-              }}
               InputLabelProps={{
-                style: {
-                  fontFamily: "Lato",
-                },
+                className: classes.textField
+              }}
+              inputProps={{
+                className: classes.input,
               }}
             />
             <TextField
+              className={classes.textField}
               fullWidth
               id="walletNumber"
               name="walletNumber"
@@ -258,15 +279,11 @@ export default function BecomeASellerForm() {
               helperText={
                 formik.touched.walletNumber && formik.errors.walletNumber
               }
-              inputProps={{
-                style: {
-                  fontFamily: "Lato",
-                },
-              }}
               InputLabelProps={{
-                style: {
-                  fontFamily: "Lato",
-                },
+                className: classes.textField
+              }}
+              inputProps={{
+                className: classes.input,
               }}
             />
             {/* <Stack direction="row" alignItems="center" spacing={2} style={{fontFamily:"Lato"}}>
@@ -297,7 +314,6 @@ export default function BecomeASellerForm() {
               variant="contained"
               fullWidth
               type="submit"
-              style={{ fontFamily: "Lato" }}
               endIcon={<SellIcon />}
             >
               <strong>Become a seller</strong>
@@ -312,19 +328,19 @@ export default function BecomeASellerForm() {
         disableEscapeKeyDown={false}
       >
         <DialogTitle>
-          <Typography fontFamily="Lato" variant="h2" component="h2">
+          <StyledDialogText variant="h2">
             Congratulations!
-          </Typography>
+          </StyledDialogText>
           <Divider></Divider>
         </DialogTitle>
         <DialogContent>
-          <Typography fontFamily="Lato" sx={{ mt: 2 }}>
+          <StyledDialogText sx={{ mt: 2 }}>
             You are now a seller
-          </Typography>
+          </StyledDialogText>
         </DialogContent>
         <DialogActions>
           <Link href="/service/new">
-            <ColorButton style={{ fontFamily: "Lato" }}>
+            <ColorButton>
               Add your first service/product{" "}
             </ColorButton>
           </Link>

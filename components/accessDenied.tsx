@@ -27,6 +27,22 @@ const ColorButton = styled(Button)<ButtonProps>(({ theme }) => ({
   },
 }));
 
+const StyledTitle = styled(Typography)(({ theme }) => ({
+  color:"#224870",
+  fontFamily:"Lato"
+}));
+
+const StyledSubject = styled(Typography)(({ theme }) => ({
+  textAlign:"center",
+  color:"#224870",
+  fontFamily:"Lato"
+}));
+
+const StyledFooterText = styled(Typography)(({ theme }) => ({
+  component:"div",
+  fontFamily:"Lato"
+}));
+
 export default function AccessDenied() {
   const AVATAR_SIZE = 180;
   return (
@@ -34,12 +50,12 @@ export default function AccessDenied() {
 
   <Grid container spacing={2}>
   <Grid item xs={6} mt={10} ml={20}>
-    <Typography variant="h2" color={"#224870"} fontFamily="Lato">
+    <StyledTitle   variant="h2">
         <strong> Student Social </strong>  
-    </Typography>
-    <Typography variant="h2" color={"#224870"} fontFamily="Lato">
+    </StyledTitle>
+    <StyledTitle variant="h2">
         <strong> Marketplace </strong> 
-    </Typography>
+    </StyledTitle>
   </Grid>
   <Grid item xs={4} mt={15}>
             <Image
@@ -68,9 +84,9 @@ export default function AccessDenied() {
       >
           <Divider variant="middle"/>
           <br />
-          <Typography variant="h3" textAlign={"center"} color={"#224870"} fontFamily="Lato">
+          <StyledSubject variant="h3">
             <strong>About Us</strong>
-          </Typography>
+          </StyledSubject>
           <br />
           <Divider variant="middle"/>
       </Grid>
@@ -131,35 +147,35 @@ export default function AccessDenied() {
               }}
             >
               <CardContent>
-                <Typography gutterBottom variant="h5" component="div" fontFamily="Lato">
+                <StyledFooterText gutterBottom variant="h5">
                   The <strong>Student Social Marketplace</strong> is a
                   social-economic enterprise.
-                </Typography>
+                </StyledFooterText>
 
-                <Typography gutterBottom variant="h5" component="div" fontFamily="Lato">
+                <StyledFooterText gutterBottom variant="h5">
                   It is the first of its kind in the country that brings an
                   exclusive trading ground designed exclusively for students,
                   who share common interests.
-                </Typography>
+                </StyledFooterText>
 
-                <Typography gutterBottom variant="h5" component="div" fontFamily="Lato">
+                <StyledFooterText gutterBottom variant="h5">
                   This marketplace allows each user to advertise a wide range of
                   services that he is interested in offering at no cost to the
                   user.
-                </Typography>
+                </StyledFooterText>
 
-                <Typography gutterBottom variant="h5" component="div" fontFamily="Lato">
+                <StyledFooterText gutterBottom variant="h5">
                   The entire payment system will be based on a unique
                   cryptographic currency that was developed for this project.
-                </Typography>
+                </StyledFooterText>
 
-                <Typography gutterBottom variant="h5" component="div" fontFamily="Lato">
+                <StyledFooterText gutterBottom variant="h5">
                   This cryptocurrency includes a unique infrastructure that
                   allows the allocation of the profits from all the transactions
                   for the purpose of promoting and helping the project grow and
                   will return to the community through financial donations with
                   the project's coin.
-                </Typography>
+                </StyledFooterText>
               </CardContent>
             </Card>
           </Grid>
@@ -171,9 +187,9 @@ export default function AccessDenied() {
           >
             <Divider variant="fullWidth" />
             <br />
-            <Typography variant="h3" textAlign={"center"} color={"#224870"} fontFamily="Lato">
+            <StyledSubject variant="h3">
               <strong>Meet the team</strong>
-            </Typography>
+            </StyledSubject>
             <br />
             <Divider variant="fullWidth" />
           </Grid>
