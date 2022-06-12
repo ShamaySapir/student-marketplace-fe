@@ -1,6 +1,48 @@
 import React from "react";
-import { Divider, Grid, Typography } from "@mui/material";
+import { Divider, Grid, Button, Typography } from "@mui/material";
 import Slider from "react-slick";
+import {
+  NavigateNext as NavigateNextIcon,
+  NavigateBefore as NavigateBeforeIcon,
+} from "@mui/icons-material";
+
+const NextArrow = (props: any) => {
+  const { onClick } = props;
+  return (
+    <div
+      style={{
+        position: "absolute",
+        display: "block",
+        padding: 0,
+        top: "50%",
+        left: "100%",
+      }}
+    >
+      <Button onClick={onClick}>
+        <NavigateNextIcon />
+      </Button>
+    </div>
+  );
+};
+const PrevArrow = (props: any) => {
+  const { onClick } = props;
+  return (
+    <div
+      style={{
+        position: "absolute",
+        display: "block",
+        padding: 0,
+        top: "50%",
+        right: "100%",
+      }}
+    >
+      <Button onClick={onClick}>
+        <NavigateBeforeIcon />
+      </Button>
+    </div>
+  );
+};
+
 const SwimLane = ({
   name,
   serviceTiles,
@@ -26,7 +68,14 @@ const SwimLane = ({
       </Grid>
 
       <div style={{ width: "100%" }}>
-        <Slider dots infinite speed={500} slidesToShow={MIN_TILES}>
+        <Slider
+          dots
+          infinite={false}
+          speed={500}
+          slidesToShow={MIN_TILES}
+          nextArrow={<NextArrow />}
+          prevArrow={<PrevArrow />}
+        >
           {[
             ...serviceTiles,
             ...Array.from(
