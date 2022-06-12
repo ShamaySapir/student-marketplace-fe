@@ -1,14 +1,6 @@
 /* eslint-disable react/no-unescaped-entities */
-import {
-  Typography,
-  Grid,
-  Card,
-  CardContent,
-  Avatar,
-  ButtonGroup,
-  Stack,
-} from "@mui/material";
-import { signIn, useSession } from "next-auth/client";
+import { Typography, Grid, Card, CardContent } from "@mui/material";
+import { signIn } from "next-auth/client";
 import CrewAvatar from "./crewAvatar";
 import Image from "next/image";
 import { styled } from "@mui/material/styles";
@@ -31,50 +23,65 @@ export default function AccessDenied() {
   const AVATAR_SIZE = 180;
   return (
     <Grid container direction="row">
-
-  <Grid container spacing={2}>
-  <Grid item xs={6} mt={10} ml={20}>
-    <Typography variant="h2" color={"#224870"} fontFamily="Lato">
-        <strong> Student Social </strong>  
-    </Typography>
-    <Typography variant="h2" color={"#224870"} fontFamily="Lato">
-        <strong> Marketplace </strong> 
-    </Typography>
-  </Grid>
-  <Grid item xs={4} mt={15}>
-            <Image
-              src={"/images/coin.png"}
-              alt={"logo"}
-              width={"200px"}
-              height={"180px"}
-            ></Image>
-  </Grid>
-  <Grid item xs={3}>
-    <ColorButton size="large" sx={{ml: 25}} style={{fontFamily:"Lato"}} 
-      onClick={() => signIn("google")}
-    >Join us</ColorButton>
-  </Grid>
-  <Grid item xs={4}>
-    <ColorButton size="large" href="#CardInfo" style={{fontFamily:"Lato"}}>About us</ColorButton>
-  </Grid>
-    </Grid>
-
-    <Grid
-          flex={"auto"}
-          paddingTop={10}
-          id="CardInfo"
-          // alignItems="center"
-          // justifyContent="center"
-      >
-          <Divider variant="middle"/>
-          <br />
-          <Typography variant="h3" textAlign={"center"} color={"#224870"} fontFamily="Lato">
-            <strong>About Us</strong>
+      <Grid container spacing={2}>
+        <Grid item xs={6} mt={10} ml={20}>
+          <Typography variant="h2" color={"#224870"} fontFamily="Lato">
+            <strong> Student Social </strong>
           </Typography>
-          <br />
-          <Divider variant="middle"/>
+          <Typography variant="h2" color={"#224870"} fontFamily="Lato">
+            <strong> Marketplace </strong>
+          </Typography>
+        </Grid>
+        <Grid item xs={4} mt={15}>
+          <Image
+            src={"/images/coin.png"}
+            alt={"logo"}
+            width={"200px"}
+            height={"180px"}
+          ></Image>
+        </Grid>
+        <Grid item xs={3}>
+          <ColorButton
+            size="large"
+            sx={{ ml: 25 }}
+            style={{ fontFamily: "Lato" }}
+            onClick={() => signIn("google")}
+          >
+            Join us
+          </ColorButton>
+        </Grid>
+        <Grid item xs={4}>
+          <ColorButton
+            size="large"
+            href="#CardInfo"
+            style={{ fontFamily: "Lato" }}
+          >
+            About us
+          </ColorButton>
+        </Grid>
       </Grid>
-        {/* <Grid container direction="column">
+
+      <Grid
+        flex={"auto"}
+        paddingTop={10}
+        id="CardInfo"
+        // alignItems="center"
+        // justifyContent="center"
+      >
+        <Divider variant="middle" />
+        <br />
+        <Typography
+          variant="h3"
+          textAlign={"center"}
+          color={"#224870"}
+          fontFamily="Lato"
+        >
+          <strong>About Us</strong>
+        </Typography>
+        <br />
+        <Divider variant="middle" />
+      </Grid>
+      {/* <Grid container direction="column">
           <Grid item container justifyContent="center">
           <Grid item lg={12}>
               <Typography variant="h2" color={"#224870"}>
@@ -100,7 +107,6 @@ export default function AccessDenied() {
         </Grid> */}
       {/* </Grid> */}
 
-
       {/* <Grid
           flex={"auto"}
           paddingTop={10}
@@ -120,7 +126,7 @@ export default function AccessDenied() {
         <Grid item xs={3} style={{ flexBasis: "15%" }}></Grid>
         <Grid container direction={"row"} m={5} item xs spacing={5}>
           <Grid item marginTop={"1px"}>
-            <Card 
+            <Card
               variant="outlined"
               sx={{
                 transition: "0.3s",
@@ -131,29 +137,54 @@ export default function AccessDenied() {
               }}
             >
               <CardContent>
-                <Typography gutterBottom variant="h5" component="div" fontFamily="Lato">
+                <Typography
+                  gutterBottom
+                  variant="h5"
+                  component="div"
+                  fontFamily="Lato"
+                >
                   The <strong>Student Social Marketplace</strong> is a
                   social-economic enterprise.
                 </Typography>
 
-                <Typography gutterBottom variant="h5" component="div" fontFamily="Lato">
+                <Typography
+                  gutterBottom
+                  variant="h5"
+                  component="div"
+                  fontFamily="Lato"
+                >
                   It is the first of its kind in the country that brings an
                   exclusive trading ground designed exclusively for students,
                   who share common interests.
                 </Typography>
 
-                <Typography gutterBottom variant="h5" component="div" fontFamily="Lato">
+                <Typography
+                  gutterBottom
+                  variant="h5"
+                  component="div"
+                  fontFamily="Lato"
+                >
                   This marketplace allows each user to advertise a wide range of
                   services that he is interested in offering at no cost to the
                   user.
                 </Typography>
 
-                <Typography gutterBottom variant="h5" component="div" fontFamily="Lato">
+                <Typography
+                  gutterBottom
+                  variant="h5"
+                  component="div"
+                  fontFamily="Lato"
+                >
                   The entire payment system will be based on a unique
                   cryptographic currency that was developed for this project.
                 </Typography>
 
-                <Typography gutterBottom variant="h5" component="div" fontFamily="Lato">
+                <Typography
+                  gutterBottom
+                  variant="h5"
+                  component="div"
+                  fontFamily="Lato"
+                >
                   This cryptocurrency includes a unique infrastructure that
                   allows the allocation of the profits from all the transactions
                   for the purpose of promoting and helping the project grow and
@@ -171,7 +202,12 @@ export default function AccessDenied() {
           >
             <Divider variant="fullWidth" />
             <br />
-            <Typography variant="h3" textAlign={"center"} color={"#224870"} fontFamily="Lato">
+            <Typography
+              variant="h3"
+              textAlign={"center"}
+              color={"#224870"}
+              fontFamily="Lato"
+            >
               <strong>Meet the team</strong>
             </Typography>
             <br />

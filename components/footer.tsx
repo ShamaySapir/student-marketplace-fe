@@ -31,8 +31,9 @@ export default function Footer() {
       <Grid container spacing={2}>
         <Grid item xs={4}>
           <Link
-            href=" https://www.linkedin.com/in/lior-savchenko-6692101a8/"
+            href="https://www.linkedin.com/in/lior-savchenko-6692101a8/"
             color="#FFFFFF"
+            target={"_blank"}
           >
             Lior Savchenko
           </Link>
@@ -49,10 +50,14 @@ export default function Footer() {
           <h6> sapirnag@post.bgu.ac.il </h6>
         </Grid>
         <Grid item xs={4}>
-          <Link href="https://www.linkedin.com/in/dorshireto/" color="#FFFFFF">
+          <Link
+            href="https://www.linkedin.com/in/dorshireto/"
+            color="#FFFFFF"
+            target={"_blank"}
+          >
             Dor Shireto
           </Link>
-          <h6> shiretod@post.bgu.ac.il </h6>
+          <h6>shiretod@post.bgu.ac.il </h6>
         </Grid>
       </Grid>
     </MyFooter>

@@ -1,9 +1,7 @@
 import React, { useEffect, useState } from "react";
 import {
   TextField,
-  IconButton,
   Stack,
-  CircularProgress,
   Dialog,
   Typography,
   DialogTitle,
@@ -20,13 +18,13 @@ import { useFormik } from "formik";
 import { useSession } from "next-auth/client";
 import { Session } from "next-auth";
 import * as yup from "yup";
-import { Home, PhotoCamera } from "@mui/icons-material";
+import { Home } from "@mui/icons-material";
 import * as routes from "../tools/api/routes";
 import { UserType } from "../constants";
 import SellIcon from "@mui/icons-material/Sell";
 import Button, { ButtonProps } from "@mui/material/Button";
 import StorefrontIcon from "@mui/icons-material/Storefront";
-
+import NextLink from "next/link";
 const validationSchema = yup.object({
   displayName: yup
     .string()
@@ -139,34 +137,26 @@ export default function BecomeASellerForm() {
           justifyContent="center"
         >
           <Breadcrumbs aria-label="breadcrumb">
-            <Link
-              underline="hover"
-              sx={{
-                display: "flex",
-                alignItems: "center",
-                ":hover": { color: "#205375" },
-              }}
-              color="inherit"
-              href="/"
-              fontSize={"20px"}
-            >
-              <Home sx={{ mr: 0.5 }} fontSize="inherit" />
-              Home
-            </Link>
-            <Link
-              underline="hover"
-              sx={{
-                display: "flex",
-                alignItems: "center",
-                ":hover": { color: "#205375" },
-              }}
-              color="inherit"
-              href="/orderHistory"
-              fontSize={"20px"}
-            >
+            <NextLink href="/">
+              <Link
+                underline="hover"
+                sx={{
+                  display: "flex",
+                  alignItems: "center",
+                  ":hover": { color: "#205375" },
+                }}
+                color="inherit"
+                href="/"
+                fontSize={"20px"}
+              >
+                <Home sx={{ mr: 0.5 }} fontSize="inherit" />
+                Home
+              </Link>
+            </NextLink>
+            <div>
               <StorefrontIcon sx={{ mr: 0.5 }} fontSize="inherit" />
               Become a seller
-            </Link>
+            </div>
           </Breadcrumbs>
         </Grid>
 
@@ -323,11 +313,13 @@ export default function BecomeASellerForm() {
           </Typography>
         </DialogContent>
         <DialogActions>
-          <Link href="/service/new">
-            <ColorButton style={{ fontFamily: "Lato" }}>
-              Add your first service/product{" "}
-            </ColorButton>
-          </Link>
+          <NextLink href="/service/new">
+            <Link href="/service/new">
+              <ColorButton style={{ fontFamily: "Lato" }}>
+                Add your first service/product{" "}
+              </ColorButton>
+            </Link>
+          </NextLink>
         </DialogActions>
       </Dialog>
     </>

@@ -11,7 +11,6 @@ import {
   Breadcrumbs,
   Link,
   Grid,
-  Avatar,
 } from "@mui/material";
 import SendIcon from "@mui/icons-material/Send";
 import { useAppSelector } from "../redux/hooks";
@@ -25,6 +24,7 @@ import { styled } from "@mui/material/styles";
 import Button, { ButtonProps } from "@mui/material/Button";
 import HomeIcon from "@mui/icons-material/Home";
 import PersonIcon from "@mui/icons-material/Person";
+import NextLink from "next/link";
 
 const validationSchema = yup.object({
   firstName: yup
@@ -133,36 +133,27 @@ export default function RegistrationForm() {
           fontFamily="Lato"
         >
           <Breadcrumbs aria-label="breadcrumb">
-            <Link
-              underline="hover"
-              sx={{
-                display: "flex",
-                alignItems: "center",
-                ":hover": { color: "#205375" },
-              }}
-              color="inherit"
-              href="/"
-              fontSize={"20px"}
-              fontFamily="Lato"
-            >
-              <HomeIcon sx={{ mr: 0.5 }} fontSize="inherit" />
-              Home
-            </Link>
-            <Link
-              underline="hover"
-              sx={{
-                display: "flex",
-                alignItems: "center",
-                ":hover": { color: "#205375" },
-              }}
-              color="inherit"
-              href="/profile"
-              fontSize={"20px"}
-              fontFamily="Lato"
-            >
+            <NextLink href="/">
+              <Link
+                underline="hover"
+                sx={{
+                  display: "flex",
+                  alignItems: "center",
+                  ":hover": { color: "#205375" },
+                }}
+                color="inherit"
+                href="/"
+                fontSize={"20px"}
+                fontFamily="Lato"
+              >
+                <HomeIcon sx={{ mr: 0.5 }} fontSize="inherit" />
+                Home
+              </Link>
+            </NextLink>
+            <div>
               <PersonIcon sx={{ mr: 0.5 }} fontSize="inherit" />
               Profile
-            </Link>
+            </div>
           </Breadcrumbs>
         </Grid>
 

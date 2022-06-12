@@ -6,10 +6,7 @@ import {
   Add as AddIcon,
   Home,
   Remove as RemoveIcon,
-  Phone as PhoneIcon,
-  Description as DescriptionIcon,
   Info as InfoIcon,
-  Accessibility as AccessibilityIcon,
   ShoppingBag as ShoppingBagIcon,
 } from "@mui/icons-material";
 // web3
@@ -47,7 +44,7 @@ import BootstrapDialogTitle from "../../components/dialogTitle";
 import { setCookie, getCookie } from "../../tools/cookieUtil";
 import SellIcon from "@mui/icons-material/Sell";
 import type { ButtonProps } from "@mui/material";
-
+import NextLink from "next/link";
 const Item = styled(Paper)(({ theme }) => ({
   ...theme.typography.body2,
   padding: theme.spacing(1),
@@ -178,36 +175,27 @@ export default function ItemPage() {
           justifyContent="center"
         >
           <Breadcrumbs aria-label="breadcrumb">
-            <Link
-              underline="hover"
-              sx={{
-                display: "flex",
-                alignItems: "center",
-                ":hover": { color: "#205375" },
-              }}
-              color="inherit"
-              href="/"
-              fontSize={"20px"}
-              fontFamily="Lato"
-            >
-              <Home fontFamily="Lato" sx={{ mr: 0.5 }} fontSize="inherit" />
-              Home
-            </Link>
-            <Link
-              underline="hover"
-              sx={{
-                display: "flex",
-                alignItems: "center",
-                ":hover": { color: "#205375" },
-              }}
-              color="inherit"
-              href="/" //change here
-              fontSize={"20px"}
-              fontFamily="Lato"
-            >
+            <NextLink href="/">
+              <Link
+                underline="hover"
+                sx={{
+                  display: "flex",
+                  alignItems: "center",
+                  ":hover": { color: "#205375" },
+                }}
+                color="inherit"
+                href="/"
+                fontSize={"20px"}
+                fontFamily="Lato"
+              >
+                <Home fontFamily="Lato" sx={{ mr: 0.5 }} fontSize="inherit" />
+                Home
+              </Link>
+            </NextLink>
+            <div>
               <ShoppingBagIcon sx={{ mr: 0.5 }} fontSize="inherit" />
               {getItemDesc.title}
-            </Link>
+            </div>
           </Breadcrumbs>
         </Grid>
 
@@ -431,9 +419,13 @@ export default function ItemPage() {
             </Typography>
           </DialogContent>
           <DialogActions>
-            <Link href="/">
-              <Button style={{ fontFamily: "Lato" }}>Back to main page</Button>
-            </Link>
+            <NextLink href="/">
+              <Link href="/">
+                <Button style={{ fontFamily: "Lato" }}>
+                  Back to main page
+                </Button>
+              </Link>
+            </NextLink>
           </DialogActions>
         </Dialog>
       </Box>

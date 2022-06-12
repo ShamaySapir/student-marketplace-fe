@@ -13,8 +13,9 @@ import { useSession } from "next-auth/client";
 import { UserPurchases, HeadCell } from "../types/types";
 import { UserType } from "../constants";
 import { keyBy } from "lodash";
-import { Home, Person } from "@mui/icons-material";
+import { Home } from "@mui/icons-material";
 import ReorderIcon from "@mui/icons-material/Reorder";
+import NextLink from "next/link";
 
 type Order = "asc" | "desc";
 
@@ -108,37 +109,27 @@ export default function EnhancedTable() {
         minWidth="800px"
       >
         <Breadcrumbs aria-label="breadcrumb">
-          <Link
-            underline="hover"
-            sx={{
-              display: "flex",
-              alignItems: "center",
-              ":hover": { color: "#205375" },
-            }}
-            color="inherit"
-            href="/"
-            fontSize={"20px"}
-            fontFamily="Lato"
-          >
-            <Home sx={{ mr: 0.5 }} fontSize="inherit" />
-            Home
-          </Link>
-          <Link
-            underline="hover"
-            sx={{
-              display: "flex",
-              alignItems: "center",
-              ":hover": { color: "#205375" },
-            }}
-            color="inherit"
-            href="/orderHistory"
-            fontSize={"20px"}
-            fontFamily="Lato"
-
-          >
+          <NextLink href="/">
+            <Link
+              underline="hover"
+              sx={{
+                display: "flex",
+                alignItems: "center",
+                ":hover": { color: "#205375" },
+              }}
+              color="inherit"
+              href="/"
+              fontSize={"20px"}
+              fontFamily="Lato"
+            >
+              <Home sx={{ mr: 0.5 }} fontSize="inherit" />
+              Home
+            </Link>
+          </NextLink>
+          <div>
             <ReorderIcon sx={{ mr: 0.5 }} fontSize="inherit" />
             Order history
-          </Link>
+          </div>{" "}
         </Breadcrumbs>
       </Grid>
 

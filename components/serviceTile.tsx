@@ -8,7 +8,6 @@ import {
   Typography,
   Grid,
   Rating,
-  Stack,
 } from "@mui/material";
 import Link from "next/link";
 import { DescriptionItem } from "../types/types";
