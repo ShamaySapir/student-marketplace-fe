@@ -1,12 +1,6 @@
-import React, { useState } from "react";
+import React from "react";
 import { Divider, Grid, Typography } from "@mui/material";
-import SwiperCore, { Navigation, Pagination, Scrollbar, A11y } from "swiper";
-import { Swiper, SwiperSlide } from "swiper/react";
-import { isObject } from "lodash";
-import "swiper/css";
-// import "swiper/css/pagination";
-SwiperCore.use([Navigation, Pagination, Scrollbar, A11y]);
-
+import Slider from "react-slick";
 const SwimLane = ({
   name,
   serviceTiles,
@@ -14,43 +8,34 @@ const SwimLane = ({
   name: string;
   serviceTiles: JSX.Element[];
 }) => {
-  const MIN_LIZARDS = 4;
+  const MIN_TILES = 4;
 
-  const serviceTilesWithSpaces = [
-    ...serviceTiles,
-    ...Array.from(Array(Math.max(MIN_LIZARDS - serviceTiles.length, 0)).keys()),
-  ];
-  const [swiperRef, setSwiperRef] = useState(null);
-  // const NUMBER_OF_ LIZARDS = Math.min(serviceTiles.length, MIN_LIZARDS);
   return (
     <Grid item container>
       <Grid item alignItems={"center"} flex={"auto"}>
-      <Divider/>
-        <Typography fontFamily={'Lato'} textAlign={"center"} variant="h4" sx={{mt:7,mb:7,color:"#4E5166"}} ><strong>{name}</strong></Typography>
-        <Divider/>
-      </Grid>
-      <Grid sx={{margin:2,justifyContent:"space-evenly"}} container item>
-        <Swiper
-          onSwiper={setSwiperRef as any}
-          spaceBetween={25}
-          slidesPerView={MIN_LIZARDS}
-          navigation
-          virtual
-          // grid={{
-          //   rows:3,
-          //   fill:"row"
-          // }}
-          modules={[Pagination]}
-          // pagination={{ clickable: true }}
+        <Divider />
+        <Typography
+          fontFamily={"Lato"}
+          textAlign={"center"}
+          variant="h4"
+          sx={{ mt: 7, mb: 7, color: "#4E5166" }}
         >
-          {serviceTilesWithSpaces.map((slideContent: any, index: number) => (
-            <SwiperSlide key={index} virtualIndex={index}>
-              {isObject(slideContent) ? slideContent : null}
-            </SwiperSlide>
-          ))}
-          
-        </Swiper>
+          <strong>{name}</strong>
+        </Typography>
+        <Divider />
       </Grid>
+
+      <div style={{ width: "100%" }}>
+        <Slider dots infinite speed={500} slidesToShow={MIN_TILES}>
+          {[
+            ...serviceTiles,
+            ...Array.from(
+              Array(Math.max(MIN_TILES - serviceTiles.length, 0)).keys()
+              // eslint-disable-next-line react/jsx-key
+            ).map((x) => <div></div>),
+          ]}
+        </Slider>
+      </div>
     </Grid>
   );
 };

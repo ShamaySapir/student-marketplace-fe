@@ -15,7 +15,6 @@ import { Session } from "next-auth";
 import { ThemeProvider } from "@mui/material/styles";
 import theme from "../tools/theme";
 import Layout, { IRenderOptions } from "../components/layout";
-import SwiperCore, { Virtual } from "swiper";
 
 interface IPageProps {
   session: Session;
@@ -30,8 +29,6 @@ interface IProps {
 export default function App({ Component, pageProps }: IProps) {
   const [session, loading] = useSession();
   const getLibrary = (providerInstance: provider) => new Web3(providerInstance);
-
-  SwiperCore.use([Virtual]);
 
   // When rendering client side don't display anything until loading is complete
   if (typeof window !== "undefined" && loading) return null;
