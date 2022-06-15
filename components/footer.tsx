@@ -19,14 +19,24 @@ const MyFooter = styled("footer")({
   // marginTop: "-91px",
   textAlign: "center",
 });
-const MailWithIcon = ({ emailAddress }) => (
+const MailWithIcon = ({ emailAddress }: { emailAddress: string }) => (
   <IconButton>
     <Link target={"_blank"} href={`mailto:${emailAddress}`} color="#FFFFFF">
       <EmailIcon />
     </Link>
   </IconButton>
 );
-const CrewFooterInfo = ({ liHref, name, image, emailAddress }) => (
+const CrewFooterInfo = ({
+  liHref,
+  name,
+  image,
+  emailAddress,
+}: {
+  liHref: string;
+  name: string;
+  image: string;
+  emailAddress: string;
+}) => (
   <Grid item container xs justifyContent="center">
     <IconButton>
       <Link target={"_blank"} href={liHref} color="#FFFFFF">
