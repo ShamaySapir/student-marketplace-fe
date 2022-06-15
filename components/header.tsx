@@ -99,9 +99,9 @@ export default function Header() {
               m={2}
               color={"white"}
               fontSize={"18px"}
-              sx={{ ":hover": { fontWeight: "bold" } }}
+              sx={{ ":hover": { fontWeight: "bold", cursor: "pointer" } }}
             >
-              Student Social Marketplace{" "}
+              Student Social Marketplace
             </Typography>
           </Box>
 

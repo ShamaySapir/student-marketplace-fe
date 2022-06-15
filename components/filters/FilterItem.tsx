@@ -56,8 +56,11 @@ export default function FilterItem({
             />
           </ListItemIcon>
           <ListItemText
-          disableTypography
-          primary={<Typography style={{fontFamily: 'Lato'}}>{title}</Typography>}/>
+            disableTypography
+            primary={
+              <Typography style={{ fontFamily: "Lato" }}>{title}</Typography>
+            }
+          />
           {subFilters && (open ? <ExpandLess /> : <ExpandMore />)}
         </ListItemButton>
         {subFilters && (

@@ -10,16 +10,16 @@ export default function TextSearch({ onFilter }: { onFilter: any }) {
   return (
     <>
       <InputBase
-        sx={{ ml: 1, flex: 1 }}
+        sx={{ ml: 3 }}
         placeholder="Search..."
         onChange={handleChange}
         inputProps={{
-          style:{
-            fontFamily: 'Lato'
-          }
-      }}
+          style: {
+            fontFamily: "Lato",
+          },
+        }}
       />
-      <IconButton type="submit" sx={{ p: "10px" }} aria-label="search">
+      <IconButton type="submit" aria-label="search">
         <SearchIcon />
       </IconButton>
     </>

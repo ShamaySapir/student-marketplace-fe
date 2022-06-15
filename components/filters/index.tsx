@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
-import { Divider, List, ListSubheader,Typography } from "@mui/material";
-import { map, reduce, upperFirst, values, flatten } from "lodash";
-import FilterItem, { IFilterItemProps } from "./FilterItem";
+import { Divider, List } from "@mui/material";
+import { map, reduce, upperFirst, values, flatten, reverse } from "lodash";
+import FilterItem from "./FilterItem";
 import { GroupedItems } from "../../types/types";
 interface IFiltersListProps {
   services: GroupedItems;
@@ -60,22 +60,22 @@ export default function FiltersList({
   }, [services]);
 
   return (
-    <List sx={{ margin:2, width: "100%", maxWidth: 360}} component="nav">
-      <Typography fontFamily="Lato" variant="h5" sx={{margin:2,color:"#224870"}} ><strong>Filters</strong></Typography>
-      <Divider></Divider>
+    <List component="nav" sx={{ paddingTop: "13vh" }}>
       {map(servicesState.initState, (filterDetails, idx) => (
-        <FilterItem
-          key={idx}
-          title={filterDetails.title}
-          subFilters={filterDetails.subFilters}
-          onFilter={(values: any) =>
-            dispatch({
-              type: "filter",
-              filterName: filterDetails.title,
-              payload: values,
-            })
-          }
-        />
+        <div style={{ paddingBottom: "8vh" }}>
+          <FilterItem
+            key={idx}
+            title={filterDetails.title}
+            subFilters={filterDetails.subFilters}
+            onFilter={(values: any) =>
+              dispatch({
+                type: "filter",
+                filterName: filterDetails.title,
+                payload: values,
+              })
+            }
+          />
+        </div>
       ))}
     </List>
   );

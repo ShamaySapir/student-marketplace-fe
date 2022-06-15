@@ -38,12 +38,12 @@ export default function Layout({
             alignItems: "center",
           }}
         >
-          <Box sx={{ gridArea: "content" }}>
+          <Box sx={{ gridArea: "content", minHeight: "74vh" }}>
             <main>{children}</main>
           </Box>
         </Box>
       )) || (
-        <Box sx={{ gridArea: "content" }}>
+        <Box sx={{ gridArea: "content", margin: 0 }}>
           <main>{children}</main>
         </Box>
       )}

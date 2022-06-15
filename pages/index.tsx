@@ -155,7 +155,7 @@ export default function Page() {
 
   return (
     <Grid container>
-      <Grid item xs={2}>
+      <Grid item xs={2} sx={{ backgroundColor: "#ced9e6" }}>
         <Filters
           services={displayItems}
           dispatch={dispatch}

@@ -33,7 +33,7 @@ const PrevArrow = (props: any) => {
         display: "block",
         padding: 0,
         top: "50%",
-        right: "100%",
+        right: "98%",
       }}
     >
       <Button onClick={onClick}>
@@ -53,15 +53,17 @@ const SwimLane = ({
   const MIN_TILES = 4;
 
   return (
-    <Grid container direction="column">
-      <Grid item>
+    <Grid container direction="column" sx={{ marginBottom: "3vh" }}>
+      <Grid item textAlign="center">
+        <Divider />
         <Typography
           fontFamily={"Lato"}
           variant="h4"
-          sx={{ mt: 4, mb: 4, color: "#4E5166" }}
+          sx={{ mt: 4, mb: 4, color: "#4E5166", margin: 0 }}
         >
           <strong>{name}</strong>
         </Typography>
+        <Divider sx={{ marginBottom: "2vh" }} />
       </Grid>
       <Grid item style={{ width: "90%" }}>
         <Slider

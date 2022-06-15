@@ -163,7 +163,7 @@ export default function ItemPage() {
 
   return (
     <>
-      <Box sx={{ ml: 10, mr: 10, mt: 5, mb: 10 }}>
+      <Box>
         <Grid
           className="breadCrumbs"
           mt={2}
