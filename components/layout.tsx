@@ -27,24 +27,25 @@ export default function Layout({
   } = renderOptions;
 
   return (
-    <div>
+    <div style={{ height: "100vh" }}>
       {renderHeader && <Header />}
       {(renderSides && (
         <Box
           sx={{
+            minHeight: "74vh",
             display: "grid",
             gridTemplateColumns: "repeat(7, 1fr)",
             gridTemplateAreas: `". content content content content content ."`,
             alignItems: "center",
           }}
         >
-          <Box sx={{ gridArea: "content", minHeight: "74vh" }}>
-            <main>{children}</main>
+          <Box sx={{ gridArea: "content" }}>
+            <main style={{ minHeight: "74vh" }}>{children}</main>
           </Box>
         </Box>
       )) || (
-        <Box sx={{ gridArea: "content", margin: 0 }}>
-          <main>{children}</main>
+        <Box sx={{ gridArea: "content", margin: 0, minHeight: "74vh" }}>
+          <main style={{ minHeight: "74vh" }}>{children}</main>
         </Box>
       )}
       {renderFooter && <Footer />}

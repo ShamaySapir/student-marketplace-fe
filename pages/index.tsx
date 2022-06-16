@@ -154,7 +154,7 @@ export default function Page() {
   });
 
   return (
-    <Grid container>
+    <Grid container sx={{ minHeight: "74vh" }}>
       <Grid item xs={2} sx={{ backgroundColor: "#ced9e6" }}>
         <Filters
           services={displayItems}
