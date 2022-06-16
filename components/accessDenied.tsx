@@ -22,52 +22,53 @@ const ColorButton = styled(Button)<ButtonProps>(({ theme }) => ({
 export default function AccessDenied() {
   const AVATAR_SIZE = 180;
   return (
-    <Grid container direction="row">
-      <Grid container spacing={2}>
-        <Grid item xs={6} mt={10} ml={20}>
+    <Grid container textAlign={"center"}>
+      <Grid container spacing={2} paddingTop={10}>
+        <Grid item xs>
           <Typography variant="h2" color={"#224870"} fontFamily="Lato">
-            <strong> Student Social </strong>
-          </Typography>
-          <Typography variant="h2" color={"#224870"} fontFamily="Lato">
-            <strong> Marketplace </strong>
+            <strong> Student Social Marketplace</strong>
           </Typography>
         </Grid>
-        <Grid item xs={4} mt={15}>
+        <Grid container item alignItems="center">
+          <Grid item xs>
+            <ColorButton
+              size="large"
+              style={{ fontFamily: "Lato" }}
+              onClick={() => signIn("google")}
+            >
+              Join us
+            </ColorButton>
+          </Grid>
+
+          <Grid item xs>
+            <Image
+              src={"/images/coin.png"}
+              alt={"logo"}
+              width={"200px"}
+              height={"180px"}
+            />
+          </Grid>
+          <Grid item xs>
+            <ColorButton
+              size="large"
+              href="#CardInfo"
+              style={{ fontFamily: "Lato" }}
+            >
+              About us
+            </ColorButton>
+          </Grid>
+        </Grid>
+        {/* <Grid item xs={4}>
           <Image
             src={"/images/coin.png"}
             alt={"logo"}
             width={"200px"}
             height={"180px"}
           ></Image>
-        </Grid>
-        <Grid item xs={3}>
-          <ColorButton
-            size="large"
-            sx={{ ml: 25 }}
-            style={{ fontFamily: "Lato" }}
-            onClick={() => signIn("google")}
-          >
-            Join us
-          </ColorButton>
-        </Grid>
-        <Grid item xs={4}>
-          <ColorButton
-            size="large"
-            href="#CardInfo"
-            style={{ fontFamily: "Lato" }}
-          >
-            About us
-          </ColorButton>
-        </Grid>
+        </Grid> */}
       </Grid>
 
-      <Grid
-        flex={"auto"}
-        paddingTop={10}
-        id="CardInfo"
-        // alignItems="center"
-        // justifyContent="center"
-      >
+      <Grid flex={"auto"} paddingTop={10} id="CardInfo">
         <Divider variant="middle" />
         <br />
         <Typography
@@ -81,48 +82,8 @@ export default function AccessDenied() {
         <br />
         <Divider variant="middle" />
       </Grid>
-      {/* <Grid container direction="column">
-          <Grid item container justifyContent="center">
-          <Grid item lg={12}>
-              <Typography variant="h2" color={"#224870"}>
-                <strong> Student Social Marketplace </strong>
-              </Typography>
-            </Grid> 
-           <Grid lg={6}>
-              <ColorButton size="large">Join us</ColorButton>
-            </Grid>
-            <Grid lg={6}>
-              <ColorButton size="large" href="#CardInfo">
-                About us
-              </ColorButton>
-            </Grid>
-        </Grid>
-        {/* <Grid item>
-            <Image
-              src={"/images/ether.png"}
-              alt={"logo"}
-              width={"350px"}
-              height={"100px"}
-            ></Image>
-        </Grid> */}
-      {/* </Grid> */}
 
-      {/* <Grid
-          flex={"auto"}
-          paddingTop={10}
-          // alignItems="center"
-          // justifyContent="center"
-      >
-          <Divider variant="fullWidth" />
-          <br />
-          <Typography variant="h3" textAlign={"center"} color={"#224870"}>
-            <strong>Student Social Marketplace</strong>
-          </Typography>
-          <br />
-          <Divider variant="fullWidth" />
-      </Grid> */}
-
-      <Grid container item columns={{ xs: 4, sm: 8, md: 12 }}>
+      <Grid container item columns={{ xs: 4 }}>
         <Grid item xs={3} style={{ flexBasis: "15%" }}></Grid>
         <Grid container direction={"row"} m={5} item xs spacing={5}>
           <Grid item marginTop={"1px"}>
