@@ -77,8 +77,9 @@ export default NextAuth({
   // https://next-auth.js.org/configuration/callbacks
   callbacks: {
     async signIn(user, account, profile) {
-      if (user.email?.endsWith("bgu.ac.il")) return true;
-      return false;
+      // if (user.email?.endsWith("bgu.ac.il")) return true;
+      // return false;
+      return true;
     },
     async redirect(url, baseUrl) {
       return `${baseUrl}`;
