@@ -30,7 +30,13 @@ export default function ServiceTile({
 
   return (
     <Link href={`/service/${id}`} passHref key={id}>
-      <Card style={{ margin: "10px" }}>
+      <Card
+        sx={{
+          margin: "10px",
+          cursor: "pointer",
+          "&:hover": { opacity: "0.7" },
+        }}
+      >
         <CardMedia
           p={3}
           component="img"
