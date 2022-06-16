@@ -77,15 +77,14 @@ function EnhancedTableHead(props: EnhancedTableProps) {
 
   return (
     <TableHead>
-      <TableRow
-        style={{fontFamily:"Lato"}}>
+      <TableRow style={{ fontFamily: "Lato" }}>
         {headCells.map((headCell) => (
           <TableCell
             key={headCell.id}
             align={headCell.numeric ? "right" : "left"}
             padding={headCell.disablePadding ? "none" : "normal"}
             sortDirection={orderBy === headCell.id ? order : false}
-            style={{fontFamily:"Lato"}}
+            style={{ fontFamily: "Lato" }}
           >
             <TableSortLabel
               active={orderBy === headCell.id}
@@ -201,7 +200,6 @@ export default function EnhancedTable({
             sx={{ minWidth: 800 }}
             aria-labelledby="tableTitle"
             size={dense ? "small" : "medium"}
-            
           >
             <EnhancedTableHead
               numSelected={selected.length}
@@ -226,7 +224,7 @@ export default function EnhancedTable({
                       key={row.purchaseId}
                       selected={isItemSelected}
                       style={{
-                        fontFamily:"Lato",
+                        fontFamily: "Lato",
                       }}
                     >
                       <TableCell
@@ -237,7 +235,7 @@ export default function EnhancedTable({
                       >
                         {new Date(row.date).toLocaleDateString("he-IL")}
                       </TableCell>
-                      <TableCell>{row.sellerName}</TableCell>
+                      <TableCell>{row.buyerName || row.sellerName}</TableCell>
                       <TableCell>{row.itemName}</TableCell>
                       <TableCell align="right">{row.quantity}</TableCell>
                       <TableCell align="right">{row.price}</TableCell>
@@ -253,7 +251,7 @@ export default function EnhancedTable({
               {emptyRows > 0 && (
                 <TableRow
                   style={{
-                    fontFamily:"Lato",
+                    fontFamily: "Lato",
                     height: (dense ? 33 : 53) * emptyRows,
                   }}
                 >

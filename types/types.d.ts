@@ -42,6 +42,7 @@ export interface GroupedItems {
 
 export interface PurchaseData {
   buyerId: string;
+  buyerEmail: string;
   itemId: string;
   quantity: number;
 }

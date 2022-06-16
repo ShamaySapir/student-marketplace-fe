@@ -129,6 +129,7 @@ export default function ItemPage() {
     if (blockchainTransferResult !== false) {
       const purchaseResult = await routes.postPurchase({
         buyerId: session?.user.googleId as string,
+        buyerEmail: session?.user.email as string,
         itemId: id as string,
         quantity,
       });

@@ -27,12 +27,6 @@ const headCells: readonly HeadCell[] = [
     label: "Date",
   },
   {
-    id: "sellerName",
-    numeric: false,
-    disablePadding: false,
-    label: "Seller Name",
-  },
-  {
     id: "itemName",
     numeric: false,
     disablePadding: false,
@@ -61,6 +55,21 @@ const headCells: readonly HeadCell[] = [
 const buyerHeadCells: readonly HeadCell[] = [
   ...headCells,
   { id: "rating", numeric: false, disablePadding: false, label: "Rating" },
+  {
+    id: "sellerName",
+    numeric: false,
+    disablePadding: false,
+    label: "Seller Name",
+  },
+];
+const sellerHeadCells: readonly HeadCell[] = [
+  ...headCells,
+  {
+    id: "buyerName",
+    numeric: false,
+    disablePadding: false,
+    label: "Buyer Name",
+  },
 ];
 
 export default function EnhancedTable() {
@@ -161,7 +170,11 @@ export default function EnhancedTable() {
             <strong>Sells History</strong>
           </Typography>
           <Grid mt={5}>
-            <Table data={sellsData} title={"Sells"} headCells={headCells} />
+            <Table
+              data={sellsData}
+              title={"Sells"}
+              headCells={sellerHeadCells}
+            />
           </Grid>
         </Grid>
       )}
