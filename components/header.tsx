@@ -41,6 +41,10 @@ import { setWalletAddress, getWalletAddress } from "../redux/slices/crypto";
 export default function Header() {
   const dispatch = useAppDispatch();
   const walletAccount = useAppSelector(getWalletAddress);
+  const walletAccountMasked = String(walletAccount)
+    .slice(0, 3)
+    .concat("*****")
+    .concat(String(walletAccount).slice(-4, -1));
   const [session, loading] = useSession();
   const [rankedItems, setRankedItems] = useState<number>(0);
   const { activate } = useWeb3React();
@@ -115,7 +119,9 @@ export default function Header() {
                   edge="end"
                   onClick={connect}
                 >
-                  {walletAccount || (
+                  {walletAccount ? (
+                    walletAccountMasked
+                  ) : (
                     <>
                       &nbsp;
                       <WalletIcon />

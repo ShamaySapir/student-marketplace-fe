@@ -2,7 +2,12 @@ import React, { useEffect, useState } from "react";
 import { Grid, Typography, TextField } from "@mui/material";
 import { max, isNumber, toNumber, isNaN } from "lodash";
 
-export default function RangeSlider({ subFilters, title, onFilter }: any) {
+export default function RangeSlider({
+  subFilters,
+  title,
+  onFilter,
+  filterName,
+}: any) {
   const [ranges, setRanges] = useState([0, 0]);
   const [currentRanges, setCurrentRanges] = useState([0, 0]);
 
@@ -27,7 +32,7 @@ export default function RangeSlider({ subFilters, title, onFilter }: any) {
 
       onFilter({
         value: { ranges, currentRanges: newCurrRanges },
-        price: true,
+        [filterName]: true,
       });
     }
   };
@@ -39,7 +44,7 @@ export default function RangeSlider({ subFilters, title, onFilter }: any) {
   return (
     <Grid container>
       <Grid item>
-        <Typography fontFamily={"Lato"} sx={{ ml: "2vh" }}>
+        <Typography fontFamily={"Lato"} sx={{ fontWeight: "bold", ml: "2vh" }}>
           {title}
         </Typography>
       </Grid>

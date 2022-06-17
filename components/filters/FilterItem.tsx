@@ -18,11 +18,15 @@ export interface IFilterItemProps {
   onFilter: any;
 }
 const INDENT = 2;
-import { Price, Rating, TextSearch } from "./renderers";
+import { RangeFilter, TextSearch } from "./renderers";
 const customRenderers = (title: string, subFilters: any, onFilter: any) => {
   const renderers = {
-    Rating: (props: any) => <></>, //<Rating {...props} />,
-    Price: (props: any) => <Price {...props} onFilter={onFilter} />,
+    Rating: (props: any) => (
+      <RangeFilter {...props} onFilter={onFilter} filterName="rating" />
+    ),
+    Price: (props: any) => (
+      <RangeFilter {...props} onFilter={onFilter} filterName="price" />
+    ),
     Title: (props: any) => <TextSearch {...props} onFilter={onFilter} />,
   };
   return ((renderers as any)[title] || noop)({ title, subFilters });

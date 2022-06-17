@@ -60,9 +60,9 @@ export default function FiltersList({
   }, [services]);
 
   return (
-    <List component="nav" sx={{ paddingTop: "13vh" }}>
+    <List component="nav" sx={{ paddingTop: "4vh" }}>
       {map(servicesState.initState, (filterDetails, idx) => (
-        <div style={{ paddingBottom: "8vh" }}>
+        <div style={{ paddingBottom: "6vh" }}>
           <FilterItem
             key={idx}
             title={filterDetails.title}

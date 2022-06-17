@@ -8,10 +8,13 @@ import SwimLane from "../components/swimLane";
 import Filters from "../components/filters";
 import LoaderWithText from "../components/LoaderWithText";
 import { map, filter, groupBy, camelCase, sortBy } from "lodash";
+import { useSession } from "next-auth/client";
+import Image from "next/image";
 
 export default function Page() {
   const [displayItems, setDisplayTileItems] = useState({});
   const [fetchingTilesData, setFetchingTilesData] = useState<Boolean>(false);
+  const [session] = useSession();
 
   useEffect(() => {
     async function fetchDisplayTileData() {
@@ -131,15 +134,18 @@ export default function Page() {
               : state.initServices,
           };
         }
-        if (action.payload.price) {
+        if (action.payload.price || action.payload.rating) {
+          const filterType = action.payload.price ? "price" : "rating";
           return {
             ...state,
             currentServices: action.payload.value
               ? [
                   ...filter(state.initServices, (service) => {
                     return (
-                      service.price >= action.payload.value.currentRanges[0] &&
-                      service.price <= action.payload.value.currentRanges[1]
+                      service[filterType] >=
+                        action.payload.value.currentRanges[0] &&
+                      service[filterType] <=
+                        action.payload.value.currentRanges[1]
                     );
                   }),
                 ]
@@ -167,23 +173,66 @@ export default function Page() {
       )) || (
         <>
           <Grid item xs={2} sx={{ backgroundColor: "#ced9e6" }}>
+            <Typography
+              fontFamily={"Lato"}
+              variant="h5"
+              color={"#224870"}
+              m={3}
+            >
+              Welcome {session!.user.firstName || "You"},
+            </Typography>
+            <Typography
+              fontFamily={"Lato"}
+              variant="h5"
+              color={"#224870"}
+              m={3}
+            >
+              What is your desire today?{" "}
+            </Typography>
             <Filters
               services={displayItems}
               dispatch={dispatch}
               onFilterServices={setDisplayTileItems}
               servicesState={servicesState}
             />
+            <Typography
+              fontFamily={"Lato"}
+              variant="h5"
+              color={"#224870"}
+              m={3}
+            >
+              Recognitions
+            </Typography>
+            <div
+              style={{
+                border: "5px solid #224870",
+                display: "flex",
+                margin: "0 10px",
+                padding: "5px",
+              }}
+            >
+              <Image
+                src={"/images/Tie-comp.png"}
+                alt={"TIE_competition"}
+                width={300}
+                // layout="fill"
+                // objectFit="cover"
+                style={{ border: "2px solid #224870" }}
+                height={500}
+              />
+            </div>
           </Grid>
           <Grid item xs={10} paddingLeft={3}>
             <center>
               <Typography
                 fontFamily={"Lato"}
-                variant="h4"
+                variant="h2"
                 color={"#224870"}
                 justifyContent={"center"}
                 m={5}
+                sx={{ fontWeight: "bold" }}
               >
-                <strong>Marketplace </strong>
+                Marketplace
               </Typography>
             </center>
             <Grid container direction="column">

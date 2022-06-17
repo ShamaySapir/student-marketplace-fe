@@ -1,3 +1,2 @@
-export { default as Price } from "./Price";
-export { default as Rating } from "./Rating";
+export { default as RangeFilter } from "./RangeFilter";
 export { default as TextSearch } from "./TextSearch";
