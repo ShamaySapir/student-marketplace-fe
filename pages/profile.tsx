@@ -25,6 +25,7 @@ import Button, { ButtonProps } from "@mui/material/Button";
 import HomeIcon from "@mui/icons-material/Home";
 import PersonIcon from "@mui/icons-material/Person";
 import NextLink from "next/link";
+import BootstrapDialogTitle from "../components/dialogTitle";
 
 const validationSchema = yup.object({
   firstName: yup
@@ -297,11 +298,9 @@ export default function RegistrationForm() {
         onClose={() => setSuccessfulMessage(false)}
         disableEscapeKeyDown={false}
       >
-        <DialogTitle>
-          <Typography fontFamily="Lato" variant="h6" component="h2">
-            Congratulations!
-          </Typography>
-        </DialogTitle>
+        <BootstrapDialogTitle onClose={() => setSuccessfulMessage(false)}>
+          Congratulations!
+        </BootstrapDialogTitle>
         <DialogContent>
           <Typography fontFamily="Lato" sx={{ mt: 2 }}>
             Your details was changed successfuly

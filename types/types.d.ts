@@ -55,6 +55,7 @@ export interface UserPurchases {
   purchaseId: string;
   buyerId: string;
   buyerName: string;
+  buyerEmail: string;
   date: string;
   sellerId: string;
   sellerName: string;
@@ -68,9 +69,10 @@ export interface UserPurchases {
 
 export interface HeadCell {
   disablePadding: boolean;
-  id: keyof UserPurchases;
+  id: string;
   label: string;
   numeric: boolean;
+  renderer: (data: UserPurchases) => JSX.Element;
 }
 
 export interface RankedItem {

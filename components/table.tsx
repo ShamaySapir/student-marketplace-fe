@@ -13,7 +13,6 @@ import {
   Typography,
   Paper,
 } from "@mui/material";
-import Rating from "../components/Rating";
 import { visuallyHidden } from "@mui/utils";
 import { HeadCell, UserPurchases } from "../types/types";
 
@@ -71,17 +70,16 @@ interface EnhancedTableProps {
 function EnhancedTableHead(props: EnhancedTableProps) {
   const { order, orderBy, onRequestSort, headCells } = props;
   const createSortHandler =
-    (property: keyof UserPurchases) => (event: React.MouseEvent<unknown>) => {
+    (property: any) => (event: React.MouseEvent<unknown>) => {
       onRequestSort(event, property);
     };
 
   return (
     <TableHead>
       <TableRow style={{ fontFamily: "Lato" }}>
-        {headCells.map((headCell) => (
+        {headCells.map((headCell: HeadCell) => (
           <TableCell
             key={headCell.id}
-            align={headCell.numeric ? "right" : "left"}
             padding={headCell.disablePadding ? "none" : "normal"}
             sortDirection={orderBy === headCell.id ? order : false}
             style={{ fontFamily: "Lato" }}
@@ -227,24 +225,10 @@ export default function EnhancedTable({
                         fontFamily: "Lato",
                       }}
                     >
-                      <TableCell
-                        component="th"
-                        id={labelId}
-                        scope="row"
-                        padding="none"
-                      >
-                        {new Date(row.date).toLocaleDateString("he-IL")}
-                      </TableCell>
-                      <TableCell>{row.buyerName || row.sellerName}</TableCell>
-                      <TableCell>{row.itemName}</TableCell>
-                      <TableCell align="right">{row.quantity}</TableCell>
-                      <TableCell align="right">{row.price}</TableCell>
-                      <TableCell align="right">{row.totalPrice}</TableCell>
-                      {row.rating !== undefined && (
-                        <TableCell align="right">
-                          <Rating value={row.rating} itemId={row.itemId} />
-                        </TableCell>
-                      )}
+                      {headCells.map((headCell: HeadCell, id: number) => (
+                        // @ts-ignore
+                        <TableCell key={id}>{headCell.renderer(row)}</TableCell>
+                      ))}
                     </TableRow>
                   );
                 })}

@@ -393,10 +393,7 @@ export default function ItemPage() {
         <Grid container></Grid>
 
         <Dialog open={open} disableEscapeKeyDown={false}>
-          <BootstrapDialogTitle
-            id="customized-dialog-title"
-            onClose={() => handleClose()}
-          >
+          <BootstrapDialogTitle onClose={() => handleClose()}>
             Your purchase completed successfully
           </BootstrapDialogTitle>
           <DialogContent>
@@ -425,11 +422,7 @@ export default function ItemPage() {
           </DialogContent>
           <DialogActions>
             <NextLink href="/">
-              <Link href="/">
-                <Button style={{ fontFamily: "Lato" }}>
-                  Back to main page
-                </Button>
-              </Link>
+              <Button style={{ fontFamily: "Lato" }}>Back to main page</Button>
             </NextLink>
           </DialogActions>
         </Dialog>
