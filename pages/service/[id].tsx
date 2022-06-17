@@ -403,7 +403,7 @@ export default function ItemPage() {
             <Typography fontFamily="Lato" variant="h6" sx={{ mt: 2 }}>
               Product/Service Name: {getItemDesc.title}
             </Typography>
-            <Typography variant="h6">
+            <Typography fontFamily="Lato" variant="h6">
               Seller Description: {getItemDesc.sellerDesc}
             </Typography>
             <Typography fontFamily="Lato" variant="h6">
@@ -421,9 +421,13 @@ export default function ItemPage() {
             </Typography>
           </DialogContent>
           <DialogActions>
-            <NextLink href="/">
-              <Button style={{ fontFamily: "Lato" }}>Back to main page</Button>
-            </NextLink>
+            <Grid container justifyContent="center">
+              <NextLink href="/">
+                <Button style={{ fontFamily: "Lato" }} variant="outlined">
+                  Back to main page
+                </Button>
+              </NextLink>
+            </Grid>
           </DialogActions>
         </Dialog>
       </Box>

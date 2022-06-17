@@ -24,12 +24,14 @@ import { UserType } from "../constants";
 import SellIcon from "@mui/icons-material/Sell";
 import Button, { ButtonProps } from "@mui/material/Button";
 import StorefrontIcon from "@mui/icons-material/Storefront";
+import BootstrapDialogTitle from "../components/dialogTitle";
+
 import NextLink from "next/link";
 const validationSchema = yup.object({
   displayName: yup
     .string()
-    .min(2, "Too Short!")
-    .max(25, "Too Long!")
+    .min(3, "Too Short!")
+    .max(20, "Too Long!")
     .matches(/^[A-Za-z ]+$/, "Should contain only letters!")
     .required("Required"),
   sellerDesc: yup
@@ -174,7 +176,7 @@ export default function BecomeASellerForm() {
             <TextField
               fullWidth
               id="displayName"
-              name="Display Name"
+              name="displayName"
               value={formik.values.displayName}
               onChange={formik.handleChange}
               error={
@@ -301,25 +303,23 @@ export default function BecomeASellerForm() {
         onClose={() => setSuccessfulMessage(false)}
         disableEscapeKeyDown={false}
       >
-        <DialogTitle>
-          <Typography fontFamily="Lato" variant="h2" component="h2">
-            Congratulations!
-          </Typography>
-          <Divider></Divider>
-        </DialogTitle>
+        <BootstrapDialogTitle onClose={() => setSuccessfulMessage(false)}>
+          Congratulations!
+        </BootstrapDialogTitle>
         <DialogContent>
           <Typography fontFamily="Lato" sx={{ mt: 2 }}>
-            You are now a seller
+            You are now a seller.
           </Typography>
         </DialogContent>
+
         <DialogActions>
-          <NextLink href="/service/new">
-            <Link href="/service/new">
-              <ColorButton style={{ fontFamily: "Lato" }}>
-                Add your first service/product{" "}
-              </ColorButton>
-            </Link>
-          </NextLink>
+          <Grid container justifyContent="center">
+            <NextLink href="/service/new">
+              <Button style={{ fontFamily: "Lato" }} variant="outlined">
+                Add your first service/product
+              </Button>
+            </NextLink>
+          </Grid>
         </DialogActions>
       </Dialog>
     </>

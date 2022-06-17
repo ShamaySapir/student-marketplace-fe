@@ -2,9 +2,9 @@ import React, { useEffect, useState } from "react";
 import {
   TextField,
   Dialog,
-  DialogTitle,
   Typography,
   DialogContent,
+  DialogActions,
   Stack,
   Box,
   Divider,
@@ -28,21 +28,11 @@ import NextLink from "next/link";
 import BootstrapDialogTitle from "../components/dialogTitle";
 
 const validationSchema = yup.object({
-  firstName: yup
-    .string()
-    .min(2, "Too Short!")
-    .max(50, "Too Long!")
-    .required("Required"),
-  lastName: yup
-    .string()
-    .min(2, "Too Short!")
-    .max(50, "Too Long!")
-    .required("Required"),
-  email: yup.string().email("Invalid email").required("Required"),
   displayName: yup
     .string()
-    .min(2, "Too Short!")
+    .min(3, "Too Short!")
     .max(20, "Too Long!")
+    .matches(/^[A-Za-z ]+$/, "Should contain only letters!")
     .required("Required"),
   walletNumber: yup
     .string()
@@ -306,6 +296,15 @@ export default function RegistrationForm() {
             Your details was changed successfuly
           </Typography>
         </DialogContent>
+        <DialogActions>
+          <Grid container justifyContent="center">
+            <NextLink href="/">
+              <Button style={{ fontFamily: "Lato" }} variant="outlined">
+                Back to main page
+              </Button>
+            </NextLink>
+          </Grid>
+        </DialogActions>
       </Dialog>
     </>
   );
