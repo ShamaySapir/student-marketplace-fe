@@ -45,9 +45,9 @@ const validationSchema = yup.object({
     .max(50, "Too Long!")
     .required("Required"),
   phone: yup
-    .string()
-    .min(10, "Phone number is not valid")
-    .max(10, "Phone number is not valid")
+    .number()
+    .min(1000000000, "Should contain only numbers")
+    .max(9999999999, "Should contain only numbers")
     .required("Required"),
 });
 interface IUserDetails {
