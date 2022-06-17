@@ -293,7 +293,7 @@ export default function RegistrationForm() {
         </BootstrapDialogTitle>
         <DialogContent>
           <Typography fontFamily="Lato" sx={{ mt: 2 }}>
-            Your details was changed successfuly
+            Your details were changed successfully
           </Typography>
         </DialogContent>
         <DialogActions>
