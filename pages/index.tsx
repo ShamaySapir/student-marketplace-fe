@@ -3,16 +3,21 @@ import React, { useEffect, useState, useReducer } from "react";
 import ServiceTile from "../components/serviceTile";
 import * as routes from "../tools/api/routes";
 import { DescriptionItem } from "../types/types";
-import { Divider, Grid, Typography } from "@mui/material";
+import { Grid, Typography } from "@mui/material";
 import SwimLane from "../components/swimLane";
 import Filters from "../components/filters";
+import LoaderWithText from "../components/LoaderWithText";
 import { map, filter, groupBy, camelCase, sortBy } from "lodash";
 
 export default function Page() {
   const [displayItems, setDisplayTileItems] = useState({});
+  const [fetchingTilesData, setFetchingTilesData] = useState<Boolean>(false);
+
   useEffect(() => {
     async function fetchDisplayTileData() {
+      setFetchingTilesData(true);
       const itemsToShow = await routes.getDisplayTileData();
+      setFetchingTilesData(false);
       setDisplayTileItems(itemsToShow);
     }
     fetchDisplayTileData();
@@ -155,40 +160,48 @@ export default function Page() {
 
   return (
     <Grid container sx={{ minHeight: "74vh" }}>
-      <Grid item xs={2} sx={{ backgroundColor: "#ced9e6" }}>
-        <Filters
-          services={displayItems}
-          dispatch={dispatch}
-          onFilterServices={setDisplayTileItems}
-          servicesState={servicesState}
-        />
-      </Grid>
-      <Grid item xs={10} paddingLeft={3}>
-        <center>
-          <Typography
-            fontFamily={"Lato"}
-            variant="h4"
-            color={"#224870"}
-            justifyContent={"center"}
-            m={5}
-          >
-            <strong>Marketplace </strong>
-          </Typography>
-        </center>
-        <Grid container direction="column">
-          {map(
-            groupBy(servicesState.currentServices, "serviceGroup"),
-            (tileData, category) => (
-              <Grid container item key={category}>
-                <SwimLane
-                  serviceTiles={prepareSlides(tileData)}
-                  name={category}
-                />
-              </Grid>
-            )
-          )}
+      {(fetchingTilesData && (
+        <Grid container item xs justifyContent="center" alignItems="center">
+          <LoaderWithText />
         </Grid>
-      </Grid>
+      )) || (
+        <>
+          <Grid item xs={2} sx={{ backgroundColor: "#ced9e6" }}>
+            <Filters
+              services={displayItems}
+              dispatch={dispatch}
+              onFilterServices={setDisplayTileItems}
+              servicesState={servicesState}
+            />
+          </Grid>
+          <Grid item xs={10} paddingLeft={3}>
+            <center>
+              <Typography
+                fontFamily={"Lato"}
+                variant="h4"
+                color={"#224870"}
+                justifyContent={"center"}
+                m={5}
+              >
+                <strong>Marketplace </strong>
+              </Typography>
+            </center>
+            <Grid container direction="column">
+              {map(
+                groupBy(servicesState.currentServices, "serviceGroup"),
+                (tileData, category) => (
+                  <Grid container item key={category}>
+                    <SwimLane
+                      serviceTiles={prepareSlides(tileData)}
+                      name={category}
+                    />
+                  </Grid>
+                )
+              )}
+            </Grid>
+          </Grid>
+        </>
+      )}
     </Grid>
   );
 }

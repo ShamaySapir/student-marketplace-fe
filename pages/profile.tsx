@@ -304,7 +304,7 @@ export default function RegistrationForm() {
         </DialogTitle>
         <DialogContent>
           <Typography fontFamily="Lato" sx={{ mt: 2 }}>
-            Your display name was changed successfuly
+            Your details was changed successfuly
           </Typography>
         </DialogContent>
       </Dialog>
