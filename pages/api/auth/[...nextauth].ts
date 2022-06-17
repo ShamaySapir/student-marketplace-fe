@@ -84,15 +84,21 @@ export default NextAuth({
       return `${baseUrl}`;
     },
     async session(session, user): Promise<Session> {
-      let userInfo;
+      let userTypeInfo;
+      let enrichedUserData;
       try {
-        userInfo = await routes.getUserType({
+        userTypeInfo = await routes.getUserType({
+          userId: user.id as string,
+        });
+        enrichedUserData = await routes.getUserDetails({
           userId: user.id as string,
         });
       } catch (e) {
         console.log(e);
       }
-      const isSeller = userInfo?.isSeller ? UserType.seller : UserType.buyer;
+      const isSeller = userTypeInfo?.isSeller
+        ? UserType.seller
+        : UserType.buyer;
 
       return {
         ...session,
@@ -101,6 +107,7 @@ export default NextAuth({
           displayName: session.user.name as string,
           firstName: session.user.name!.split(" ")?.[0] || "",
           lastName: session.user.name!.split(" ")?.[1] || "",
+          ...enrichedUserData,
           googleId: user.id,
           type: isSeller,
         },

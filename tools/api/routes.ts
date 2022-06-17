@@ -62,6 +62,17 @@ export const deleteUser = async ({ userId }: { userId: string }) => {
   } as AxiosRequestConfig);
 };
 
+export const getUserDetails = async ({ userId }: { userId: string }) => {
+  const payload = {
+    method: "GET",
+    route: `/user/${userId}`,
+  };
+  return getBaseRequestor({
+    url: payload.route,
+    ...payload,
+  } as AxiosRequestConfig);
+};
+
 export const getUserType = async ({
   userId,
 }: {
