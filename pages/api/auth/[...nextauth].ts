@@ -87,7 +87,7 @@ export default NextAuth({
       let userTypeInfo;
       let enrichedUserData;
       try {
-        const [userTypeInfo, enrichedUserData] = await Promise.all([
+        [userTypeInfo, enrichedUserData] = await Promise.all([
           routes.getUserType({
             userId: user.id as string,
           }),
