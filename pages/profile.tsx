@@ -81,8 +81,8 @@ export default function RegistrationForm() {
           email: loggedInUser.email,
           firstName: updatedSession!.user.firstName as string,
           lastName: updatedSession!.user.lastName as string,
-          displayName: updatedSession?.user?.displayName as string,
-          isSeller: updatedSession?.user?.isSeller,
+          displayName: updatedSession!.user?.displayName as string,
+          isSeller: updatedSession!.user?.isSeller as boolean,
           walletNumber:
             (updatedSession!.user.walletNumber as string) || walletAccount,
         });
