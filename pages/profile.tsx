@@ -17,7 +17,7 @@ import { useAppSelector } from "../redux/hooks";
 import { getWalletAddress } from "../redux/slices/crypto";
 
 import { useFormik } from "formik";
-import { useSession } from "next-auth/client";
+import { useSession, getSession } from "next-auth/client";
 import * as routes from "../tools/api/routes";
 import * as yup from "yup";
 import { styled } from "@mui/material/styles";
@@ -27,6 +27,8 @@ import PersonIcon from "@mui/icons-material/Person";
 import NextLink from "next/link";
 import BootstrapDialogTitle from "../components/dialogTitle";
 import * as validations from "../tools/validations";
+import { useAppDispatch } from "../redux/hooks";
+import { setShouldInvalidate } from "../redux/slices/user";
 
 const validationSchema = yup.object({
   ...validations.DISPLAY_NAME_VALIDATION,
@@ -54,6 +56,7 @@ const ColorButton = styled(Button)<ButtonProps>(({ theme }) => ({
 }));
 
 export default function RegistrationForm() {
+  const dispatch = useAppDispatch();
   const walletAccount = useAppSelector(getWalletAddress);
   const [session, loading] = useSession();
   const [getSuccessfulMessage, setSuccessfulMessage] = useState<boolean>(false);
@@ -66,17 +69,22 @@ export default function RegistrationForm() {
   });
 
   useEffect(() => {
-    if (!loading && session!.user) {
-      const loggedInUser = session!.user;
-      setUser({
-        email: loggedInUser.email,
-        firstName: session!.user.firstName as string,
-        lastName: session!.user.lastName as string,
-        displayName: session!.user.displayName as string,
-        walletNumber: (session!.user.walletNumber as string) || walletAccount,
-      });
-    }
-  }, [session, walletAccount, loading]);
+    const getUpdatedSession = async () => {
+      const updatedSession = await getSession();
+      const loggedInUser = updatedSession!.user;
+      if (!loading && updatedSession!.user) {
+        setUser({
+          email: loggedInUser.email,
+          firstName: updatedSession!.user.firstName as string,
+          lastName: updatedSession!.user.lastName as string,
+          displayName: updatedSession?.user?.displayName as string,
+          walletNumber:
+            (updatedSession!.user.walletNumber as string) || walletAccount,
+        });
+      }
+    };
+    getUpdatedSession();
+  });
   const formik = useFormik({
     initialValues: {
       email: user.email,
@@ -97,6 +105,7 @@ export default function RegistrationForm() {
         googleId: session!.user.googleId,
       };
       const response = await routes.updateUser(payload);
+      dispatch(setShouldInvalidate(true));
       setSuccessfulMessage(response.status === 200);
     },
   });

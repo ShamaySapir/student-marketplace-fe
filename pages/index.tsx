@@ -8,13 +8,20 @@ import SwimLane from "../components/swimLane";
 import Filters from "../components/filters";
 import LoaderWithText from "../components/LoaderWithText";
 import { map, filter, groupBy, camelCase, sortBy } from "lodash";
-import { useSession } from "next-auth/client";
+import { getSession } from "next-auth/client";
 import Image from "next/image";
 
 export default function Page() {
   const [displayItems, setDisplayTileItems] = useState({});
+  const [getUpdateSessionData, setUpdateSessionData] = useState();
   const [fetchingTilesData, setFetchingTilesData] = useState<Boolean>(false);
-  const [session] = useSession();
+  useEffect(() => {
+    const getUpdatedSession = async () => {
+      const updatedSession = await getSession();
+      setUpdateSessionData(updatedSession);
+    };
+    getUpdatedSession();
+  }, []);
 
   useEffect(() => {
     async function fetchDisplayTileData() {
@@ -179,7 +186,7 @@ export default function Page() {
               color={"#224870"}
               m={3}
             >
-              Welcome {session!.user.displayName || "You"},
+              Welcome {getUpdateSessionData?.user?.displayName || "You"},
             </Typography>
             <Typography
               fontFamily={"Lato"}

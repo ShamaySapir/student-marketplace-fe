@@ -29,7 +29,6 @@ interface IProps {
 export default function App({ Component, pageProps }: IProps) {
   const [session, loading] = useSession();
   const getLibrary = (providerInstance: provider) => new Web3(providerInstance);
-
   // When rendering client side don't display anything until loading is complete
   if (typeof window !== "undefined" && loading) return null;
   const { renderLayout } = pageProps;

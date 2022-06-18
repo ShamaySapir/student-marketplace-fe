@@ -1,7 +1,5 @@
 import Header from "../components/header";
 import Footer from "../components/footer";
-import { useState } from "react";
-import { useSession } from "next-auth/client";
 import React from "react";
 import { Box } from "@mui/material";
 

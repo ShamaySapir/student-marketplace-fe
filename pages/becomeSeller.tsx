@@ -14,7 +14,7 @@ import {
 } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import { useFormik } from "formik";
-import { useSession } from "next-auth/client";
+import { useSession, getSession } from "next-auth/client";
 import { Session } from "next-auth";
 import * as yup from "yup";
 import { Home } from "@mui/icons-material";
@@ -60,12 +60,17 @@ export default function BecomeASellerForm() {
   });
 
   useEffect(() => {
-    if (!loading && session?.user) {
-      setUser({
-        displayName: session.user.displayName,
-      });
-    }
-  }, [session, loading]);
+    const getUpdatedSession = async () => {
+      const updatedSession = await getSession();
+      if (!loading && updatedSession!.user) {
+        setUser({
+          displayName: updatedSession?.user?.displayName as string,
+        });
+      }
+    };
+    getUpdatedSession();
+  });
+
   const formik = useFormik({
     initialValues: {
       displayName: user.displayName,
@@ -90,6 +95,7 @@ export default function BecomeASellerForm() {
         googleId: session!.user.googleId,
       };
       const response = await routes.updateUser(payload);
+      await getSession({ event: "storage" });
       setSuccessfulMessage(response.status === 200);
       session!.user.type = UserType.seller;
     },
