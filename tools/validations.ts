@@ -26,8 +26,8 @@ export const WALLET_NUMBER_VALIDATION = {
 export const PHONE_NUMBER_VALIDATION = {
   phone: yup
     .number()
-    .min(1000000000, "Should contain only numbers")
-    .max(9999999999, "Should contain only numbers")
+    .min(1000000000, "Phone number is not valid")
+    .max(9999999999, "Phone number is not valid")
     .required("Required"),
 };
 
