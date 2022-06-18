@@ -33,7 +33,7 @@ const validationSchema = yup.object({
   itemTypeId: yup.string().required("Required"),
   itemName: yup
     .string()
-    .min(2, "Too Short!")
+    .min(5, "Too Short!")
     .max(25, "Too Long!")
     .required("Required"),
   itemDesc: yup
