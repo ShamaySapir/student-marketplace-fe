@@ -87,12 +87,14 @@ export default NextAuth({
       let userTypeInfo;
       let enrichedUserData;
       try {
-        userTypeInfo = await routes.getUserType({
-          userId: user.id as string,
-        });
-        enrichedUserData = await routes.getUserDetails({
-          userId: user.id as string,
-        });
+        const [userTypeInfo, enrichedUserData] = await Promise.all([
+          routes.getUserType({
+            userId: user.id as string,
+          }),
+          routes.getUserDetails({
+            userId: user.id as string,
+          }),
+        ]);
       } catch (e) {
         console.log(e);
       }
