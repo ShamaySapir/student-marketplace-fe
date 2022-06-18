@@ -51,16 +51,16 @@ const CrewFooterInfo = ({
 );
 const crewInfo = [
   {
-    name: "Sapir Shamay",
-    liHref: "https://www.linkedin.com/in/sapir-shamay/",
-    image: "/images/Sapir.png",
-    emailAddress: "sapirnag@post.bgu.ac.il",
-  },
-  {
     name: "Lior Savchenko",
     liHref: "https://www.linkedin.com/in/lior-savchenko-6692101a8/",
     image: "/images/lior.jpg",
     emailAddress: "LIORSAV@post.bgu.ac.il",
+  },
+  {
+    name: "Sapir Shamay",
+    liHref: "https://www.linkedin.com/in/sapir-shamay/",
+    image: "/images/Sapir.png",
+    emailAddress: "sapirnag@post.bgu.ac.il",
   },
   {
     name: "Dor Shireto",
