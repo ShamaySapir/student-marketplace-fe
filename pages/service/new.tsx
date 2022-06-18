@@ -1,12 +1,15 @@
 import React, { useEffect, useState } from "react";
 import { useRouter } from "next/router";
-import Button, { ButtonProps } from "@mui/material/Button";
+import { ButtonProps } from "@mui/material/Button";
+
 import AddIcon from "@mui/icons-material/Add";
 import {
   TextField,
   MenuItem,
   Stack,
   Dialog,
+  Button,
+  CircularProgress,
   DialogTitle,
   Typography,
   DialogContent,
@@ -30,22 +33,21 @@ import * as filestack from "filestack-js";
 let imgurl = "";
 
 const validationSchema = yup.object({
-  itemTypeId: yup.string().required("Required"),
+  itemTypeId: yup.string().required("Category must be specified"),
   itemName: yup
     .string()
-    .min(5, "Too Short!")
-    .max(25, "Too Long!")
-    .required("Required"),
+    .min(5, "Minimum length is 5 characters")
+    .max(25, "Maximum length is 25 characters")
+    .required("Name must be specified"),
   itemDesc: yup
     .string()
-    .min(10, "Too Short!")
-    .max(500, "Too Long!")
-    .required("Required"),
+    .min(10, "Minimum length is 10 characters")
+    .max(500, "Maximum length is 500 characters")
+    .required("Description must be specified"),
   itemPrice: yup
     .number()
-    .min(0, "Too cheap")
-    // .max(100, "Too expensive")
-    .required("Required"),
+    .min(0, "Minimum price must be 0")
+    .required("Price must be specified"),
 });
 
 // const uploadImage = async (
@@ -64,7 +66,7 @@ export default function AddServiceForm() {
   const options = {
     maxFiles: 1,
     uploadInBackground: false,
-    onOpen: () => console.log("opened!"),
+    onOpen: () => {},
     onUploadDone: (res: any) => {
       imgurl = res.filesUploaded[0].url;
     },
@@ -99,6 +101,7 @@ export default function AddServiceForm() {
     enableReinitialize: true,
     validationSchema: validationSchema,
     onSubmit: async (values) => {
+      setLoading(true);
       const payload = {
         title: values.itemName,
         serviceGroup: values.itemTypeId,
@@ -116,6 +119,7 @@ export default function AddServiceForm() {
           router.push(`/service/${response.data.itemId}`);
         }
       }
+      setLoading(false);
     },
   });
   const ColorButton = styled(Button)<ButtonProps>(({ theme }) => ({
@@ -303,9 +307,11 @@ export default function AddServiceForm() {
               color="primary"
               variant="contained"
               fullWidth
+              disabled={getLoading}
               type="submit"
               endIcon={<AddIcon />}
             >
+              {getLoading && <CircularProgress color="inherit" size={20} />}{" "}
               <strong>Add </strong>
             </ColorButton>
           </Stack>
