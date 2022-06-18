@@ -28,6 +28,7 @@ import NextLink from "next/link";
 import BootstrapDialogTitle from "../components/dialogTitle";
 import * as validations from "../tools/validations";
 import { useAppDispatch } from "../redux/hooks";
+import { UserType } from "../constants";
 
 const validationSchema = yup.object({
   ...validations.DISPLAY_NAME_VALIDATION,
@@ -40,6 +41,7 @@ interface IUserDetails {
   lastName: stringOrUndefinendOrNull;
   displayName: stringOrUndefinendOrNull;
   walletNumber: stringOrUndefinendOrNull;
+  isSeller: stringOrUndefinendOrNull;
 }
 
 const ColorButton = styled(Button)<ButtonProps>(({ theme }) => ({
@@ -65,6 +67,7 @@ export default function RegistrationForm() {
     lastName: "",
     displayName: "",
     walletNumber: "",
+    isSeller: false,
   });
 
   useEffect(() => {
@@ -77,13 +80,14 @@ export default function RegistrationForm() {
           firstName: updatedSession!.user.firstName as string,
           lastName: updatedSession!.user.lastName as string,
           displayName: updatedSession?.user?.displayName as string,
+          isSeller: updatedSession?.user?.isSeller,
           walletNumber:
             (updatedSession!.user.walletNumber as string) || walletAccount,
         });
       }
     };
     getUpdatedSession();
-  });
+  }, []);
   const formik = useFormik({
     initialValues: {
       email: user.email,
@@ -100,9 +104,10 @@ export default function RegistrationForm() {
         lastName: session!.user.lastName,
         displayName: values.displayName,
         email: session!.user.email,
-        isSeller: false,
+        isSeller: session!.user.type === UserType.seller,
         googleId: session!.user.googleId,
       };
+      console.log(payload);
       const response = await routes.updateUser(payload);
       setSuccessfulMessage(response.status === 200);
     },

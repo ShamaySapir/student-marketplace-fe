@@ -69,7 +69,7 @@ export default function BecomeASellerForm() {
       }
     };
     getUpdatedSession();
-  });
+  }, []);
 
   const formik = useFormik({
     initialValues: {
