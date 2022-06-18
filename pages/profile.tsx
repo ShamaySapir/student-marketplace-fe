@@ -35,13 +35,15 @@ const validationSchema = yup.object({
   ...validations.WALLET_NUMBER_VALIDATION,
 });
 type stringOrUndefinendOrNull = string | undefined | null;
+type booleanOrUndefinendOrNull = boolean | undefined | null;
+
 interface IUserDetails {
   email: stringOrUndefinendOrNull;
   firstName: stringOrUndefinendOrNull;
   lastName: stringOrUndefinendOrNull;
   displayName: stringOrUndefinendOrNull;
   walletNumber: stringOrUndefinendOrNull;
-  isSeller: stringOrUndefinendOrNull;
+  isSeller: booleanOrUndefinendOrNull;
 }
 
 const ColorButton = styled(Button)<ButtonProps>(({ theme }) => ({
@@ -106,8 +108,8 @@ export default function RegistrationForm() {
         email: session!.user.email,
         isSeller: session!.user.type === UserType.seller,
         googleId: session!.user.googleId,
+        walletNumber: values.walletNumber,
       };
-      console.log(payload);
       const response = await routes.updateUser(payload);
       setSuccessfulMessage(response.status === 200);
     },
