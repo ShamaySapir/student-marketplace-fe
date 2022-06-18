@@ -28,7 +28,6 @@ import NextLink from "next/link";
 import BootstrapDialogTitle from "../components/dialogTitle";
 import * as validations from "../tools/validations";
 import { useAppDispatch } from "../redux/hooks";
-import { setShouldInvalidate } from "../redux/slices/user";
 
 const validationSchema = yup.object({
   ...validations.DISPLAY_NAME_VALIDATION,
@@ -105,7 +104,6 @@ export default function RegistrationForm() {
         googleId: session!.user.googleId,
       };
       const response = await routes.updateUser(payload);
-      dispatch(setShouldInvalidate(true));
       setSuccessfulMessage(response.status === 200);
     },
   });
