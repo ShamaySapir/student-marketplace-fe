@@ -106,7 +106,7 @@ export default function RegistrationForm() {
         lastName: session!.user.lastName,
         displayName: values.displayName,
         email: session!.user.email,
-        isSeller: session!.user.type === UserType.seller,
+        // isSeller: session!.user.type === UserType.seller,
         googleId: session!.user.googleId,
         walletNumber: values.walletNumber,
       };
