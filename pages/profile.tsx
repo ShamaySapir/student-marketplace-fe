@@ -26,19 +26,11 @@ import HomeIcon from "@mui/icons-material/Home";
 import PersonIcon from "@mui/icons-material/Person";
 import NextLink from "next/link";
 import BootstrapDialogTitle from "../components/dialogTitle";
+import * as validations from "../tools/validations";
 
 const validationSchema = yup.object({
-  displayName: yup
-    .string()
-    .min(3, "Too Short!")
-    .max(20, "Too Long!")
-    .matches(/^[A-Za-z ]+$/, "Should contain only letters!")
-    .required("Required"),
-  walletNumber: yup
-    .string()
-    .min(3, "Too Short!")
-    .max(50, "Too Long!")
-    .required("Required"),
+  ...validations.DISPLAY_NAME_VALIDATION,
+  ...validations.WALLET_NUMBER_VALIDATION,
 });
 type stringOrUndefinendOrNull = string | undefined | null;
 interface IUserDetails {

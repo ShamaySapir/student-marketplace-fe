@@ -4,7 +4,6 @@ import {
   Stack,
   Dialog,
   Typography,
-  DialogTitle,
   DialogContent,
   DialogActions,
   Box,
@@ -25,30 +24,13 @@ import SellIcon from "@mui/icons-material/Sell";
 import Button, { ButtonProps } from "@mui/material/Button";
 import StorefrontIcon from "@mui/icons-material/Storefront";
 import BootstrapDialogTitle from "../components/dialogTitle";
-
+import * as validations from "../tools/validations";
 import NextLink from "next/link";
 const validationSchema = yup.object({
-  displayName: yup
-    .string()
-    .min(3, "Too Short!")
-    .max(20, "Too Long!")
-    .matches(/^[A-Za-z ]+$/, "Should contain only letters!")
-    .required("Required"),
-  sellerDesc: yup
-    .string()
-    .min(10, "Too Short!")
-    .max(500, "Too Long!")
-    .required("Required"),
-  walletNumber: yup
-    .string()
-    .min(3, "Too Short!")
-    .max(50, "Too Long!")
-    .required("Required"),
-  phone: yup
-    .number()
-    .min(1000000000, "Should contain only numbers")
-    .max(9999999999, "Should contain only numbers")
-    .required("Required"),
+  ...validations.DISPLAY_NAME_VALIDATION,
+  ...validations.SELLER_DESC_VALIDATION,
+  ...validations.WALLET_NUMBER_VALIDATION,
+  ...validations.PHONE_NUMBER_VALIDATION,
 });
 interface IUserDetails {
   displayName: Session["displayName"];

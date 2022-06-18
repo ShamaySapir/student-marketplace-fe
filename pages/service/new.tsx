@@ -28,26 +28,16 @@ import { ItemType } from "../../types/types";
 import { Home } from "@mui/icons-material";
 import { useSession } from "next-auth/client";
 import NextLink from "next/link";
+import * as validations from "../../tools/validations";
+
 // Dor
 import * as filestack from "filestack-js";
 let imgurl = "";
 
 const validationSchema = yup.object({
-  itemTypeId: yup.string().required("Category must be specified"),
-  itemName: yup
-    .string()
-    .min(5, "Minimum length is 5 characters")
-    .max(25, "Maximum length is 25 characters")
-    .required("Name must be specified"),
-  itemDesc: yup
-    .string()
-    .min(10, "Minimum length is 10 characters")
-    .max(500, "Maximum length is 500 characters")
-    .required("Description must be specified"),
-  itemPrice: yup
-    .number()
-    .min(0, "Minimum price must be 0")
-    .required("Price must be specified"),
+  ...validations.ITEM_TYPE_ID_VALIDATION,
+  ...validations.ITEM_DESC_VALIDATION,
+  ...validations.ITEM_PRICE_VALIDATION,
 });
 
 // const uploadImage = async (
