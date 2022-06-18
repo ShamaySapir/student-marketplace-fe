@@ -179,7 +179,7 @@ export default function Page() {
               color={"#224870"}
               m={3}
             >
-              Welcome {session!.user.firstName || "You"},
+              Welcome {session!.user.displayName || "You"},
             </Typography>
             <Typography
               fontFamily={"Lato"}

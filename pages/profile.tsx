@@ -72,7 +72,7 @@ export default function RegistrationForm() {
         email: loggedInUser.email,
         firstName: session!.user.firstName as string,
         lastName: session!.user.lastName as string,
-        displayName: session!.user.name as string,
+        displayName: session!.user.displayName as string,
         walletNumber: (session!.user.walletNumber as string) || walletAccount,
       });
     }

@@ -67,10 +67,11 @@ export const getUserDetails = async ({ userId }: { userId: string }) => {
     method: "GET",
     route: `/user/${userId}`,
   };
-  return getBaseRequestor({
+  const resp = await getBaseRequestor({
     url: payload.route,
     ...payload,
   } as AxiosRequestConfig);
+  return resp?.data || {};
 };
 
 export const getUserType = async ({
