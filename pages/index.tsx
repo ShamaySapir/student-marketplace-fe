@@ -14,11 +14,15 @@ import Image from "next/image";
 export default function Page() {
   const [displayItems, setDisplayTileItems] = useState({});
   const [getUpdateSessionData, setUpdateSessionData] = useState();
+  const [fetchingSession, setFetchingSession] = useState(false);
+
   const [fetchingTilesData, setFetchingTilesData] = useState<Boolean>(false);
   useEffect(() => {
     const getUpdatedSession = async () => {
+      setFetchingSession(true);
       const updatedSession = await getSession();
       setUpdateSessionData(updatedSession);
+      setFetchingSession(false);
     };
     getUpdatedSession();
   }, []);
@@ -179,41 +183,82 @@ export default function Page() {
         </Grid>
       )) || (
         <>
-          <Grid item xs={2} sx={{ backgroundColor: "#ced9e6" }}>
-            <Typography
-              fontFamily={"Lato"}
-              variant="h5"
-              color={"#224870"}
-              m={3}
-            >
-              Welcome {getUpdateSessionData?.user?.displayName || "You"},
-            </Typography>
-            <Typography
-              fontFamily={"Lato"}
-              variant="h5"
-              color={"#224870"}
-              m={3}
-            >
-              What is your desire today?{" "}
-            </Typography>
-            <Filters
-              services={displayItems}
-              dispatch={dispatch}
-              onFilterServices={setDisplayTileItems}
-              servicesState={servicesState}
-            />
-            <Typography
-              fontFamily={"Lato"}
-              variant="h5"
-              color={"#224870"}
-              m={3}
-            >
-              Recognitions
-            </Typography>
-            <div
+          <Grid
+            container
+            item
+            xs={2}
+            sx={{ backgroundColor: "#ced9e6" }}
+            flexDirection="column"
+          >
+            <Grid item>
+              <Typography
+                fontFamily={"Lato"}
+                variant="h5"
+                color={"#224870"}
+                m={3}
+              >
+                Welcome {""}
+                {!fetchingSession &&
+                  (getUpdateSessionData?.user?.displayName || "You") + ","}
+              </Typography>
+              <Typography
+                fontFamily={"Lato"}
+                variant="h5"
+                color={"#224870"}
+                m={3}
+              >
+                What is your desire today?{" "}
+              </Typography>
+            </Grid>
+            <Grid item>
+              <Filters
+                services={displayItems}
+                dispatch={dispatch}
+                onFilterServices={setDisplayTileItems}
+                servicesState={servicesState}
+              />
+            </Grid>
+            <Grid container item direction="column">
+              <Grid item>
+                <Typography
+                  fontFamily={"Lato"}
+                  variant="h5"
+                  color={"#224870"}
+                  m={3}
+                >
+                  Recognitions
+                </Typography>
+              </Grid>
+              <Grid
+                item
+                sx={{
+                  border: "5px solid #224870",
+                  display: "flex",
+                  // width: "13vw",
+                  height: "40vh",
+                  position: "relative",
+                  margin: "0 10px",
+                  padding: "5px",
+                }}
+              >
+                <Image
+                  src={"/images/Tie-comp.png"}
+                  alt={"TIE_competition"}
+                  // width={300}
+                  layout="fill"
+                  // objectFit="cover"
+                  style={{ border: "2px solid #224870" }}
+                  // height={500}
+                />
+              </Grid>
+            </Grid>
+            {/* <div
               style={{
                 border: "5px solid #224870",
                 display: "flex",
+                width: "13vw",
+                height: "40vh",
+                position: "relative",
                 margin: "0 10px",
                 padding: "5px",
               }}
@@ -221,13 +266,13 @@ export default function Page() {
               <Image
                 src={"/images/Tie-comp.png"}
                 alt={"TIE_competition"}
-                width={300}
-                // layout="fill"
+                // width={300}
+                layout="fill"
                 // objectFit="cover"
                 style={{ border: "2px solid #224870" }}
-                height={500}
+                // height={500}
               />
-            </div>
+            </div> */}
           </Grid>
           <Grid item xs={10} paddingLeft={3}>
             <center>

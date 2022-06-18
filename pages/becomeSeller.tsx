@@ -56,7 +56,7 @@ export default function BecomeASellerForm() {
   const [getLoading, setLoading] = useState<boolean>(false);
   const [getSuccessfulMessage, setSuccessfulMessage] = useState<boolean>(false);
   const [user, setUser] = useState<Partial<IUserDetails>>({
-    displayName: session?.user.displayName as string,
+    displayName: "",
   });
 
   useEffect(() => {
