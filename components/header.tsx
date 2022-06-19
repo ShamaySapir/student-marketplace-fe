@@ -65,7 +65,7 @@ export default function Header() {
       setRankedItems(Math.max(numPurchases - numRanked, 0));
     }
     getUserBuyHistory();
-  }, []);
+  });
 
   async function connect() {
     try {
