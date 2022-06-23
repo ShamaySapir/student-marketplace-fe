@@ -31,22 +31,29 @@ const CrewFooterInfo = ({
   name,
   image,
   emailAddress,
+  description,
 }: {
   liHref: string;
   name: string;
   image: string;
   emailAddress: string;
+  description: string;
 }) => (
-  <Grid item container xs justifyContent="center">
-    <IconButton>
-      <Link target={"_blank"} href={liHref} color="#FFFFFF">
-        <LinkedInIcon />
-      </Link>
-    </IconButton>
-    <Avatar alt={name}>
-      <Image src={image} alt={name} width={30} height={30} />
-    </Avatar>
-    <MailWithIcon emailAddress={emailAddress} />
+  <Grid container direction="column" xs>
+    <Grid item p={1}>
+      {description}
+    </Grid>
+    <Grid item container xs justifyContent="center">
+      <IconButton>
+        <Link target={"_blank"} href={liHref} color="#FFFFFF">
+          <LinkedInIcon />
+        </Link>
+      </IconButton>
+      <Avatar alt={name}>
+        <Image src={image} alt={name} width={30} height={30} />
+      </Avatar>
+      <MailWithIcon emailAddress={emailAddress} />
+    </Grid>
   </Grid>
 );
 const crewInfo = [
@@ -55,18 +62,21 @@ const crewInfo = [
     liHref: "https://www.linkedin.com/in/lior-savchenko-6692101a8/",
     image: "/images/lior.jpg",
     emailAddress: "LIORSAV@post.bgu.ac.il",
+    description: "Backend Developer",
   },
   {
     name: "Sapir Shamay",
     liHref: "https://www.linkedin.com/in/sapir-shamay/",
     image: "/images/Sapir.png",
     emailAddress: "sapirnag@post.bgu.ac.il",
+    description: "Frontend Developer",
   },
   {
     name: "Dor Shireto",
     liHref: "https://www.linkedin.com/in/dorshireto/",
     image: "/images/dor.png",
     emailAddress: "shiretod@post.bgu.ac.il",
+    description: "Crypto Developer",
   },
 ];
 export default function Footer() {

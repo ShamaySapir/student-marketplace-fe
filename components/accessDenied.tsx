@@ -181,21 +181,21 @@ export default function AccessDenied() {
                 imgSrc: "/images/lior.jpg",
                 name: "Lior",
                 fullName: "Lior Savchenko",
-                description: "4th year student BGU",
+                description: "Backend Developer",
               },
               {
                 AVATAR_SIZE,
                 imgSrc: "/images/Sapir.png",
                 name: "Sapir",
                 fullName: "Sapir Shamay",
-                description: "4th year student BGU",
+                description: "Frontend Developer",
               },
               {
                 AVATAR_SIZE,
                 imgSrc: "/images/dor.png",
                 name: "Dor",
                 fullName: "Dor Shireto",
-                description: "4th year student BGU",
+                description: "Crypto Developer",
               },
             ].map((props, id) => (
               <Grid item key={id}>
